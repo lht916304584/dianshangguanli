@@ -1,0 +1,38 @@
+# ── Web Framework ─────────────────────────────────────────────────────────────
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+python-multipart==0.0.20       # file uploads
+
+# ── Database ──────────────────────────────────────────────────────────────────
+sqlalchemy==2.0.36
+asyncpg==0.30.0                # async PostgreSQL driver
+psycopg2-binary==2.9.10        # sync driver (Alembic)
+alembic==1.14.0
+
+# ── Redis ─────────────────────────────────────────────────────────────────────
+redis[hiredis]==5.2.1
+
+# ── Task Queue ────────────────────────────────────────────────────────────────
+celery[redis]==5.4.0
+flower==2.0.1                  # Celery monitoring UI
+
+# ── Auth & Security ───────────────────────────────────────────────────────────
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+
+# ── Config ────────────────────────────────────────────────────────────────────
+pydantic==2.10.4
+pydantic-settings==2.7.0
+
+# ── HTTP Client ───────────────────────────────────────────────────────────────
+httpx==0.28.1
+
+# ── Observability ─────────────────────────────────────────────────────────────
+structlog==24.4.0
+
+# ── Dev / Test ────────────────────────────────────────────────────────────────
+pytest==8.3.4
+pytest-asyncio==0.25.0
+pytest-cov==6.0.0
+httpx==0.28.1                  # TestClient
+factory-boy==3.3.1
