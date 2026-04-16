@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI标题优化神器 - 拼多多/淘宝/抖音/小红书</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a24;--border:#2a2a3a;--text:#e8e8f0;--text2:#8888a0;--accent:#ff6b35;--accent2:#ff8f5e;--accent-glow:rgba(255,107,53,0.15);--green:#22c55e;--green-glow:rgba(34,197,94,0.15);--yellow:#eab308;--red:#ef4444;--blue:#3b82f6;--purple:#a855f7;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(255,107,53,0.03) 0%,transparent 50%),radial-gradient(circle at 70% 80%,rgba(168,85,247,0.03) 0%,transparent 50%);animation:bgFloat 20s ease-in-out infinite;z-index:0}
+@keyframes bgFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-2%,2%)}}
+.container{max-width:800px;margin:0 auto;padding:20px;position:relative;z-index:1}
+.header{text-align:center;padding:40px 0 20px}.header h1{font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}.header p{color:var(--text2);font-size:0.95rem;font-weight:300}
+.badge-row{display:flex;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}.badge{display:inline-flex;align-items:center;gap:4px;padding:4px 12px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:0.75rem;color:var(--text2)}.badge .dot{width:6px;height:6px;border-radius:50%}.badge .dot.green{background:var(--green)}.badge .dot.orange{background:var(--accent)}.badge .dot.blue{background:var(--blue)}.badge .dot.purple{background:var(--purple)}
+
+/* User bar */
+.user-bar{display:flex;align-items:center;justify-content:space-between;margin:16px 0;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem}
+.user-bar .left{display:flex;align-items:center;gap:8px}
+.user-bar .avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:white;font-weight:700}
+.user-bar .phone{color:var(--text)}
+.user-bar .plan-tag{padding:2px 8px;border-radius:10px;font-size:0.7rem;font-weight:600}
+.plan-free{background:var(--surface2);color:var(--text2)}
+.plan-vip{background:linear-gradient(135deg,var(--accent),#ff4500);color:white}
+.user-bar .right{display:flex;align-items:center;gap:12px}
+.user-bar .usage-info{color:var(--text2);font-size:0.8rem}
+.user-bar .usage-info strong{color:var(--green)}
+.user-bar .logout-btn{padding:4px 12px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer;font-size:0.75rem;font-family:inherit;transition:all 0.3s}
+.user-bar .logout-btn:hover{border-color:var(--red);color:var(--red)}
+.login-prompt{text-align:center;margin:16px 0;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.login-prompt span{color:var(--text2);font-size:0.85rem}
+.login-prompt a{color:var(--accent);cursor:pointer;text-decoration:none;font-weight:600}
+
+.platform-pills{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}.platform-pill{padding:8px 18px;border-radius:20px;font-size:0.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:all 0.3s}.platform-pill.active{background:var(--accent);color:white;border-color:var(--accent);box-shadow:0 2px 12px rgba(255,107,53,0.3)}.platform-pill:hover:not(.active){border-color:var(--accent);color:var(--text)}
+.platform-hint{text-align:center;font-size:0.75rem;color:var(--text2);margin-bottom:20px}
+.tabs{display:flex;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:4px;margin-bottom:24px}.tab{flex:1;padding:12px;text-align:center;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:500;color:var(--text2);transition:all 0.3s;border:none;background:none}.tab.active{background:var(--accent);color:white;box-shadow:0 4px 15px rgba(255,107,53,0.3)}.tab:hover:not(.active){color:var(--text);background:var(--surface2)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;transition:border-color 0.3s}.card:hover{border-color:var(--accent)}.card-title{font-size:0.85rem;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
+.input-group{margin-bottom:16px}.input-group label{display:block;font-size:0.85rem;color:var(--text2);margin-bottom:6px}textarea,input[type="text"],input[type="password"],input[type="tel"],select{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1rem;font-family:inherit;transition:border-color 0.3s,box-shadow 0.3s;outline:none}textarea{resize:vertical;min-height:80px}textarea:focus,input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}select{cursor:pointer}select option{background:var(--surface)}.row{display:flex;gap:12px}.row>.input-group{flex:1}
+.btn{width:100%;padding:16px;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;font-family:inherit}.btn-primary{background:linear-gradient(135deg,var(--accent),#ff4500);color:white;box-shadow:0 4px 20px rgba(255,107,53,0.3)}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(255,107,53,0.4)}.btn-primary:active{transform:translateY(0)}.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+.score-hero{text-align:center;padding:30px 0}.score-circle{width:140px;height:140px;border-radius:50%;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;margin-bottom:12px;position:relative}.score-circle::before{content:'';position:absolute;inset:-3px;border-radius:50%;padding:3px;background:conic-gradient(var(--score-color) calc(var(--score-pct)*3.6deg),var(--border) 0);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude}.score-number{font-size:2.8rem;font-weight:900;line-height:1}.score-grade{font-size:0.85rem;font-weight:500;margin-top:4px}.score-platform-tag{display:inline-block;padding:3px 10px;background:var(--surface2);border-radius:12px;font-size:0.75rem;color:var(--accent2);margin-top:8px}
+.dim-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}.dim-label{width:80px;font-size:0.8rem;color:var(--text2);text-align:right;flex-shrink:0}.dim-bar-bg{flex:1;height:8px;background:var(--bg);border-radius:4px;overflow:hidden}.dim-bar{height:100%;border-radius:4px;transition:width 1s ease}.dim-score{width:40px;font-size:0.85rem;font-weight:700;text-align:right;flex-shrink:0}
+.title-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px;transition:all 0.3s}.title-card:hover{border-color:var(--accent)}.title-rank{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;font-size:0.8rem;font-weight:700;margin-right:10px}.rank-1{background:linear-gradient(135deg,#ff6b35,#ff4500);color:white}.rank-2{background:linear-gradient(135deg,#a855f7,#7c3aed);color:white}.rank-3{background:linear-gradient(135deg,#3b82f6,#2563eb);color:white}.rank-other{background:var(--surface2);color:var(--text2)}.title-text{font-size:1rem;font-weight:500;margin-bottom:8px;line-height:1.5;cursor:pointer}.title-text:hover{color:var(--accent)}.title-meta{display:flex;gap:12px;flex-wrap:wrap;font-size:0.75rem;color:var(--text2)}.title-meta span{display:inline-flex;align-items:center;gap:3px}
+.suggestion{display:flex;align-items:flex-start;gap:8px;padding:10px 12px;background:var(--bg);border-radius:6px;margin-bottom:8px;font-size:0.85rem;color:var(--text2)}.suggestion::before{content:'💡';flex-shrink:0}
+.loading{display:none;text-align:center;padding:40px}.loading.show{display:block}.spinner{width:40px;height:40px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 16px}@keyframes spin{to{transform:rotate(360deg)}}.loading-text{color:var(--text2);font-size:0.9rem}
+
+/* Auth Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;backdrop-filter:blur(4px)}.modal-overlay.show{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;max-width:400px;width:90%;animation:modalIn 0.3s ease}
+@keyframes modalIn{from{transform:scale(0.9);opacity:0}to{transform:scale(1);opacity:1}}
+.modal h2{font-size:1.3rem;font-weight:700;margin-bottom:20px;color:var(--accent);text-align:center}
+.modal .tabs-sm{display:flex;border-radius:8px;overflow:hidden;margin-bottom:24px;border:1px solid var(--border)}
+.modal .tab-sm{flex:1;padding:10px;text-align:center;cursor:pointer;font-size:0.9rem;font-weight:500;background:var(--bg);color:var(--text2);border:none;font-family:inherit;transition:all 0.3s}
+.modal .tab-sm.active{background:var(--accent);color:white}
+.modal .input-group{margin-bottom:14px}
+.modal .input-group label{font-size:0.8rem}
+.modal .error-msg{color:var(--red);font-size:0.8rem;text-align:center;margin-bottom:12px;min-height:20px}
+.modal .close-x{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--text2);font-size:1.2rem;cursor:pointer}
+.modal-wrap{position:relative}
+/* Pay Modal */
+.modal img{width:220px;height:220px;object-fit:contain;border-radius:12px;margin-bottom:16px;background:white;padding:8px}
+.modal .price-tag{display:inline-block;padding:6px 20px;background:linear-gradient(135deg,var(--accent),#ff4500);color:white;border-radius:20px;font-size:1.1rem;font-weight:700;margin-bottom:16px}
+.modal .features{text-align:left;margin:16px 0;padding:16px;background:var(--bg);border-radius:8px}.modal .features div{padding:4px 0;font-size:0.85rem;color:var(--text2)}.modal .features div::before{content:'✅ '}
+.modal .close-btn{padding:10px 30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:0.85rem;font-family:inherit;margin-top:12px;transition:all 0.3s}.modal .close-btn:hover{border-color:var(--text2);color:var(--text)}
+
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green);color:white;padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:500;box-shadow:0 4px 20px rgba(34,197,94,0.3);transition:transform 0.3s;z-index:300}.toast.show{transform:translateX(-50%) translateY(0)}
+.hidden{display:none!important}.footer{text-align:center;padding:30px 0;color:var(--text2);font-size:0.75rem}
+@media(max-width:600px){.container{padding:12px}.header h1{font-size:1.5rem}.score-circle{width:120px;height:120px}.score-number{font-size:2.2rem}.dim-label{width:60px;font-size:0.75rem}.row{flex-direction:column;gap:0}.modal{padding:24px}.user-bar{flex-direction:column;gap:8px;text-align:center}.user-bar .right{justify-content:center}}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="header"><h1>🔥 AI标题优化神器</h1><p>多平台智能评分 & 一键生成高分标题</p>
+<div class="badge-row"><span class="badge"><span class="dot green"></span>699关键词库</span><span class="badge"><span class="dot orange"></span>5维度AI评分</span><span class="badge"><span class="dot blue"></span>智能标题生成</span><span class="badge"><span class="dot purple"></span>4大平台支持</span></div></div>
+
+<!-- User Bar (logged in) -->
+<div class="user-bar hidden" id="user-bar">
+<div class="left"><div class="avatar" id="user-avatar">U</div><span class="phone" id="user-phone"></span><span class="plan-tag plan-free" id="user-plan">免费版</span></div>
+<div class="right"><span class="usage-info">今日AI生成：<strong id="user-remaining">3</strong>次剩余</span><button class="logout-btn" onclick="logout()">退出</button></div>
+</div>
+<!-- Login Prompt (not logged in) -->
+<div class="login-prompt" id="login-prompt">
+<span>📊 标题评分免费使用 · AI生成需 <a onclick="showAuth()">登录/注册</a> · 每日3次免费</span>
+</div>
+
+<div class="platform-pills">
+<div class="platform-pill active" onclick="selectPlatform('pinduoduo',this)">🟠 拼多多</div>
+<div class="platform-pill" onclick="selectPlatform('taobao',this)">🔴 淘宝/天猫</div>
+<div class="platform-pill" onclick="selectPlatform('douyin',this)">🎵 抖音</div>
+<div class="platform-pill" onclick="selectPlatform('xiaohongshu',this)">📕 小红书</div>
+</div>
+<div class="platform-hint" id="platform-hint">拼多多标题最佳长度：20-35字</div>
+
+<div class="tabs">
+<button class="tab active" onclick="switchTab('score')">📊 标题评分 <span style="font-size:0.7rem;opacity:0.7">免费</span></button>
+<button class="tab" onclick="switchTab('optimize')">✨ AI优化</button>
+</div>
+
+<div id="panel-score">
+<div class="card"><div class="card-title">输入你的标题</div>
+<div class="input-group"><textarea id="score-title" placeholder="粘贴你的商品标题..." maxlength="80"></textarea><div style="text-align:right;font-size:0.75rem;color:var(--text2);margin-top:4px"><span id="char-count">0</span>/<span id="max-chars">60</span>字符</div></div>
+<div class="input-group"><label>商品品类</label><select id="score-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div>
+<button class="btn btn-primary" onclick="doScore()">开始评分（免费）</button></div>
+<div id="score-result" class="hidden"><div class="card"><div class="score-hero"><div class="score-circle" id="score-circle" style="--score-pct:0;--score-color:var(--text2)"><div class="score-number" id="score-num">0</div><div class="score-grade" id="score-grade">—</div></div><div class="score-platform-tag" id="score-platform-tag"></div></div><div id="dimensions"></div></div>
+<div class="card"><div class="card-title">优化建议</div><div id="suggestions"></div></div></div>
+</div>
+
+<div id="panel-optimize" class="hidden">
+<div class="card"><div class="card-title">输入商品信息</div>
+<div class="input-group"><textarea id="opt-product" placeholder="描述你的商品..." rows="3"></textarea></div>
+<div class="row"><div class="input-group"><label>品类</label><select id="opt-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div>
+<div class="input-group"><label>数量</label><select id="opt-count"><option value="3">3条</option><option value="5" selected>5条</option></select></div></div>
+<button class="btn btn-primary" onclick="doOptimize()" id="btn-opt">🚀 AI生成优化标题</button></div>
+<div id="opt-result" class="hidden"><div class="card"><div class="card-title" id="opt-result-title"></div><div id="opt-titles"></div></div></div>
+</div>
+
+<div class="loading" id="loading"><div class="spinner"></div><div class="loading-text" id="loading-text">AI分析中...</div></div>
+<div class="footer">AI标题优化神器 v3.0 · 支持拼多多/淘宝/抖音/小红书<br>标题评分免费 · AI生成每日3次免费<br><a href="https://beian.miit.gov.cn/" target="_blank" style="color:var(--text2);text-decoration:none">粤ICP备2026038535号</a></div>
+</div>
+
+<!-- Auth Modal -->
+<div class="modal-overlay" id="auth-modal">
+<div class="modal modal-wrap">
+<button class="close-x" onclick="closeAuth()">✕</button>
+<h2>🔥 AI标题优化神器</h2>
+<div class="tabs-sm">
+<button class="tab-sm active" id="tab-login" onclick="switchAuthTab('login')">登录</button>
+<button class="tab-sm" id="tab-register" onclick="switchAuthTab('register')">注册新账号</button>
+</div>
+<div id="auth-login">
+<div class="input-group"><label>手机号</label><input type="tel" id="login-phone" placeholder="请输入手机号" maxlength="11"></div>
+<div class="input-group"><label>密码</label><input type="password" id="login-pwd" placeholder="请输入密码"></div>
+<div class="error-msg" id="login-error"></div>
+<button class="btn btn-primary" onclick="doLogin()">登录</button>
+</div>
+<div id="auth-register" class="hidden">
+<div class="input-group"><label>手机号</label><input type="tel" id="reg-phone" placeholder="请输入手机号" maxlength="11"></div>
+<div class="input-group"><label>密码</label><input type="password" id="reg-pwd" placeholder="至少6位，建议字母+数字"></div>
+<div class="input-group"><label>确认密码</label><input type="password" id="reg-pwd2" placeholder="请再次输入密码"></div>
+<div class="error-msg" id="reg-error"></div>
+<button class="btn btn-primary" onclick="doRegister()">注册</button>
+</div>
+</div></div>
+
+<!-- Pay Modal -->
+<div class="modal-overlay" id="pay-modal">
+<div class="modal" style="text-align:center">
+<h2>🔥 今日免费次数已用完</h2>
+<p style="font-size:0.9rem;color:var(--text2);margin-bottom:20px">解锁无限AI标题生成，让每个标题都是S级！</p>
+<div class="price-tag">¥9.9 / 月 · 无限次生成</div>
+<div class="features"><div>AI标题生成无限次</div><div>4大平台全支持</div><div>专属关键词库持续更新</div><div>标题评分永久免费</div></div>
+<p style="font-size:0.85rem;color:var(--text);margin-bottom:12px">微信扫码添加，备注「标题优化」开通</p>
+<img src="/wechat_pay.jpg" alt="微信二维码">
+<br><button class="close-btn" onclick="closePay()">我再想想</button>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API='/api/v1';let currentPlatform='pinduoduo',authToken=localStorage.getItem('token')||'';
+const PI={pinduoduo:{name:'拼多多',hint:'拼多多标题最佳长度：20-35字',maxLen:60,ph:'例如：法式碎花方领短袖连衣裙女夏季新款收腰显瘦设计感中长裙'},taobao:{name:'淘宝/天猫',hint:'淘宝标题最佳长度：20-28字',maxLen:30,ph:'例如：法式碎花连衣裙女气质收腰显瘦中长款'},douyin:{name:'抖音',hint:'抖音标题最佳长度：20-28字',maxLen:30,ph:'例如：今年最火碎花裙显瘦又气质'},xiaohongshu:{name:'小红书',hint:'小红书标题最佳长度：20-28字',maxLen:30,ph:'例如：这条碎花裙太显瘦了法式气质'}};
+
+// === Auth ===
+function showAuth(){document.getElementById('auth-modal').classList.add('show')}
+function closeAuth(){document.getElementById('auth-modal').classList.remove('show');document.getElementById('login-error').textContent='';document.getElementById('reg-error').textContent=''}
+function switchAuthTab(t){document.getElementById('tab-login').classList.toggle('active',t==='login');document.getElementById('tab-register').classList.toggle('active',t==='register');document.getElementById('auth-login').classList.toggle('hidden',t!=='login');document.getElementById('auth-register').classList.toggle('hidden',t!=='register')}
+
+async function doLogin(){
+  const phone=document.getElementById('login-phone').value.trim(),pwd=document.getElementById('login-pwd').value;
+  if(!phone||!pwd){document.getElementById('login-error').textContent='请填写完整';return}
+  try{const r=await fetch(`${API}/user/login`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,password:pwd})});const d=await r.json();
+  if(d.success){authToken=d.token;localStorage.setItem('token',d.token);closeAuth();refreshUser();showToast('登录成功！')}
+  else{document.getElementById('login-error').textContent=d.error||'登录失败'}}catch(e){document.getElementById('login-error').textContent='网络错误'}}
+
+async function doRegister(){
+  const phone=document.getElementById('reg-phone').value.trim(),pwd=document.getElementById('reg-pwd').value,pwd2=document.getElementById('reg-pwd2').value;
+  if(!phone||!pwd||!pwd2){document.getElementById('reg-error').textContent='请填写完整';return}
+  if(pwd!==pwd2){document.getElementById('reg-error').textContent='两次密码不一致';return}
+  if(pwd.length<6){document.getElementById('reg-error').textContent='密码至少6位';return}
+  try{const r=await fetch(`${API}/user/register`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,password:pwd})});const d=await r.json();
+  if(d.success){authToken=d.token;localStorage.setItem('token',d.token);closeAuth();refreshUser();showToast('注册成功！')}
+  else{document.getElementById('reg-error').textContent=d.error||'注册失败'}}catch(e){document.getElementById('reg-error').textContent='网络错误'}}
+
+function logout(){authToken='';localStorage.removeItem('token');refreshUser();showToast('已退出')}
+
+async function refreshUser(){
+  if(!authToken){document.getElementById('user-bar').classList.add('hidden');document.getElementById('login-prompt').classList.remove('hidden');return}
+  try{const r=await fetch(`${API}/user/me`,{headers:{'Authorization':'Bearer '+authToken}});const d=await r.json();
+  if(d.success){document.getElementById('user-bar').classList.remove('hidden');document.getElementById('login-prompt').classList.add('hidden');
+  const p=d.phone;document.getElementById('user-phone').textContent=p.substring(0,3)+'****'+p.substring(7);document.getElementById('user-avatar').textContent=p.substring(p.length-2);
+  const u=d.usage;document.getElementById('user-remaining').textContent=u.remaining;
+  if(u.plan==='vip'){document.getElementById('user-plan').textContent='VIP';document.getElementById('user-plan').className='plan-tag plan-vip'}
+  else{document.getElementById('user-plan').textContent='免费版';document.getElementById('user-plan').className='plan-tag plan-free'}}
+  else{authToken='';localStorage.removeItem('token');document.getElementById('user-bar').classList.add('hidden');document.getElementById('login-prompt').classList.remove('hidden')}}
+  catch(e){}}
+
+// === Platform ===
+function selectPlatform(p,el){currentPlatform=p;document.querySelectorAll('.platform-pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');const i=PI[p];document.getElementById('platform-hint').textContent=i.hint;document.getElementById('score-title').placeholder=i.ph;document.getElementById('max-chars').textContent=i.maxLen;document.getElementById('score-title').maxLength=i.maxLen}
+function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));event.target.closest('.tab').classList.add('active');document.getElementById('panel-score').classList.toggle('hidden',t!=='score');document.getElementById('panel-optimize').classList.toggle('hidden',t!=='optimize')}
+document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
+function copyTitle(t){navigator.clipboard.writeText(t).then(()=>showToast('已复制到剪贴板！'))}
+function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
+function showLoading(s,t){document.getElementById('loading').classList.toggle('show',s);document.getElementById('loading').style.display=s?'block':'none';if(t)document.getElementById('loading-text').textContent=t}
+function closePay(){document.getElementById('pay-modal').classList.remove('show')}
+function gc(s){return s>=90?'var(--green)':s>=80?'var(--blue)':s>=70?'var(--yellow)':'var(--red)'}
+function dc(s){return s>=80?'var(--green)':s>=60?'var(--yellow)':'var(--red)'}
+
+// === Score (FREE) ===
+async function doScore(){const title=document.getElementById('score-title').value.trim();if(!title){showToast('请输入标题');return}const cat=document.getElementById('score-category').value;showLoading(true,`${PI[currentPlatform].name}规则评分中...`);document.getElementById('score-result').classList.add('hidden');
+try{const r=await fetch(`${API}/title/score`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({title,category:cat,platform:currentPlatform})});const d=await r.json();renderScore(d.result)}catch(e){showToast('评分失败')}finally{showLoading(false)}}
+
+function renderScore(r){document.getElementById('score-result').classList.remove('hidden');const s=r.total_score,c=gc(s),cl=document.getElementById('score-circle');cl.style.setProperty('--score-color',c);cl.style.setProperty('--score-pct',s);document.getElementById('score-num').style.color=c;document.getElementById('score-num').textContent=s;document.getElementById('score-grade').textContent=r.grade;document.getElementById('score-grade').style.color=c;document.getElementById('score-platform-tag').textContent=r.platform_name||PI[currentPlatform].name;
+const dn={keyword_coverage:'关键词覆盖',compliance:'平台合规',readability:'可读性',competition_diff:'竞争差异',length:'字数合规'};let h='';for(const[k,d] of Object.entries(r.dimensions)){const cc=dc(d.score);h+=`<div class="dim-row"><div class="dim-label">${dn[k]||k}</div><div class="dim-bar-bg"><div class="dim-bar" style="width:${d.score}%;background:${cc}"></div></div><div class="dim-score" style="color:${cc}">${d.score}</div></div>`}document.getElementById('dimensions').innerHTML=h;
+let sg='';if(r.suggestions&&r.suggestions.length>0)r.suggestions.forEach(s=>{sg+=`<div class="suggestion">${s}</div>`});else sg='<div class="suggestion">标题质量不错！</div>';document.getElementById('suggestions').innerHTML=sg}
+
+// === Optimize (Need Login) ===
+async function doOptimize(){
+  if(!authToken){showAuth();showToast('请先登录后使用AI生成');return}
+  const product=document.getElementById('opt-product').value.trim();if(!product){showToast('请输入商品信息');return}
+  const cat=document.getElementById('opt-category').value,cnt=parseInt(document.getElementById('opt-count').value),btn=document.getElementById('btn-opt');
+  btn.disabled=true;showLoading(true,`AI为${PI[currentPlatform].name}生成标题中...`);document.getElementById('opt-result').classList.add('hidden');
+  try{const r=await fetch(`${API}/title/optimize`,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken},body:JSON.stringify({product_info:product,platform:currentPlatform,category:cat,count:cnt})});const d=await r.json();
+  if(d.error&&d.error.includes('用完')){document.getElementById('pay-modal').classList.add('show');refreshUser();return}
+  renderOpt(d);refreshUser()}catch(e){showToast('生成失败')}finally{btn.disabled=false;showLoading(false)}}
+
+function renderOpt(d){if(!d.success||!d.top_titles||!d.top_titles.length){showToast('生成失败，请重试');return}document.getElementById('opt-result').classList.remove('hidden');document.getElementById('opt-result-title').textContent=`${PI[currentPlatform].name} · AI生成标题排名`;
+let h='';d.top_titles.forEach((t,i)=>{const rc=i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-other',c=gc(t.total_score);
+h+=`<div class="title-card"><div style="display:flex;align-items:flex-start"><span class="title-rank ${rc}">${i+1}</span><div style="flex:1"><div class="title-text" onclick="copyTitle('${t.title.replace(/'/g,"\\'")}')" title="点击复制">${t.title}</div><div class="title-meta"><span style="color:${c};font-weight:700">${t.total_score}分 ${t.grade}</span><span>📏 ${t.char_count}字</span>${t.strategy?`<span>💡 ${t.strategy.substring(0,35)}${t.strategy.length>35?'...':''}</span>`:''}</div>${t.keywords&&t.keywords.length?`<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${t.keywords.map(k=>`<span style="padding:2px 8px;background:var(--accent-glow);border:1px solid rgba(255,107,53,0.3);border-radius:4px;font-size:0.7rem;color:var(--accent2)">${k}</span>`).join('')}</div>`:''}</div></div></div>`});
+if(d.summary)h+=`<div style="margin-top:16px;padding:14px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.2);border-radius:8px;font-size:0.85rem">✅ ${d.summary.recommendation}</div>`;
+document.getElementById('opt-titles').innerHTML=h}
+
+// Init
+refreshUser();
+document.getElementById('auth-modal').addEventListener('click',function(e){if(e.target===this)closeAuth()});
+document.getElementById('pay-modal').addEventListener('click',function(e){if(e.target===this)closePay()});
+// Enter key for login/register
+document.getElementById('login-pwd').addEventListener('keyup',function(e){if(e.key==='Enter')doLogin()});
+document.getElementById('reg-pwd2').addEventListener('keyup',function(e){if(e.key==='Enter')doRegister()});
+</script>
+</body>
+</html>

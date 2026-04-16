@@ -52,3 +52,13 @@ logs/
 # ── Celery ────────────────────────────────────────────────────────────────────
 celerybeat-schedule
 celerybeat.pid
+
+# Sensitive data
+data/users.db
+data/pdd_cookies.json
+data/pdd_search_page.png
+server.log
+frontend.log
+__pycache__/
+*.pyc
+get-pip.py
