@@ -1,12 +1,16 @@
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import health, auth, users, files, websocket, title
+from app.api.v1.endpoints import admin, health, platform, title, user
 
 api_router = APIRouter()
 
-api_router.include_router(health.router, tags=["health"])
-api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
-api_router.include_router(users.router, prefix="/users", tags=["users"])
-api_router.include_router(files.router, prefix="/files", tags=["files"])
-api_router.include_router(websocket.router, tags=["websocket"])
+# 用户系统（注册/登录/用量/历史）
+api_router.include_router(user.router, prefix="/user", tags=["用户"])
+# 标题优化（生成/评分/优化）
 api_router.include_router(title.router, prefix="/title", tags=["标题优化"])
+# 管理员（VIP/用户列表/统计）
+api_router.include_router(admin.router, prefix="/admin", tags=["管理员"])
+# 平台与热搜词
+api_router.include_router(platform.router, tags=["平台"])
+# 健康检查
+api_router.include_router(health.router, tags=["health"])

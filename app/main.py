@@ -1,56 +1,34 @@
-from contextlib import asynccontextmanager
+"""AI电商标题优化服务 — 统一入口"""
+
+from pathlib import Path
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from fastapi.staticfiles import StaticFiles
 
 from app.api.v1.router import api_router
-from app.core.config import settings
-from app.core.logging import setup_logging
-from app.db.session import engine
-from app.db.base import Base
+
+FRONTEND_DIR = Path(__file__).resolve().parent.parent / "frontend"
+
+app = FastAPI(title="AI电商标题优化", version="3.0")
+
+# CORS
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# API路由 — 挂载到 /api/v1
+app.include_router(api_router, prefix="/api/v1")
 
 
-@asynccontextmanager
-async def lifespan(app: FastAPI):
-    # Startup
-    setup_logging()
-    # Create tables (use Alembic in production)
-    async with engine.begin() as conn:
-        await conn.run_sync(Base.metadata.create_all)
-    yield
-    # Shutdown
-    await engine.dispose()
+# 静态前端文件
+if FRONTEND_DIR.exists():
+    app.mount("/static", StaticFiles(directory=str(FRONTEND_DIR)), name="static")
 
 
-def create_application() -> FastAPI:
-    app = FastAPI(
-        title=settings.PROJECT_NAME,
-        version=settings.VERSION,
-        description=settings.DESCRIPTION,
-        openapi_url=f"{settings.API_V1_STR}/openapi.json",
-        docs_url=f"{settings.API_V1_STR}/docs",
-        redoc_url=f"{settings.API_V1_STR}/redoc",
-        lifespan=lifespan,
-    )
-
-    # Middlewares
-    app.add_middleware(
-        CORSMiddleware,
-        allow_origins=settings.ALLOWED_ORIGINS_LIST,
-        allow_credentials=True,
-        allow_methods=["*"],
-        allow_headers=["*"],
-    )
-    app.add_middleware(
-        TrustedHostMiddleware,
-        allowed_hosts=settings.ALLOWED_HOSTS_LIST,
-    )
-
-    # Routers
-    app.include_router(api_router, prefix=settings.API_V1_STR)
-
-    return app
-
-
-app = create_application()
+@app.get("/")
+async def root():
+    return {"status": "ok", "version": "3.0", "message": "AI电商标题优化服务"}
