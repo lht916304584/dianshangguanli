@@ -10,7 +10,15 @@ class Settings(BaseSettings):
         env_file=".env",
         env_file_encoding="utf-8",
         case_sensitive=True,
+        extra="ignore",
     )
+
+    # LLM
+    DEEPSEEK_API_KEY: str = ""
+    DEEPSEEK_BASE_URL: str = "https://api.deepseek.com"
+    DEFAULT_LLM_MODEL: str = "deepseek-chat"
+    MAX_TITLE_LENGTH: int = 30
+    DEFAULT_PLATFORM: str = "pinduoduo"
 
     # ── Project ──────────────────────────────────────────────────────
     PROJECT_NAME: str = "MyProject"
