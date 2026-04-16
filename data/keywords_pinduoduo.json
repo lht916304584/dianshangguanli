@@ -1,0 +1,6135 @@
+[
+  {
+    "word": "连衣裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 25
+  },
+  {
+    "word": "夏季",
+    "type": "季节词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 23
+  },
+  {
+    "word": "显瘦",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 18
+  },
+  {
+    "word": "新款",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 17
+  },
+  {
+    "word": "零食",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 17,
+    "primary_category": "零食"
+  },
+  {
+    "word": "短袖",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 16
+  },
+  {
+    "word": "收腰",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 15
+  },
+  {
+    "word": "休闲",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 14
+  },
+  {
+    "word": "儿童",
+    "type": "人群词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 14
+  },
+  {
+    "word": "气质",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 13
+  },
+  {
+    "word": "薄款",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 13,
+    "primary_category": "女装"
+  },
+  {
+    "word": "法式",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 12
+  },
+  {
+    "word": "宽松",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 12,
+    "primary_category": "女装"
+  },
+  {
+    "word": "婴儿",
+    "type": "人群词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 12
+  },
+  {
+    "word": "宝宝",
+    "type": "人群词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 12
+  },
+  {
+    "word": "纯棉",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 11,
+    "primary_category": "女装"
+  },
+  {
+    "word": "裙子",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 10
+  },
+  {
+    "word": "透气",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 10,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "女夏",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 9,
+    "primary_category": "女装"
+  },
+  {
+    "word": "防滑",
+    "type": "功能词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 9,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "加厚",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 9
+  },
+  {
+    "word": "学生",
+    "type": "人群词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 9
+  },
+  {
+    "word": "2026",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 8
+  },
+  {
+    "word": "新生儿",
+    "type": "人群词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 8
+  },
+  {
+    "word": "玩具",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 8
+  },
+  {
+    "word": "保湿",
+    "type": "功能词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 8,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "T恤",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 8,
+    "primary_category": "女装"
+  },
+  {
+    "word": "外套",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 8,
+    "primary_category": "女装"
+  },
+  {
+    "word": "碎花",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 7
+  },
+  {
+    "word": "春秋",
+    "type": "季节词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 7,
+    "primary_category": "女装"
+  },
+  {
+    "word": "大容量",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 7,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "百搭",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 6,
+    "primary_category": "女装"
+  },
+  {
+    "word": "温柔",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 6
+  },
+  {
+    "word": "长裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 6
+  },
+  {
+    "word": "健身",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 6,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "专用",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 6
+  },
+  {
+    "word": "可爱",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 6
+  },
+  {
+    "word": "家用",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 6
+  },
+  {
+    "word": "便携",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 6,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "坚果",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 6,
+    "primary_category": "零食"
+  },
+  {
+    "word": "爆款",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 6
+  },
+  {
+    "word": "跑步",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 6,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "2025",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 5
+  },
+  {
+    "word": "方领",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 5
+  },
+  {
+    "word": "复古",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 5
+  },
+  {
+    "word": "防水",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "垃圾袋",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "ins",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "女装"
+  },
+  {
+    "word": "美甲",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 5
+  },
+  {
+    "word": "面膜",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "补水",
+    "type": "功能词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "夹克",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "女装"
+  },
+  {
+    "word": "短裤",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "女装"
+  },
+  {
+    "word": "男士",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "女装"
+  },
+  {
+    "word": "快充",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "手机壳",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "防摔",
+    "type": "功能词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "500g",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 5,
+    "primary_category": "零食"
+  },
+  {
+    "word": "设计感",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "甜美",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "衬衫",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "女装"
+  },
+  {
+    "word": "雪纺",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "印花",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "高腰",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "女装"
+  },
+  {
+    "word": "新中式",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "早教",
+    "type": "功能词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "婴幼儿",
+    "type": "人群词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "益智",
+    "type": "功能词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "新生",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "耐用",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "厨房",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "成人",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "整箱",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "水杯",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "持久",
+    "type": "功能词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 4
+  },
+  {
+    "word": "韩版",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "女装"
+  },
+  {
+    "word": "运动",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "保温杯",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "数据线",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "清洁",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "洗面奶",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "小吃",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "零食"
+  },
+  {
+    "word": "奶瓶",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "运动鞋",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "瑜伽",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "背包",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 4,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "拼接",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "赫本",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "显白",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "修身",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "摇铃",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "衣服",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "夏装",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "男女",
+    "type": "人群词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "神器",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "贴纸",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "女孩",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "独立",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "套装",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "滋润",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "清爽",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "眉刀",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3
+  },
+  {
+    "word": "半身裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "牛仔",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "短裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "速干",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "潮牌",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "春秋季",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "工装",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "商务",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "长袖",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "衬衣",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "潮流",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "女装"
+  },
+  {
+    "word": "拖鞋",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "收纳盒",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "苹果",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "全包",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "超薄",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "充电宝",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "收缩",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "毛孔",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "控油",
+    "type": "功能词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "祛痘",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "SPF50",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "口红",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "混合",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "零食"
+  },
+  {
+    "word": "辣条",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "零食"
+  },
+  {
+    "word": "饼干",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "零食"
+  },
+  {
+    "word": "食品",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "零食"
+  },
+  {
+    "word": "特产",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "零食"
+  },
+  {
+    "word": "尿不湿",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "PPSU",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "宽口径",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "轻便",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "减震",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "跳绳",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "减肥",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "旅行",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "书包",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 3,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "通勤",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "黑色",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "碎花裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "仙女",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "清新",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "花边",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "中长款",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "MOHO",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "MO",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "沫晗",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "依美",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "遮肚",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "小个子",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "公主裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "A字裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "吊带",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "蓝色",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "盘扣",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "改良",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "开衫",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "两件套",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "旗袍",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "设计",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "蓝莓",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "公主",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "清凉",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "长款",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "条纹",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "蕾丝",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "礼盒",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "礼物",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "食品级",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "月龄",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "12",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "幼儿园",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "连体衣",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "三角",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "婴蓓",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "毛绒",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "毛巾",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "手账",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "花盆",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "柔软",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "迷你",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "冰箱",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "收纳",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "软毛",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "包装",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "加粗",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "爆闪",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "diy",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "儿童玩具",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "宿舍",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "口味",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "网红",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "即食",
+    "type": "功能词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "解馋",
+    "type": "功能词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "原味",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "长条",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "孕妇",
+    "type": "人群词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "巧克力",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "棉花",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "打磨",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "指甲",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "双头",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "修复",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "哑光",
+    "type": "功能词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "初学者",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2
+  },
+  {
+    "word": "上衣",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "女装"
+  },
+  {
+    "word": "打底",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "女装"
+  },
+  {
+    "word": "冰丝",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "女装"
+  },
+  {
+    "word": "五分裤",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "女装"
+  },
+  {
+    "word": "半袖",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "女装"
+  },
+  {
+    "word": "格纹",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "女装"
+  },
+  {
+    "word": "不锈钢",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "居家",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "透明",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "衣物",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "整理",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "整理盒",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "液态",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "硅胶",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "无线",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "蓝牙耳机",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "入耳式",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "磨砂",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "温和",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "防晒霜",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "油腻",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "不沾杯",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "美白",
+    "type": "功能词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "黑头",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "防晒",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "每日",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "大礼包",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "包邮",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "水果",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "果脯",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "葡萄干",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "无核",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "组合装",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "零食"
+  },
+  {
+    "word": "纸尿裤",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "胀气",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "童装",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "特价",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "女童",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "双肩",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "双肩包",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 2,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "唐狮",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "圆领",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "下摆",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "凡兔",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "初恋",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "名媛",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "绿色",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "斜裁",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "淑女",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "高级感",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "时尚",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "小黑裙",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "森系",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "桔梗",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "子女",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "多巴胺",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "海边",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "渡假",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "吊带裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "翻领",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "小众",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "遮肉",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "微胖",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "mm",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "绣花",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "A字",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "波点",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "鱼尾裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "内衬",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "晚风",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "清梦",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "杏色",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "度假",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "简约",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "光泽感",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "蓝岛",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "续歌",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "幻紫",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "流云",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "国风",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "暗纹",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "琉光",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "纱裙",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "淡雅",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "风杏色",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "脚踏",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "钢琴",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "见面",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "实用",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "满月",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "黄鸭手",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "智力",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "安抚",
+    "type": "功能词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "星星",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "启蒙",
+    "type": "功能词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "安静",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "撕书",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "趣味",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "魔术",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "科巢",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "以上",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "隔尿垫",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "可洗",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "尺寸",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "床单",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "姨妈",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "床垫",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "包屁衣",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "哈衣",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "包单",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "襁褓",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "裹布",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "盖毯",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "产房",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "包巾",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "春夏",
+    "type": "季节词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "袜子",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "夏天",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "网眼",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "长筒袜",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "防蚊",
+    "type": "功能词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "正版",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "躲猫猫",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "大象",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "玩偶",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "学说话",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "哄娃",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "公仔",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "好玩",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "翻翻",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "洞洞",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "触摸",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "推拉",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "方巾",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "口水",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "纱布",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "洗脸",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "儿童用品",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "库洛米",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "卡通",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "三丽鸥",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "装饰",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "贴画",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "奖励",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "通风",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "托盘",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "招财",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "底座",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "树脂",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "盆栽",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "绿植接",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "水盘",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "恒澍",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "抹布",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "洗碗",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "洗车",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "特厚强",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "吸水",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "沾油",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "美工刀",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "快递",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "开箱",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "利器",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "小刀",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "墙纸",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "壁纸",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "美术",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "保鲜膜",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "加大",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "超市",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "微波炉",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "耐高温",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "PE",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "冷冻",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "高档",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "沐浴球",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "散花",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "搓澡",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "泡澡",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "洗澡",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "泡沫",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "金倍",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "牙刷",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "高端",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "竹炭",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "护龈",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "高密度",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "家庭装",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "抽绳",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "塑料袋",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "抽绳袋",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "手提式",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "自动",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "收口",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "Touchmark",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "按动",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "闪光",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "啫喱",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "闪亮",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "流沙",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "亮晶晶",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "荧光笔",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "笔手",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "奶油",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "胶咕卡",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "手工",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "节日",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "生日礼物",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "送礼",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "叶黄素",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "果汁",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "软糖",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "30",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "粒近",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "青少年",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "视力",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "健康",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "呵护",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "干涩",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "肉松",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "正宗",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "吊柿",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "新鲜",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "霜降",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "流心",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "柿子",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "蜜柿",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "博仔",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "闪电",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "爽口",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "含片",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "糖果",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "童年",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "8090",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "薄荷",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "膜片",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "加贝鲜",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "带籽",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "鱿鱼仔",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "香辣",
+    "type": "功能词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "烧烤",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "海鲜",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "墨鱼",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "熟食",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "陈皮味",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "酸梅",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "话梅",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "酸甜",
+    "type": "功能词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "开胃",
+    "type": "功能词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "梅子",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "办公",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "酥醇",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "脆角",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "图层",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "夹心饼干",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "果仁",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "谷物",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "三只松鼠",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "小白",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "杏核",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "100g",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "自然",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "原香易",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "剥壳",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "杏仁",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "袋装",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "开口",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "薄皮",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "新品",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "豪华版",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "炉炭",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "女友",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "统一",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "当家",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "干脆面",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "香辣蟹",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "红烧",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "牛肉",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "蜜汁",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "猪排",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "香葱",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "方便面",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "香脆",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "点心",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "甘源",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "条豆果",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "鲜虾",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "烤肉",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "蟹黄",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "办公室",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "下午茶",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "美味",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "推荐",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "贴上去",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "公园",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "爱莎",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "额头",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "彩虹",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "蝴蝶花",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "彩绘",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "纹身",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "海绵",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "砂条",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "抛光",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "甲面",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "工具",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "棉签",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "卸妆",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "挖耳",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "掏耳朵",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "一次性",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "卫生",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "美容",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "化妆",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "竹棒",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "超火",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "像素",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "凯蒂",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "hellokitty",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "5d",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "浮雕",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "相机",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "面霜",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "冷门",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "淡颜",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "腮红",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "饱和",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "万能",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "消肿",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "粉色",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "柔雾",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "UAU",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "养出",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "漫画",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "香氛",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "护手霜",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "干裂",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "四季",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "秋冬",
+    "type": "季节词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "女发带",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "高弹性",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "不伤",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "多功能",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "马尾",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "头饰",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "束发",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "遗憾",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "塞纳",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "纯手工",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "穿戴",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "猫眼",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "高级",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "折叠",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "唇部",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "懒人",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "修眉",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1
+  },
+  {
+    "word": "2024",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "香风",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "短款",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "针织",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "服装",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "西装",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "夏潮",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "bf",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "冰感",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "男夏",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "重磅",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "体恤",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "职业",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "正装",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "免烫",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "ins风",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "夹克衫",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "加绒",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "运动裤",
+    "type": "其他",
+    "category": "女装",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "女装"
+  },
+  {
+    "word": "特大号",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "软底",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "塑料",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "女士",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "车载",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "背心",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "平口",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "冬季",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "保暖",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "室内外",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "桌面",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "文具",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "化妆品",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "箱大号",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "充充",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "电线",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "华为",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "20000",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "毫安",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "三合一",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "充线",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "耳机",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "有线",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "高音质",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "安卓",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "加长",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "超长",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "续航",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "闪充",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "指纹",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "10",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "片装",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "深层",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "氨基酸",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "通用",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "PA",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "+++",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "防汗",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "雾面",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "掉色",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "祛斑",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "紧致",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "国货",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "军训",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "脱色",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "豆沙",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "泥膜",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "粉刺",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "洁面乳",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "喷雾",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "全身",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "可用",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "丝绒",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "隔离霜",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "二合一",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "SPF30",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "提亮",
+    "type": "功能词",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "肤色",
+    "type": "其他",
+    "category": "美妆配饰",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "美妆配饰"
+  },
+  {
+    "word": "辣味",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "网红辣条",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "大刀",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "小包装",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "芒果",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "泰国",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "风味",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "老式",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "大辣",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "片儿",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "怀旧",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "豆皮",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "炒货",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "夏威夷",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "奶油味",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "开果器",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "罐装",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "早餐",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "批发",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "新疆",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "山药",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "薄片",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "薯片",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "酥脆",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "红枣",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "麻辣",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "豆制品",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "一包",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "综合",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "猕猴桃",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "草莓",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "糕点",
+    "type": "其他",
+    "category": "零食",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "零食"
+  },
+  {
+    "word": "男孩",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "遥控",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "汽车",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "可充电",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "男童",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "拉拉",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "XXL",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "牙胶",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "洋气",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "SMLXL",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "干爽",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "手柄",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "积木",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "颗粒",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "拼装",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "清仓",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "裤子",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "长裤",
+    "type": "其他",
+    "category": "母婴",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "母婴"
+  },
+  {
+    "word": "加宽",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "鞋女",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "燃脂",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "健身运动",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "电脑包",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "计数",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "无绳",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "旅行包",
+    "type": "其他",
+    "category": "家居日用",
+    "platform": "pinduoduo",
+    "count": 1,
+    "primary_category": "家居日用"
+  },
+  {
+    "word": "卫衣",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "牛仔裤",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "打底衫",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "风衣",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "针织衫",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "百褶裙",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "阔腿裤",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "小香风",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "直筒",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "V领",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "刺绣",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "破洞",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "开叉",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "系带",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "撞色",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "水洗",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "磨毛",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "螺纹",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "慵懒",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "时髦",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "减龄",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "垂感",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "亲肤",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "软糯",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "有型",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "约会",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "实拍",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "妈妈装",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "大码",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "日常",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "拉拉裤",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "学步裤",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "奶嘴",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "爬服",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "手推车",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "婴儿车",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "安全座椅",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "米粉",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "果泥",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "沐浴露",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "浴巾",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "睡袋",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "婴儿床",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "床围",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "布书",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "童鞋",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "防漏",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "中大童",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "分腿",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "一体式",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "可折叠",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "360度",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "五点式",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "有机",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "无添加",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "弱酸性",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "四季通用",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "护脊",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "XL码",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "大包装",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "礼盒装",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "防胀气",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "萌趣",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "稳固",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "营养",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "护颈",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "热卖",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "工厂直发",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "一件包邮",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "官方补贴",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "限时秒杀",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "宝妈必备",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "待产包",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "新生儿礼盒",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "送礼佳品",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "开学季",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "换季清仓",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "囤货装",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "收纳箱",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "置物架",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "拖把",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "扫把",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "垃圾桶",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "菜板",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "碗碟架",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "花洒",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "浴帘",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "菜刀",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "台灯",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "挂画",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "大号",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "多层",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "免打孔",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "旋转",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "陶瓷",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "棉质",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "珊瑚绒",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "背心式",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "点断式",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "锋利",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "玻璃",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "真空",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "LED",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "无痕",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "沥水",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "增压",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "抗菌",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "北欧",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "日式",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "高颜值",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "省空间",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "好收纳",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "易清洁",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "不掉毛",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "不漏水",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "护眼",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "温馨",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "工厂",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "直发",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "限时抢",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "新人专享",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "租房",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "年货节",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "囤货",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "肉干",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "果干",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "蜜饯",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "膨化食品",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "海味零食",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "夏威夷果",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "牛肉干",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "奶糖",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "芒果干",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "锅巴",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "独立包装",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "混合装",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "散装",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "盒装",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "甜味",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "咸味",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "五香",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "耐嚼",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "薄脆",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "去壳",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "夹心",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "拉丝",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "手撕",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "干货",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "好吃",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "过瘾",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "实惠",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "量大",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "耐吃",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "经典",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "追剧",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "夜宵",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "年货",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "秒杀",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "满减",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "精华液",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "眼霜",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "粉底液",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "眼影盘",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "卸妆水",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "美甲贴",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "假睫毛",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "发夹",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "发圈",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "耳环",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "项链",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "手链",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "戒指",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "补水面膜",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "气垫",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "贴片",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "按压泵",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "滴管",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "滚珠",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "遮瑕",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "持妆",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "珠光",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "亮片",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "水油",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "分层",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "甲片",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "单簇",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "整排",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "925银",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "合金",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "钛钢",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "不脱妆",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "显色",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "易上手",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "易卸除",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "同款",
+    "type": "营销词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "少女",
+    "type": "营销词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "必备",
+    "type": "营销词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "组合",
+    "type": "营销词",
+    "category": "美妆配饰"
+  }
+]

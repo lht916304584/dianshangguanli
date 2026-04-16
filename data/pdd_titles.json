@@ -1,0 +1,22 @@
+[
+  {
+    "title": "精彩活动更多 >",
+    "keyword": "连衣裙",
+    "selector": "[class*=\"title\"]"
+  },
+  {
+    "title": "精选专题更多 >",
+    "keyword": "连衣裙",
+    "selector": "[class*=\"title\"]"
+  },
+  {
+    "title": "精彩活动更多 >",
+    "keyword": "保温杯",
+    "selector": "[class*=\"title\"]"
+  },
+  {
+    "title": "精选专题更多 >",
+    "keyword": "保温杯",
+    "selector": "[class*=\"title\"]"
+  }
+]

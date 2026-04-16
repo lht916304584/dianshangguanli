@@ -1,0 +1,112 @@
+[
+  {
+    "name": "api_uid",
+    "value": "CiI57GnIoo5KHgCdFQpNAg==",
+    "domain": ".yangkeduo.com",
+    "path": "/",
+    "expires": 1809316494.762151,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_nano_fp",
+    "value": "Xpm8n0myn5TbnpXql9_0SBG16bI4eXmZCbiyaChC",
+    "domain": "mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1809316495.024198,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "webp",
+    "value": "1",
+    "domain": "mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1777348578.960015,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "jrpl",
+    "value": "YpDupO4XMPLVzkjtyN8l1z2o1km7hOgY",
+    "domain": ".mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1806292578.823433,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "njrpl",
+    "value": "YpDupO4XMPLVzkjtyN8l1z2o1km7hOgY",
+    "domain": ".mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1806292578.82352,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "dilx",
+    "value": "QYgqV02HYSH2hYqB2cQ58",
+    "domain": ".mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1806292578.823581,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "PDDAccessToken",
+    "value": "WBFORJUE2E53CV7TQEDXKQGFWWSDZRJGAGNQF7LERBDZDVTACKXQ122fca3",
+    "domain": "mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1783396578.715161,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "pdd_user_id",
+    "value": "1284168020732",
+    "domain": "mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1783396578.718916,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "pdd_user_uin",
+    "value": "WSXP2XO3E5HFOFTGTB5YPCBV6I_GEXDA",
+    "domain": "mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1783396578.719419,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "pdd_vds",
+    "value": "gaTLByNNubmnLmTbutxbLaGidLBOmEenLLBiTywbnOIbNoBaBPltLGnmuIen",
+    "domain": "mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1775361378.769815,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "rec_list_personal",
+    "value": "rec_list_personal_fyhz2o",
+    "domain": "mobile.yangkeduo.com",
+    "path": "/",
+    "expires": 1774758378.9463,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

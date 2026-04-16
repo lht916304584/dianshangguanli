@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>登录 - AI标题优化神器</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a24;--border:#2a2a3a;--text:#e8e8f0;--text2:#8888a0;--accent:#ff6b35;--accent2:#ff8f5e;--accent-glow:rgba(255,107,53,0.15);--green:#22c55e;--red:#ef4444;--purple:#a855f7;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 30%,rgba(255,107,53,0.05) 0%,transparent 50%),radial-gradient(circle at 70% 70%,rgba(168,85,247,0.05) 0%,transparent 50%);animation:bgFloat 20s ease-in-out infinite;z-index:0}
+@keyframes bgFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-2%,2%)}}
+
+.page{position:relative;z-index:1;width:100%;max-width:420px;padding:20px}
+
+/* Logo area */
+.logo-area{text-align:center;margin-bottom:40px}
+.logo-icon{width:64px;height:64px;border-radius:16px;background:linear-gradient(135deg,var(--accent),#ff4500);display:inline-flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:16px;box-shadow:0 8px 30px rgba(255,107,53,0.3)}
+.logo-title{font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,var(--accent),var(--accent2),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px}
+.logo-sub{color:var(--text2);font-size:0.9rem;font-weight:300}
+.logo-features{display:flex;justify-content:center;gap:16px;margin-top:16px;font-size:0.75rem;color:var(--text2)}
+.logo-features span{display:flex;align-items:center;gap:4px}
+.logo-features .dot{width:5px;height:5px;border-radius:50%;background:var(--green)}
+
+/* Auth card */
+.auth-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px;box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+
+/* Tabs */
+.auth-tabs{display:flex;border-radius:10px;overflow:hidden;margin-bottom:28px;border:1px solid var(--border)}
+.auth-tab{flex:1;padding:12px;text-align:center;cursor:pointer;font-size:0.95rem;font-weight:600;background:var(--bg);color:var(--text2);border:none;font-family:inherit;transition:all 0.3s}
+.auth-tab.active{background:var(--accent);color:white}
+.auth-tab:hover:not(.active){color:var(--text)}
+
+/* Steps indicator */
+.steps{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:24px;font-size:0.8rem;color:var(--text2)}
+.step-dot{width:24px;height:24px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.7rem;font-weight:700;border:2px solid var(--border);color:var(--text2)}
+.step-dot.active{background:var(--accent);border-color:var(--accent);color:white}
+.step-dot.done{background:var(--green);border-color:var(--green);color:white}
+.step-line{width:30px;height:2px;background:var(--border)}
+.step-line.active{background:var(--accent)}
+
+/* Form */
+.form-group{margin-bottom:20px;position:relative}
+.form-group label{display:block;font-size:0.85rem;color:var(--text2);margin-bottom:8px;font-weight:500}
+.form-group input{width:100%;padding:14px 16px 14px 44px;background:var(--bg);border:1px solid var(--border);border-radius:10px;color:var(--text);font-size:1rem;font-family:inherit;outline:none;transition:all 0.3s}
+.form-group input:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}
+.form-group .icon{position:absolute;left:14px;top:38px;font-size:1.1rem;color:var(--text2)}
+.form-group .hint{font-size:0.75rem;color:var(--text2);margin-top:6px}
+
+.error-msg{color:var(--red);font-size:0.8rem;text-align:center;margin-bottom:16px;min-height:22px;font-weight:500}
+
+.btn{width:100%;padding:16px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#ff4500);color:white;box-shadow:0 4px 20px rgba(255,107,53,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(255,107,53,0.4)}
+.btn-primary:active{transform:translateY(0)}
+.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
+
+.divider{display:flex;align-items:center;gap:12px;margin:24px 0;color:var(--text2);font-size:0.8rem}
+.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+
+.guest-link{text-align:center;font-size:0.85rem;color:var(--text2)}
+.guest-link a{color:var(--accent);text-decoration:none;cursor:pointer;font-weight:500}
+.guest-link a:hover{text-decoration:underline}
+
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:500;box-shadow:0 4px 20px rgba(0,0,0,0.3);transition:transform 0.3s;z-index:100}
+.toast.show{transform:translateX(-50%) translateY(0)}
+.toast.success{background:var(--green);color:white}
+.toast.error{background:var(--red);color:white}
+
+.hidden{display:none!important}
+
+@media(max-width:480px){.page{padding:16px}.auth-card{padding:24px}.logo-title{font-size:1.5rem}}
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="logo-area">
+    <div class="logo-icon">🔥</div>
+    <div class="logo-title">AI标题优化神器</div>
+    <div class="logo-sub">多平台智能评分 & 一键生成高分标题</div>
+    <div class="logo-features">
+      <span><span class="dot"></span>拼多多</span>
+      <span><span class="dot"></span>淘宝</span>
+      <span><span class="dot"></span>抖音</span>
+      <span><span class="dot"></span>小红书</span>
+    </div>
+  </div>
+
+  <div class="auth-card">
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">登录</button>
+      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">注册新账号</button>
+    </div>
+
+    <!-- Login Form -->
+    <div id="form-login">
+      <div class="form-group">
+        <label>手机号</label>
+        <span class="icon">📱</span>
+        <input type="tel" id="login-phone" placeholder="请输入手机号" maxlength="11">
+      </div>
+      <div class="form-group">
+        <label>密码</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="login-pwd" placeholder="请输入密码">
+      </div>
+      <div class="error-msg" id="login-error"></div>
+      <button class="btn btn-primary" onclick="doLogin()" id="btn-login">登录</button>
+    </div>
+
+    <!-- Register Form -->
+    <div id="form-register" class="hidden">
+      <div class="steps">
+        <span class="step-dot active" id="s1">1</span>
+        <span class="step-line" id="sl1"></span>
+        <span class="step-dot" id="s2">2</span>
+        <span class="step-line" id="sl2"></span>
+        <span class="step-dot" id="s3">3</span>
+        <span style="margin-left:4px;font-size:0.75rem">注册 → 完成 → 开始使用</span>
+      </div>
+      <div class="form-group">
+        <label>手机号</label>
+        <span class="icon">📱</span>
+        <input type="tel" id="reg-phone" placeholder="请输入11位手机号" maxlength="11">
+        <div class="hint">· 用于登录，建议填写常用手机号</div>
+      </div>
+      <div class="form-group">
+        <label>密码</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="reg-pwd" placeholder="请输入密码">
+        <div class="hint">· 至少6位字符，建议字母 + 数字组合</div>
+      </div>
+      <div class="form-group">
+        <label>确认密码</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="reg-pwd2" placeholder="请再次输入密码">
+      </div>
+      <div class="error-msg" id="reg-error"></div>
+      <button class="btn btn-primary" onclick="doRegister()" id="btn-register">注册</button>
+    </div>
+
+    <div class="divider">或</div>
+    <div class="guest-link">
+      <a href="/tool.html">先免费体验标题评分 →</a>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = '/api/v1';
+
+// Check if already logged in
+const existingToken = localStorage.getItem('token');
+if (existingToken) {
+  // Verify token
+  fetch(`${API}/user/me`, {headers: {'Authorization': 'Bearer ' + existingToken}})
+    .then(r => r.json())
+    .then(d => { if (d.success) window.location.href = '/tool.html'; })
+    .catch(() => {});
+}
+
+function switchTab(t) {
+  document.getElementById('tab-login').classList.toggle('active', t === 'login');
+  document.getElementById('tab-register').classList.toggle('active', t === 'register');
+  document.getElementById('form-login').classList.toggle('hidden', t !== 'login');
+  document.getElementById('form-register').classList.toggle('hidden', t !== 'register');
+  document.getElementById('login-error').textContent = '';
+  document.getElementById('reg-error').textContent = '';
+}
+
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast ' + type + ' show';
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+async function doLogin() {
+  const phone = document.getElementById('login-phone').value.trim();
+  const pwd = document.getElementById('login-pwd').value;
+  const errEl = document.getElementById('login-error');
+  errEl.textContent = '';
+
+  if (!phone || !pwd) { errEl.textContent = '请填写手机号和密码'; return; }
+  if (phone.length !== 11) { errEl.textContent = '请输入11位手机号'; return; }
+
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true; btn.textContent = '登录中...';
+
+  try {
+    const r = await fetch(`${API}/user/login`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({phone, password: pwd})
+    });
+    const d = await r.json();
+
+    if (d.success) {
+      localStorage.setItem('token', d.token);
+      showToast('登录成功！正在跳转...', 'success');
+      setTimeout(() => window.location.href = '/tool.html', 800);
+    } else {
+      errEl.textContent = d.error || '登录失败';
+    }
+  } catch(e) {
+    errEl.textContent = '网络错误，请重试';
+  } finally {
+    btn.disabled = false; btn.textContent = '登录';
+  }
+}
+
+async function doRegister() {
+  const phone = document.getElementById('reg-phone').value.trim();
+  const pwd = document.getElementById('reg-pwd').value;
+  const pwd2 = document.getElementById('reg-pwd2').value;
+  const errEl = document.getElementById('reg-error');
+  errEl.textContent = '';
+
+  if (!phone || !pwd || !pwd2) { errEl.textContent = '请填写完整信息'; return; }
+  if (phone.length !== 11) { errEl.textContent = '请输入11位手机号'; return; }
+  if (pwd.length < 6) { errEl.textContent = '密码至少6位'; return; }
+  if (pwd !== pwd2) { errEl.textContent = '两次密码不一致'; return; }
+
+  const btn = document.getElementById('btn-register');
+  btn.disabled = true; btn.textContent = '注册中...';
+
+  // Update steps UI
+  document.getElementById('s1').classList.add('done');
+  document.getElementById('sl1').classList.add('active');
+  document.getElementById('s2').classList.add('active');
+
+  try {
+    const r = await fetch(`${API}/user/register`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({phone, password: pwd})
+    });
+    const d = await r.json();
+
+    if (d.success) {
+      localStorage.setItem('token', d.token);
+      // Update steps
+      document.getElementById('s2').classList.add('done');
+      document.getElementById('sl2').classList.add('active');
+      document.getElementById('s3').classList.add('active');
+
+      showToast('注册成功！正在跳转...', 'success');
+      setTimeout(() => window.location.href = '/tool.html', 1000);
+    } else {
+      errEl.textContent = d.error || '注册失败';
+      document.getElementById('s2').classList.remove('active');
+      document.getElementById('sl1').classList.remove('active');
+      document.getElementById('s1').classList.remove('done');
+    }
+  } catch(e) {
+    errEl.textContent = '网络错误，请重试';
+  } finally {
+    btn.disabled = false; btn.textContent = '注册';
+  }
+}
+
+// Enter key support
+document.getElementById('login-pwd').addEventListener('keyup', e => { if(e.key === 'Enter') doLogin(); });
+document.getElementById('reg-pwd2').addEventListener('keyup', e => { if(e.key === 'Enter') doRegister(); });
+</script>
+</body>
+</html>

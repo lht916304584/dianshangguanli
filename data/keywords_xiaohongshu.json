@@ -1,0 +1,2727 @@
+[
+  {
+    "word": "连衣裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "T恤",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "半身裙",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "裤子",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "外套",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "上衣",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "针织衫",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "衬衫",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "卫衣",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "西装",
+    "type": "品类词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "纯棉",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "醋酸",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "冰丝",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "收腰",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "高腰",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "直筒",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "A字",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宽松",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "短款",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "长款",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "V领",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "方领",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "泡泡袖",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "开衩",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "垂感",
+    "type": "属性词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "温柔",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "气质",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "高级感",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "氛围感",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "显瘦",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "显白",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "显高",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "慵懒",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "法式",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "韩系",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "复古",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "甜酷",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "通勤",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "百搭",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "小众",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "绝美",
+    "type": "修饰词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "OOTD",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "穿搭",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "分享",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "测评",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "开箱",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "早春",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "夏季",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "小个子",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "梨形",
+    "type": "营销词",
+    "category": "女装",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "纸尿裤",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "奶瓶",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "玩具",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "童装",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "辅食",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "婴儿服",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宝宝鞋",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "爬行垫",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "婴儿车",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "湿巾",
+    "type": "品类词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "纯棉",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "A类",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "PPSU",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宽口径",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "拉拉裤",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "连体衣",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "分腿",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "加厚",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "大码",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "有机",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "无添加",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "高颜值",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "新生儿",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "益智",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "防胀气",
+    "type": "属性词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "超薄",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "透气",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "柔软",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "亲肤",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "ins风",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "软萌",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "可爱",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "实用",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "安全",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "好用",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "不红屁屁",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "解放双手",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "不踩雷",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "巨能吸",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "自用款",
+    "type": "修饰词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "开箱",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "测评",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "囤货",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "清单",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "好物",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "分享",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "双十一",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "必入",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宝妈",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "孕期",
+    "type": "营销词",
+    "category": "母婴",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "收纳",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "清洁",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "厨房好物",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "卫浴",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "文具",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "家居日用",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "收纳神器",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "清洁工具",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "厨房用品",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "浴室好物",
+    "type": "品类词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "透明",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "可折叠",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "免打孔",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "分层",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "带盖",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "壁挂",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "小户型",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "大容量",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "可水洗",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "不锈钢",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "硅胶",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "塑料",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "磨砂",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "迷你",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "多功能",
+    "type": "属性词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "高颜值",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "治愈系",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "ins风",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "奶油风",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "极简",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "懒人",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "幸福感",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "提升",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "实用",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "整洁",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "干净",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "平价",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "精致",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "收纳狂",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "强迫症",
+    "type": "修饰词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "抄作业",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "闭眼入",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "无限回购",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "租房党",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "学生党",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "新家",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宿舍",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "年度爱用",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宝藏",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "合集",
+    "type": "营销词",
+    "category": "家居日用",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "零食",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "坚果",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "饼干",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "肉干",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "糖果",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "果干",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "零食推荐",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "零食分享",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "零食测评",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "追剧零食",
+    "type": "品类词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "独立包装",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "大包装",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "混合装",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "小包装",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "无添加",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "低糖",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "无糖",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "酥脆",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "软糯",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "有嚼劲",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "咸香",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "酸甜",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "香辣",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "五香味",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "原味",
+    "type": "属性词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "巨好吃",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "绝了",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "天花板",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "无限回购",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宝藏零食",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "神仙零食",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "好吃到哭",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "停不下来",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "一口惊艳",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "幸福感",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "解馋",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "治愈系",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "高颜值",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "办公室零食",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "宿舍零食",
+    "type": "修饰词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "囤货",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "必买",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "安利",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "种草",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "开箱",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "平价",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "学生党",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "打工人",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "追剧必备",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "年货清单",
+    "type": "营销词",
+    "category": "零食",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "面膜",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "口红",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "防晒",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "护肤",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "美甲",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "彩妆",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "眼影",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "腮红",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "香水",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "配饰",
+    "type": "品类词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "哑光",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "镜面",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "滋润",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "防水",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "SPF50",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "小样",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "正装",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "甲片",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "甲油胶",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "贴片",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "长款",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "短款",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "亮片",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "纯色",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "渐变",
+    "type": "属性词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "高级感",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "氛围感",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "显白",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "提亮",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "水光肌",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "妈生感",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "伪素颜",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "清透",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "不沾杯",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "不脱妆",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "少女感",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "温柔风",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "ins风",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "甜酷风",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "国货",
+    "type": "修饰词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "闭眼入",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "回购",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "空瓶",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "学生党",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "通勤",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "约会",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "开箱",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "测评",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "教程",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "好物",
+    "type": "营销词",
+    "category": "美妆配饰",
+    "platform": "xiaohongshu"
+  },
+  {
+    "word": "短裤",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "牛仔裤",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "打底衫",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "吊带",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "风衣",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "碎花裙",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "A字裙",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "百褶裙",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "包臀裙",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "阔腿裤",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "小香风",
+    "type": "品类词",
+    "category": "女装"
+  },
+  {
+    "word": "雪纺",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "天丝",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "牛仔",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "针织",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "修身",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "长袖",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "短袖",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "刺绣",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "印花",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "水洗",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "破洞",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "加绒",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "轻薄",
+    "type": "属性词",
+    "category": "女装"
+  },
+  {
+    "word": "慵懒风",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "设计感",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "时髦",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "洋气",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "减龄",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "遮肉",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "舒适",
+    "type": "修饰词",
+    "category": "女装"
+  },
+  {
+    "word": "学生",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "职场",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "日常",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "度假",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "爆款",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "新款",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "清仓",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "特价",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "包邮",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "现货",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "实拍",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "推荐",
+    "type": "营销词",
+    "category": "女装"
+  },
+  {
+    "word": "学饮杯",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "爬服",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "安抚玩具",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "摇铃",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "婴儿推车",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "遛娃神器",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "安全座椅",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "米粉",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "果泥",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "沐浴露",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "浴巾",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "睡袋",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "床围",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "布书",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "洞洞书",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "学步鞋",
+    "type": "品类词",
+    "category": "母婴"
+  },
+  {
+    "word": "竹纤维",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "一体式",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "高景观",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "360度旋转",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "isofix接口",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "氨基酸",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "纱布",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "六层",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "护脊",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "立体剪裁",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "撕不烂",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "软底",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "防滑",
+    "type": "属性词",
+    "category": "母婴"
+  },
+  {
+    "word": "干爽",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "断奶神器",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "萌趣",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "便携",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "轻便",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "稳固",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "营养",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "温和",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "保湿",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "速干",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "恒温",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "护颈",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "启蒙",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "防踢",
+    "type": "修饰词",
+    "category": "母婴"
+  },
+  {
+    "word": "送礼",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "自用",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "新生儿必备",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "待产包",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "宝妈推荐",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "口碑",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "网红",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "换季",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "出游",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "居家",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "哄睡",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "辅食添加",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "学步期",
+    "type": "营销词",
+    "category": "母婴"
+  },
+  {
+    "word": "收纳盒",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "置物架",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "真空袋",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "拖把",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "洗碗刷",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "沥水架",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "菜刀",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "马克杯",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "保温壶",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "笔记本",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "台灯",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "挂画",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "垃圾桶",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "保鲜盒",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "棉拖鞋",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "垃圾袋",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "保鲜膜",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "剪刀",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "玻璃杯",
+    "type": "品类词",
+    "category": "家居日用"
+  },
+  {
+    "word": "304不锈钢",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "陶瓷",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "双层",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "旋转",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "电动",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "平口",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "背心式",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "点断式",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "锋利",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "防烫",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "24小时保温",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "活页",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "护眼",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "可调光",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "无痕",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "A4尺寸",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "加大号",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "长绒棉",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "抽绳",
+    "type": "属性词",
+    "category": "家居日用"
+  },
+  {
+    "word": "简约",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "北欧",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "日式",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "神器",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "省空间",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "提升幸福感",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "小清新",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "温馨",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "收纳必备",
+    "type": "修饰词",
+    "category": "家居日用"
+  },
+  {
+    "word": "居家好物",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "宿舍神器",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "厨房必备",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "开学季",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "限时优惠",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "组合装",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "秒杀",
+    "type": "营销词",
+    "category": "家居日用"
+  },
+  {
+    "word": "薯片",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "辣条",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "巧克力",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "蜜饯",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "膨化食品",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "方便面",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "特产",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "糕点",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "海味零食",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "夏威夷果",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "碧根果",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "曲奇",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "威化",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "牛肉干",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "猪肉脯",
+    "type": "品类词",
+    "category": "零食"
+  },
+  {
+    "word": "桶装",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "袋装",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "散装",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "甜辣",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "五香",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "麻辣",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "咸蛋黄",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "海苔",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "夹心",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "手撕",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "风干",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "炭烤",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "低温烘焙",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "低脂",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "高蛋白",
+    "type": "属性词",
+    "category": "零食"
+  },
+  {
+    "word": "嘎嘣脆",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "太上头",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "追剧",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "扛饿",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "童年回忆",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "神仙",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "绝绝子",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "办公室",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "宅家",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "野餐",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "年货",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "伴手礼",
+    "type": "修饰词",
+    "category": "零食"
+  },
+  {
+    "word": "上班族",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "吃货",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "满减",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "多口味",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "量大",
+    "type": "营销词",
+    "category": "零食"
+  },
+  {
+    "word": "防晒霜",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "洁面乳",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "精华液",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "眼霜",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "粉底液",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "眼影盘",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "卸妆水",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "美甲贴",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "假睫毛",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "发夹",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "发箍",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "耳环",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "项链",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "手链",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "戒指",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "补水",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "遮瑕",
+    "type": "品类词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "片装",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "膏状",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "乳霜",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "水状",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "啫喱",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "珠光",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "雾面",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "清爽",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "多色",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "单色",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "组合",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "套装",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "浓密",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "自然",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "纤细",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "合金",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "925银",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "亚克力",
+    "type": "属性词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "控油",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "修护",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "抗老",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "美白",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "持妆",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "显气色",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "甜美",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "仙气",
+    "type": "修饰词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "明星同款",
+    "type": "营销词",
+    "category": "美妆配饰"
+  },
+  {
+    "word": "新手",
+    "type": "营销词",
+    "category": "美妆配饰"
+  }
+]

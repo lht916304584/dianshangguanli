@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>管理后台 - AI标题优化神器</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a24;--border:#2a2a3a;--text:#e8e8f0;--text2:#8888a0;--accent:#ff6b35;--green:#22c55e;--blue:#3b82f6;--purple:#a855f7;--red:#ef4444;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;padding:20px}
+.container{max-width:1000px;margin:0 auto}
+h1{font-size:1.5rem;font-weight:900;color:var(--accent);margin-bottom:24px;text-align:center}
+.login-box{max-width:400px;margin:100px auto;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:32px;text-align:center}
+.login-box h2{color:var(--accent);margin-bottom:20px}
+.login-box input{width:100%;padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1rem;margin-bottom:12px;outline:none;font-family:inherit}
+.login-box input:focus{border-color:var(--accent)}
+.login-box button{width:100%;padding:12px;background:var(--accent);color:white;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;font-family:inherit}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.stat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;text-align:center}
+.stat-card .num{font-size:2rem;font-weight:900;margin-bottom:4px}
+.stat-card .label{font-size:0.85rem;color:var(--text2)}
+.stat-card.accent .num{color:var(--accent)}
+.stat-card.green .num{color:var(--green)}
+.stat-card.blue .num{color:var(--blue)}
+.stat-card.purple .num{color:var(--purple)}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
+.card-title{font-size:0.9rem;color:var(--text2);margin-bottom:16px;font-weight:600}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:10px 12px;color:var(--text2);font-size:0.8rem;border-bottom:1px solid var(--border);font-weight:500}
+td{padding:10px 12px;font-size:0.85rem;border-bottom:1px solid var(--border)}
+tr:hover td{background:var(--surface2)}
+.tag{padding:2px 8px;border-radius:10px;font-size:0.75rem;font-weight:600}
+.tag-free{background:var(--surface2);color:var(--text2)}
+.tag-vip{background:var(--accent);color:white}
+.vip-btn{padding:4px 10px;background:var(--green);color:white;border:none;border-radius:6px;cursor:pointer;font-size:0.75rem;font-family:inherit}
+.vip-btn:hover{opacity:0.8}
+.hidden{display:none}
+.refresh-btn{padding:8px 20px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:0.85rem;font-family:inherit;margin-bottom:20px}
+.refresh-btn:hover{border-color:var(--accent);color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Login -->
+<div class="login-box" id="admin-login">
+<h2>🔐 管理后台</h2>
+<input type="password" id="admin-key" placeholder="请输入管理密钥">
+<button onclick="adminLogin()">进入</button>
+</div>
+
+<!-- Dashboard -->
+<div id="dashboard" class="hidden">
+<h1>📊 AI标题优化神器 · 管理后台</h1>
+
+<button class="refresh-btn" onclick="loadDashboard()">🔄 刷新数据</button>
+
+<div class="stats">
+<div class="stat-card accent"><div class="num" id="s-users">-</div><div class="label">注册用户</div></div>
+<div class="stat-card green"><div class="num" id="s-today">-</div><div class="label">今日活跃</div></div>
+<div class="stat-card blue"><div class="num" id="s-scores">-</div><div class="label">总评分次数</div></div>
+<div class="stat-card purple"><div class="num" id="s-generates">-</div><div class="label">总生成次数</div></div>
+</div>
+
+<div class="card">
+<div class="card-title">用户列表</div>
+<table>
+<thead><tr><th>ID</th><th>手机号</th><th>套餐</th><th>每日限额</th><th>注册时间</th><th>操作</th></tr></thead>
+<tbody id="user-table"></tbody>
+</table>
+</div>
+
+<div class="card">
+<div class="card-title">最近使用记录</div>
+<table>
+<thead><tr><th>用户</th><th>操作</th><th>平台</th><th>标题</th><th>评分</th><th>时间</th></tr></thead>
+<tbody id="history-table"></tbody>
+</table>
+</div>
+</div>
+</div>
+
+<script>
+const API='/api/v1';
+let adminKey='';
+
+function adminLogin(){
+  adminKey=document.getElementById('admin-key').value;
+  if(!adminKey){alert('请输入管理密钥');return}
+  loadDashboard();
+}
+
+async function loadDashboard(){
+  try{
+    // 获取用户列表
+    const r=await fetch(`${API}/admin/users?admin_key=${adminKey}`);
+    const users=await r.json();
+    if(users.error){alert(users.error);return}
+
+    document.getElementById('admin-login').classList.add('hidden');
+    document.getElementById('dashboard').classList.remove('hidden');
+
+    // 统计
+    document.getElementById('s-users').textContent=users.length;
+
+    // 渲染用户表
+    let html='';
+    users.forEach(u=>{
+      const tag=u.plan==='vip'?'<span class="tag tag-vip">VIP</span>':'<span class="tag tag-free">免费</span>';
+      const phone=u.phone;
+      const vipBtn=u.plan!=='vip'?`<button class="vip-btn" onclick="setVip('${phone}')">设为VIP</button>`:'<span style="color:var(--green);font-size:0.75rem">已开通</span>';
+      html+=`<tr><td>${u.id}</td><td>${phone}</td><td>${tag}</td><td>${u.daily_limit}</td><td>${(u.created_at||'').substring(0,16)}</td><td>${vipBtn}</td></tr>`;
+    });
+    document.getElementById('user-table').innerHTML=html||'<tr><td colspan="6" style="text-align:center;color:var(--text2)">暂无用户</td></tr>';
+
+    // 获取使用统计
+    const r2=await fetch(`${API}/admin/stats?admin_key=${adminKey}`);
+    const stats=await r2.json();
+    if(stats.today_active!==undefined){
+      document.getElementById('s-today').textContent=stats.today_active;
+      document.getElementById('s-scores').textContent=stats.total_scores;
+      document.getElementById('s-generates').textContent=stats.total_generates;
+    }
+
+    // 获取最近记录
+    const r3=await fetch(`${API}/admin/recent-history?admin_key=${adminKey}`);
+    const history=await r3.json();
+    let hhtml='';
+    if(history.records){
+      history.records.forEach(h=>{
+        const platName={'pinduoduo':'拼多多','taobao':'淘宝','douyin':'抖音','xiaohongshu':'小红书'}[h.platform]||h.platform;
+        const actionName=h.action==='score'?'评分':'生成';
+        hhtml+=`<tr><td>${h.phone||'用户'+h.user_id}</td><td>${actionName}</td><td>${platName}</td><td style="max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${h.title||''}</td><td>${h.score||'-'}</td><td>${(h.created_at||'').substring(5,16)}</td></tr>`;
+      });
+    }
+    document.getElementById('history-table').innerHTML=hhtml||'<tr><td colspan="6" style="text-align:center;color:var(--text2)">暂无记录</td></tr>';
+
+  }catch(e){alert('加载失败：'+e.message)}
+}
+
+async function setVip(phone){
+  if(!confirm(`确认将 ${phone} 设为VIP？`))return;
+  const r=await fetch(`${API}/admin/set-vip?phone=${phone}&admin_key=${adminKey}`);
+  const d=await r.json();
+  if(d.success){alert('已设为VIP！');loadDashboard()}
+  else{alert(d.error||'操作失败')}
+}
+</script>
+</body>
+</html>
