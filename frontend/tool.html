@@ -93,6 +93,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <div class="tabs">
 <button class="tab active" onclick="switchTab('score')">📊 评分 <span style="font-size:0.7rem;opacity:0.7">免费</span></button>
 <button class="tab" onclick="switchTab('optimize')">✨ AI优化</button>
+<button class="tab" onclick="switchTab('detail')">🎨 详情图</button>
 <button class="tab" onclick="switchTab('hot')">🔥 热搜词</button>
 <button class="tab" onclick="switchTab('history')">📋 历史</button>
 </div>
@@ -136,6 +137,14 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <div class="card-title">我的使用记录</div>
 <div id="history-list" style="color:var(--text2);font-size:0.9rem;">登录后查看历史记录</div>
 </div>
+</div>
+
+<div id="panel-detail" class="hidden">
+<div class="card"><div class="card-title">🎨 详情图AI策划</div>
+<div class="input-group"><textarea id="detail-product" placeholder="描述你的商品，如：纯棉短袖T恤女夏季新款宽松百搭显瘦打底衫..." rows="3"></textarea></div>
+<div class="row"><div class="input-group"><label>品类</label><select id="detail-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
+<button class="btn btn-primary" onclick="doDetailPlan()">🎨 生成详情页策划</button></div>
+<div id="detail-result" class="hidden"></div>
 </div>
 
 </div>
@@ -222,7 +231,7 @@ async function refreshUser(){
 
 // === Platform ===
 function selectPlatform(p,el){currentPlatform=p;document.querySelectorAll('.platform-pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');const i=PI[p];document.getElementById('platform-hint').textContent=i.hint;document.getElementById('score-title').placeholder=i.ph;document.getElementById('max-chars').textContent=i.maxLen;document.getElementById('score-title').maxLength=i.maxLen}
-function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));event.target.closest('.tab').classList.add('active');document.getElementById('panel-score').classList.toggle('hidden',t!=='score');document.getElementById('panel-optimize').classList.toggle('hidden',t!=='optimize');document.getElementById('panel-hot').classList.toggle('hidden',t!=='hot');document.getElementById('panel-history').classList.toggle('hidden',t!=='history');if(t==='history')loadHistory()}
+function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));event.target.closest('.tab').classList.add('active');['score','optimize','detail','hot','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory()}
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
 function copyTitle(t){navigator.clipboard.writeText(t).then(()=>showToast('已复制到剪贴板！'))}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
@@ -344,6 +353,64 @@ async function loadHistory(){
     });
     document.getElementById('history-list').innerHTML=h;
   }catch(e){document.getElementById('history-list').innerHTML='<div style="text-align:center;padding:20px;color:var(--text2)">加载失败</div>'}
+}
+
+// Detail Page Planner
+async function doDetailPlan(){
+  const product=document.getElementById('detail-product').value.trim();
+  if(!product){showToast('请输入商品信息');return}
+  if(!authToken){showToast('请先登录');showAuth();return}
+  showLoading(true,'AI正在策划详情页...');
+  try{
+    const r=await fetch(API+'/detail/plan',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+authToken},body:JSON.stringify({product_info:product,platform:currentPlatform,category:document.getElementById('detail-category').value})});
+    const d=await r.json();
+    if(d.success===false){showToast(d.error||'生成失败');return}
+    renderDetailPlan(d);
+  }catch(e){showToast('网络错误')}finally{showLoading(false)}
+}
+function renderDetailPlan(d){
+  const el=document.getElementById('detail-result');
+  el.classList.remove('hidden');
+  let h='';
+  // Selling points section
+  if(d.selling_points){
+    const sp=d.selling_points;
+    h+='<div class="card"><div class="card-title">💎 卖点提炼</div>';
+    if(sp.core_points&&sp.core_points.length){
+      h+='<div style="margin-bottom:16px"><div style="font-size:0.8rem;color:var(--accent);margin-bottom:8px;font-weight:600">核心卖点</div>';
+      sp.core_points.forEach(p=>{h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px"><strong style="color:var(--accent)">${p.title}</strong><div style="color:var(--text2);font-size:0.85rem;margin-top:4px">${p.detail}</div></div>`});
+      h+='</div>';
+    }
+    if(sp.support_points&&sp.support_points.length){
+      h+='<div style="margin-bottom:16px"><div style="font-size:0.8rem;color:var(--blue);margin-bottom:8px;font-weight:600">支撑卖点</div>';
+      h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+      sp.support_points.forEach(p=>{h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px"><strong style="color:var(--text)">${p.title}</strong><div style="color:var(--text2);font-size:0.8rem;margin-top:2px">${p.detail}</div></div>`});
+      h+='</div></div>';
+    }
+    if(sp.evidence&&sp.evidence.length){
+      h+='<div style="margin-bottom:12px"><div style="font-size:0.8rem;color:var(--green);margin-bottom:8px;font-weight:600">证据素材</div>';
+      sp.evidence.forEach(e=>{h+=`<span style="display:inline-block;padding:4px 10px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.3);border-radius:6px;font-size:0.8rem;color:var(--green);margin:0 6px 6px 0">${e}</span>`});
+      h+='</div>';
+    }
+    h+='</div>';
+  }
+  // Page structure section
+  if(d.page_structure&&d.page_structure.length){
+    h+='<div class="card"><div class="card-title">📱 详情页结构策划（共'+d.page_structure.length+'屏）</div>';
+    d.page_structure.forEach((s,i)=>{
+      const imgPrompt=d.image_prompts&&d.image_prompts[i]?d.image_prompts[i]:'';
+      h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px">`;
+      h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:0.75rem;font-weight:700">${s.screen||i+1}</span><span style="font-size:0.75rem;color:var(--text2)">${s.type||''}</span></div>`;
+      h+=`<div style="font-size:1.05rem;font-weight:700;margin-bottom:4px">${s.title||''}</div>`;
+      if(s.subtitle)h+=`<div style="font-size:0.85rem;color:var(--accent);margin-bottom:6px">${s.subtitle}</div>`;
+      h+=`<div style="font-size:0.9rem;color:var(--text);line-height:1.6;margin-bottom:8px">${s.body||''}</div>`;
+      if(s.design_tip)h+=`<div style="font-size:0.8rem;color:var(--text2);padding:8px;background:var(--surface);border-radius:6px">🎨 ${s.design_tip}</div>`;
+      if(imgPrompt)h+=`<div style="font-size:0.75rem;color:var(--text2);margin-top:8px;padding:8px;background:var(--surface2);border-radius:6px;border:1px dashed var(--border)">📷 图片提示词：<span style="color:var(--purple)">${imgPrompt.substring(0,120)}${imgPrompt.length>120?'...':''}</span></div>`;
+      h+=`</div>`;
+    });
+    h+='</div>';
+  }
+  el.innerHTML=h;
 }
 
 // Init
