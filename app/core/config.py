@@ -1,7 +1,7 @@
+import json
 from functools import lru_cache
 from typing import List
 
-from pydantic import PostgresDsn, RedisDsn, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -13,7 +13,7 @@ class Settings(BaseSettings):
         extra="ignore",
     )
 
-    # LLM 配置
+    # ── LLM ──────────────────────────────────────────────────────────
     DEEPSEEK_API_KEY: str = ""
     DEEPSEEK_BASE_URL: str = "https://api.deepseek.com"
     DEFAULT_LLM_MODEL: str = "deepseek-chat"
@@ -29,28 +29,26 @@ class Settings(BaseSettings):
 
     # ── API ──────────────────────────────────────────────────────────
     API_V1_STR: str = "/api/v1"
-    ALLOWED_HOSTS: str = "*"
-ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:8080"
+    ALLOWED_HOSTS: str = "localhost"
+    ALLOWED_ORIGINS: str = "http://localhost:3000,http://localhost:8080"
 
-@property
-def ALLOWED_HOSTS_LIST(self) -> List[str]:
-    v = self.ALLOWED_HOSTS.strip()
-    if v.startswith("["):
-        import json
-        return json.loads(v)
-    return [i.strip() for i in v.split(",") if i.strip()]
+    @property
+    def ALLOWED_HOSTS_LIST(self) -> List[str]:
+        v = self.ALLOWED_HOSTS.strip()
+        if v.startswith("["):
+            return json.loads(v)
+        return [i.strip() for i in v.split(",") if i.strip()]
 
-@property
-def ALLOWED_ORIGINS_LIST(self) -> List[str]:
-    v = self.ALLOWED_ORIGINS.strip()
-    if v.startswith("["):
-        import json
-        return json.loads(v)
-    return [i.strip() for i in v.split(",") if i.strip()]
+    @property
+    def ALLOWED_ORIGINS_LIST(self) -> List[str]:
+        v = self.ALLOWED_ORIGINS.strip()
+        if v.startswith("["):
+            return json.loads(v)
+        return [i.strip() for i in v.split(",") if i.strip()]
 
     # ── Security ─────────────────────────────────────────────────────
-    SECRET_KEY: str = "change-me-in-production-use-openssl-rand-hex-32"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24        # 1 day
+    SECRET_KEY: str = ""
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24   # 1 day
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
     ALGORITHM: str = "HS256"
 

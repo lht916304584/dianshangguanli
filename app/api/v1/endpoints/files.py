@@ -1,3 +1,5 @@
+"""文件上传/下载/删除 API（已修复文件归属校验漏洞）"""
+
 import os
 import uuid
 from pathlib import Path
@@ -30,12 +32,33 @@ class UploadResponse(BaseModel):
     url: str
 
 
+def _user_file_dir(user_id: str) -> Path:
+    """每个用户独立子目录，物理隔离文件。"""
+    d = UPLOAD_DIR / str(user_id)
+    d.mkdir(parents=True, exist_ok=True)
+    return d
+
+
+def _find_user_file(user_id: str, file_id: str) -> Path:
+    """在当前用户目录下查找文件，找不到则抛 404。"""
+    try:
+        uuid.UUID(file_id)
+    except ValueError:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid file_id")
+
+    user_dir = _user_file_dir(str(user_id))
+    matches = list(user_dir.glob(f"{file_id}.*"))
+    if not matches:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
+    return matches[0]
+
+
 @router.post("/upload", response_model=UploadResponse, status_code=status.HTTP_201_CREATED)
 async def upload_file(
     current_user: CurrentUser,
     file: UploadFile = File(...),
 ):
-    """Upload a single file (max 10 MB). Returns a file_id for later retrieval."""
+    """上传单个文件（最大 10 MB），返回 file_id 供后续访问。"""
     if file.content_type not in ALLOWED_CONTENT_TYPES:
         raise HTTPException(
             status_code=status.HTTP_415_UNSUPPORTED_MEDIA_TYPE,
@@ -51,8 +74,8 @@ async def upload_file(
 
     ext = Path(file.filename).suffix.lower()
     file_id = str(uuid.uuid4())
-    dest = UPLOAD_DIR / f"{file_id}{ext}"
-
+    user_dir = _user_file_dir(str(current_user.id))
+    dest = user_dir / f"{file_id}{ext}"
     dest.write_bytes(contents)
 
     return UploadResponse(
@@ -66,30 +89,13 @@ async def upload_file(
 
 @router.get("/{file_id}")
 async def get_file(file_id: str, current_user: CurrentUser):
-    """Download a previously uploaded file by its file_id."""
-    # Sanitize: only allow UUID-like names
-    try:
-        uuid.UUID(file_id)
-    except ValueError:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid file_id")
-
-    matches = list(UPLOAD_DIR.glob(f"{file_id}.*"))
-    if not matches:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
-
-    return FileResponse(matches[0])
+    """下载文件（只能访问自己上传的文件）。"""
+    file_path = _find_user_file(current_user.id, file_id)
+    return FileResponse(file_path)
 
 
 @router.delete("/{file_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def delete_file(file_id: str, current_user: CurrentUser):
-    """Delete an uploaded file."""
-    try:
-        uuid.UUID(file_id)
-    except ValueError:
-        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Invalid file_id")
-
-    matches = list(UPLOAD_DIR.glob(f"{file_id}.*"))
-    if not matches:
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="File not found")
-
-    matches[0].unlink()
+    """删除文件（只能删除自己上传的文件）。"""
+    file_path = _find_user_file(current_user.id, file_id)
+    file_path.unlink()

@@ -8,6 +8,7 @@ sqlalchemy==2.0.36
 asyncpg==0.30.0                # async PostgreSQL driver
 psycopg2-binary==2.9.10        # sync driver (Alembic)
 alembic==1.14.0
+aiosqlite==0.20.0              # async SQLite for admin endpoints
 
 # ── Redis ─────────────────────────────────────────────────────────────────────
 redis[hiredis]==5.2.1
@@ -19,6 +20,8 @@ flower==2.0.1                  # Celery monitoring UI
 # ── Auth & Security ───────────────────────────────────────────────────────────
 python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
+bcrypt==4.2.1                  # direct bcrypt for SQLite user manager
+PyJWT==2.10.1                  # JWT for SQLite user manager
 
 # ── Config ────────────────────────────────────────────────────────────────────
 pydantic==2.10.4
