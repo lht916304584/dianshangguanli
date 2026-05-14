@@ -91,7 +91,6 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
     <div class="auth-tabs">
       <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">登录</button>
       <button class="auth-tab" id="tab-register" onclick="switchTab('register')">注册</button>
-      <button class="auth-tab" id="tab-reset" onclick="switchTab('reset')">忘记密码</button>
     </div>
 
     <!-- Login Form -->
@@ -105,6 +104,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
         <label>密码</label>
         <span class="icon">🔒</span>
         <input type="password" id="login-pwd" placeholder="请输入密码">
+        <div style="text-align:right;margin-top:6px"><a href="javascript:switchTab('reset')" style="color:var(--accent);font-size:0.8rem;text-decoration:none">忘记密码？</a></div>
       </div>
       <div class="error-msg" id="login-error"></div>
       <button class="btn btn-primary" onclick="doLogin()" id="btn-login">登录</button>
