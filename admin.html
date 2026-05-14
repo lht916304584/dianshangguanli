@@ -86,20 +86,24 @@ let adminKey='';
 function esc(s){if(!s)return '';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
 function adminLogin(){
-  adminKey=document.getElementById('admin-key').value;
+  adminKey=document.getElementById('admin-key').value.trim();
   if(!adminKey){alert('请输入管理密钥');return}
   loadDashboard();
 }
 
 async function loadDashboard(){
+  const loginDiv=document.getElementById('admin-login');
+  const dashDiv=document.getElementById('dashboard');
   try{
     // 获取用户列表
     const r=await fetch(`${API}/admin/users`,{headers:{'X-Admin-Key':adminKey}});
+    if(r.status===403){alert('管理密钥错误');return}
+    if(!r.ok){alert('请求失败 ('+r.status+')');return}
     const users=await r.json();
     if(users.error||users.detail){alert(users.error||users.detail||'无权限');return}
 
-    document.getElementById('admin-login').classList.add('hidden');
-    document.getElementById('dashboard').classList.remove('hidden');
+    loginDiv.classList.add('hidden');
+    dashDiv.classList.remove('hidden');
 
     // 统计
     document.getElementById('s-users').textContent=users.length;
