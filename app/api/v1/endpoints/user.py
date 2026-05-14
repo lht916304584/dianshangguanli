@@ -1,11 +1,14 @@
 """用户相关 API — 注册/登录/用量/历史"""
 
-from fastapi import APIRouter, Header
+from fastapi import APIRouter, Header, Request
 from pydantic import BaseModel, Field
+from slowapi import Limiter
+from slowapi.util import get_remote_address
 
 from app.ai.user_manager import user_manager
 
 router = APIRouter()
+_limiter = Limiter(key_func=get_remote_address)
 
 
 class RegisterRequest(BaseModel):
@@ -19,12 +22,14 @@ class LoginRequest(BaseModel):
 
 
 @router.post("/register")
-async def register(req: RegisterRequest):
+@_limiter.limit("5/minute")
+async def register(request: Request, req: RegisterRequest):
     return user_manager.register(req.phone, req.password)
 
 
 @router.post("/login")
-async def login(req: LoginRequest):
+@_limiter.limit("10/minute")
+async def login(request: Request, req: LoginRequest):
     return user_manager.login(req.phone, req.password)
 
 

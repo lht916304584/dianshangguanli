@@ -22,6 +22,7 @@ python-jose[cryptography]==3.3.0
 passlib[bcrypt]==1.7.4
 bcrypt==4.2.1                  # direct bcrypt for SQLite user manager
 PyJWT==2.10.1                  # JWT for SQLite user manager
+slowapi==0.1.9                 # rate limiting
 
 # ── Config ────────────────────────────────────────────────────────────────────
 pydantic==2.10.4

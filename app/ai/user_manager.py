@@ -2,19 +2,18 @@
 
 import os
 import sqlite3
-import secrets
+import hashlib
 from datetime import datetime, timedelta
 
-import bcrypt
+from passlib.hash import bcrypt as passlib_bcrypt
 import jwt
 
 DB_PATH = "data/users.db"
-# 从环境变量读取，不提供硬编码默认值——启动时若未配置会快速失败
-JWT_SECRET = os.environ.get("USER_JWT_SECRET", "")
+JWT_SECRET = os.environ.get("JWT_SECRET", "")
 if not JWT_SECRET:
     raise RuntimeError(
-        "USER_JWT_SECRET 环境变量未设置。"
-        "请在 .env 中配置：USER_JWT_SECRET=$(openssl rand -hex 32)"
+        "JWT_SECRET 环境变量未设置。"
+        "请在 .env 中配置：JWT_SECRET=$(openssl rand -hex 32)"
     )
 JWT_EXPIRE_HOURS = int(os.environ.get("USER_JWT_EXPIRE_HOURS", "72"))
 
@@ -58,20 +57,21 @@ class UserManager:
         conn.commit()
         conn.close()
 
-    # ── 密码哈希（bcrypt + 随机 salt，每次不同）────────────────────────
     def _hash_password(self, password: str) -> str:
-        """使用 bcrypt 哈希密码，salt 随机生成并内嵌在结果中"""
-        return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
+        return passlib_bcrypt.hash(password)
 
-    def _verify_password(self, password: str, hashed: str) -> bool:
-        """验证密码"""
-        return bcrypt.checkpw(password.encode("utf-8"), hashed.encode("utf-8"))
+    def _verify_password(self, password: str, password_hash: str) -> bool:
+        if password_hash.startswith("$2b$"):
+            return passlib_bcrypt.verify(password, password_hash)
+        # 旧 SHA256 验证（迁移用）
+        old_hash = hashlib.sha256(f"aititles_salt_2026{password}".encode()).hexdigest()
+        return old_hash == password_hash
 
     def register(self, phone: str, password: str):
         if len(phone) != 11 or not phone.isdigit():
             return {"success": False, "error": "请输入11位手机号"}
-        if len(password) < 8:
-            return {"success": False, "error": "密码至少8位"}
+        if len(password) < 6:
+            return {"success": False, "error": "密码至少6位"}
 
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
@@ -81,12 +81,10 @@ class UserManager:
                 return {"success": False, "error": "该手机号已注册"}
 
             pw_hash = self._hash_password(password)
-            c.execute(
-                "INSERT INTO users (phone, password_hash) VALUES (?, ?)",
-                (phone, pw_hash),
-            )
+            c.execute("INSERT INTO users (phone, password_hash) VALUES (?, ?)", (phone, pw_hash))
             conn.commit()
             user_id = c.lastrowid
+
             token = self._gen_token(user_id, phone)
             return {"success": True, "token": token, "phone": phone, "plan": "free", "daily_limit": 3}
         except Exception as e:
@@ -98,16 +96,18 @@ class UserManager:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         try:
-            c.execute(
-                "SELECT id, phone, plan, daily_ai_limit, password_hash FROM users WHERE phone=?",
-                (phone,),
-            )
+            c.execute("SELECT id, phone, plan, daily_ai_limit, password_hash FROM users WHERE phone=?", (phone,))
             user = c.fetchone()
             # 防止时序攻击：即使用户不存在也执行一次哈希比对
             dummy_hash = "$2b$12$invalidhashfortimingprotection000000000000000000000000"
             stored_hash = user[4] if user else dummy_hash
             if not self._verify_password(password, stored_hash) or not user:
                 return {"success": False, "error": "手机号或密码错误"}
+
+            # Auto-upgrade old SHA256 hash to bcrypt
+            if not user[4].startswith("$2b$"):
+                c.execute("UPDATE users SET password_hash=? WHERE id=?", (self._hash_password(password), user[0]))
+                conn.commit()
 
             token = self._gen_token(user[0], user[1])
             return {
@@ -134,10 +134,7 @@ class UserManager:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         try:
-            c.execute(
-                "SELECT count FROM usage_log WHERE user_id=? AND action='ai_generate' AND date=?",
-                (user_id, today),
-            )
+            c.execute("SELECT count FROM usage_log WHERE user_id=? AND action='ai_generate' AND date=?", (user_id, today))
             row = c.fetchone()
             used = row[0] if row else 0
 
@@ -162,13 +159,10 @@ class UserManager:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         try:
-            c.execute(
-                """INSERT INTO usage_log (user_id, action, date, count)
-                   VALUES (?, 'ai_generate', ?, 1)
-                   ON CONFLICT(user_id, action, date)
-                   DO UPDATE SET count = count + 1""",
-                (user_id, today),
-            )
+            c.execute("""INSERT INTO usage_log (user_id, action, date, count)
+                        VALUES (?, 'ai_generate', ?, 1)
+                        ON CONFLICT(user_id, action, date)
+                        DO UPDATE SET count = count + 1""", (user_id, today))
             conn.commit()
             usage["used"] += 1
             usage["remaining"] -= 1
@@ -176,39 +170,23 @@ class UserManager:
         finally:
             conn.close()
 
-    def set_vip(self, phone: str):
+    def set_vip(self, phone):
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         try:
-            c.execute(
-                "UPDATE users SET plan='vip', daily_ai_limit=9999 WHERE phone=?",
-                (phone,),
-            )
+            c.execute("UPDATE users SET plan='vip', daily_ai_limit=9999 WHERE phone=?", (phone,))
             conn.commit()
             return {"success": True, "msg": f"{phone} 已升级为VIP"}
         finally:
             conn.close()
 
-    def save_history(
-        self,
-        user_id: int,
-        action: str,
-        platform: str,
-        title: str = "",
-        score: float = 0,
-        grade: str = "",
-        product_info: str = "",
-        result_json: str = "",
-    ):
+    def save_history(self, user_id, action, platform, title="", score=0, grade="", product_info="", result_json=""):
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         try:
-            c.execute(
-                """INSERT INTO history
-                   (user_id, action, platform, title, score, grade, product_info, result_json)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
-                (user_id, action, platform, title, score, grade, product_info, result_json),
-            )
+            c.execute("""INSERT INTO history (user_id, action, platform, title, score, grade, product_info, result_json)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)""",
+                     (user_id, action, platform, title, score, grade, product_info, result_json))
             conn.commit()
             return {"success": True}
         except Exception as e:
@@ -216,15 +194,12 @@ class UserManager:
         finally:
             conn.close()
 
-    def get_history(self, user_id: int, limit: int = 50):
+    def get_history(self, user_id, limit=50):
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         try:
-            c.execute(
-                """SELECT id, action, platform, title, score, grade, product_info, created_at
-                   FROM history WHERE user_id=? ORDER BY id DESC LIMIT ?""",
-                (user_id, limit),
-            )
+            c.execute("""SELECT id, action, platform, title, score, grade, product_info, created_at
+                        FROM history WHERE user_id=? ORDER BY id DESC LIMIT ?""", (user_id, limit))
             records = []
             for row in c.fetchall():
                 records.append({
@@ -240,25 +215,19 @@ class UserManager:
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
         try:
-            c.execute(
-                "SELECT id, phone, plan, daily_ai_limit, created_at FROM users ORDER BY id DESC"
-            )
+            c.execute("SELECT id, phone, plan, daily_ai_limit, created_at FROM users ORDER BY id DESC")
             users = []
             for row in c.fetchall():
-                users.append({
-                    "id": row[0], "phone": row[1], "plan": row[2],
-                    "daily_limit": row[3], "created_at": row[4],
-                })
+                users.append({"id": row[0], "phone": row[1], "plan": row[2], "daily_limit": row[3], "created_at": row[4]})
             return users
         finally:
             conn.close()
 
-    def _gen_token(self, user_id: int, phone: str) -> str:
+    def _gen_token(self, user_id, phone):
         payload = {
             "user_id": user_id,
             "phone": phone,
             "exp": datetime.utcnow() + timedelta(hours=JWT_EXPIRE_HOURS),
-            "jti": secrets.token_hex(16),   # 唯一 ID，便于后续实现黑名单
         }
         return jwt.encode(payload, JWT_SECRET, algorithm="HS256")
 

@@ -194,6 +194,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <script>
 const API='/api/v1';let currentPlatform='pinduoduo',authToken=localStorage.getItem('token')||'';
 const PI={pinduoduo:{name:'拼多多',hint:'拼多多标题最佳长度：28-30字',maxLen:60,ph:'例如：法式碎花方领短袖连衣裙女夏季新款收腰显瘦设计感中长裙'},taobao:{name:'淘宝/天猫',hint:'淘宝标题最佳长度：28-30字',maxLen:30,ph:'例如：法式碎花连衣裙女气质收腰显瘦中长款'},douyin:{name:'抖音',hint:'抖音标题最佳长度：28-30字',maxLen:30,ph:'例如：今年最火碎花裙显瘦又气质'},xiaohongshu:{name:'小红书',hint:'小红书标题最佳长度：28-30字',maxLen:30,ph:'例如：这条碎花裙太显瘦了法式气质'}};
+function esc(s){if(!s)return '';const d=document.createElement('div');d.textContent=s;return d.innerHTML}
 
 // === Auth ===
 function showAuth(){document.getElementById('auth-modal').classList.add('show')}
@@ -246,7 +247,7 @@ try{const r=await fetch(`${API}/title/score`,{method:'POST',headers:{'Content-Ty
 
 function renderScore(r){document.getElementById('score-result').classList.remove('hidden');const s=r.total_score,c=gc(s),cl=document.getElementById('score-circle');cl.style.setProperty('--score-color',c);cl.style.setProperty('--score-pct',s);document.getElementById('score-num').style.color=c;document.getElementById('score-num').textContent=s;document.getElementById('score-grade').textContent=r.grade;document.getElementById('score-grade').style.color=c;document.getElementById('score-platform-tag').textContent=r.platform_name||PI[currentPlatform].name;
 const dn={keyword_coverage:'关键词覆盖',compliance:'平台合规',readability:'可读性',competition_diff:'竞争差异',length:'字数合规'};let h='';for(const[k,d] of Object.entries(r.dimensions)){const cc=dc(d.score);h+=`<div class="dim-row"><div class="dim-label">${dn[k]||k}</div><div class="dim-bar-bg"><div class="dim-bar" style="width:${d.score}%;background:${cc}"></div></div><div class="dim-score" style="color:${cc}">${d.score}</div></div>`}document.getElementById('dimensions').innerHTML=h;
-let sg='';if(r.suggestions&&r.suggestions.length>0)r.suggestions.forEach(s=>{sg+=`<div class="suggestion">${s}</div>`});else sg='<div class="suggestion">标题质量不错！</div>';document.getElementById('suggestions').innerHTML=sg}
+let sg='';if(r.suggestions&&r.suggestions.length>0)r.suggestions.forEach(s=>{sg+=`<div class="suggestion">${esc(s)}</div>`});else sg='<div class="suggestion">标题质量不错！</div>';document.getElementById('suggestions').innerHTML=sg}
 
 // === Optimize (Need Login) ===
 async function doOptimize(){
@@ -260,7 +261,7 @@ async function doOptimize(){
 
 function renderOpt(d){if(!d.success||!d.top_titles||!d.top_titles.length){showToast('生成失败，请重试');return}document.getElementById('opt-result').classList.remove('hidden');document.getElementById('opt-result-title').textContent=`${PI[currentPlatform].name} · AI生成标题排名`;
 let h='';d.top_titles.forEach((t,i)=>{const rc=i===0?'rank-1':i===1?'rank-2':i===2?'rank-3':'rank-other',c=gc(t.total_score);
-h+=`<div class="title-card"><div style="display:flex;align-items:flex-start"><span class="title-rank ${rc}">${i+1}</span><div style="flex:1"><div class="title-text" onclick="copyTitle('${t.title.replace(/'/g,"\\'")}')" title="点击复制">${t.title}</div><div class="title-meta"><span style="color:${c};font-weight:700">${t.total_score}分 ${t.grade}</span><span>📏 ${t.char_count}字</span>${t.strategy?`<span>💡 ${t.strategy}${'' }</span>`:''}</div>${t.keywords&&t.keywords.length?`<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${t.keywords.map(k=>`<span style="padding:2px 8px;background:var(--accent-glow);border:1px solid rgba(255,107,53,0.3);border-radius:4px;font-size:0.7rem;color:var(--accent2)">${k}</span>`).join('')}</div>`:''}</div></div></div>`});
+h+=`<div class="title-card"><div style="display:flex;align-items:flex-start"><span class="title-rank ${rc}">${i+1}</span><div style="flex:1"><div class="title-text" onclick="copyTitle(this.dataset.title)" data-title="${esc(t.title)}" title="点击复制">${esc(t.title)}</div><div class="title-meta"><span style="color:${c};font-weight:700">${t.total_score}分 ${esc(t.grade)}</span><span>📏 ${t.char_count}字</span>${t.strategy?`<span>💡 ${esc(t.strategy)}</span>`:''}</div>${t.keywords&&t.keywords.length?`<div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">${t.keywords.map(k=>`<span style="padding:2px 8px;background:var(--accent-glow);border:1px solid rgba(255,107,53,0.3);border-radius:4px;font-size:0.7rem;color:var(--accent2)">${esc(k)}</span>`).join('')}</div>`:''}</div></div></div>`});
 if(d.summary)h+=`<div style="margin-top:16px;padding:14px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.2);border-radius:8px;font-size:0.85rem">✅ ${d.summary.recommendation}</div>`;
 document.getElementById('opt-titles').innerHTML=h}
 
@@ -345,10 +346,10 @@ async function loadHistory(){
       h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
       h+='<span style="font-size:0.8rem;color:var(--text2)">'+icon+' '+actionName+' \u00b7 '+platName+'</span>';
       h+='<span style="font-size:0.75rem;color:var(--text2)">'+time+'</span></div>';
-      h+='<div style="font-size:0.95rem;margin-bottom:4px">'+rec.title+'</div>';
+      h+='<div style="font-size:0.95rem;margin-bottom:4px">'+esc(rec.title)+'</div>';
       h+='<div style="display:flex;gap:8px;font-size:0.8rem">';
       h+='<span style="color:'+color+';font-weight:700">'+sc+'\u5206 '+(rec.grade||'')+'</span>';
-      if(pi){h+='<span style="color:var(--text2)">\u5546\u54c1\uff1a'+pi.substring(0,20)+(pi.length>20?'...':'')+'</span>'}
+      if(pi){h+='<span style="color:var(--text2)">\u5546\u54c1\uff1a'+esc(pi.substring(0,20))+(pi.length>20?'...':'')+'</span>'}
       h+='</div></div>';
     });
     document.getElementById('history-list').innerHTML=h;
@@ -378,18 +379,18 @@ function renderDetailPlan(d){
     h+='<div class="card"><div class="card-title">💎 卖点提炼</div>';
     if(sp.core_points&&sp.core_points.length){
       h+='<div style="margin-bottom:16px"><div style="font-size:0.8rem;color:var(--accent);margin-bottom:8px;font-weight:600">核心卖点</div>';
-      sp.core_points.forEach(p=>{h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px"><strong style="color:var(--accent)">${p.title}</strong><div style="color:var(--text2);font-size:0.85rem;margin-top:4px">${p.detail}</div></div>`});
+      sp.core_points.forEach(p=>{h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:12px;margin-bottom:8px"><strong style="color:var(--accent)">${esc(p.title)}</strong><div style="color:var(--text2);font-size:0.85rem;margin-top:4px">${esc(p.detail)}</div></div>`});
       h+='</div>';
     }
     if(sp.support_points&&sp.support_points.length){
       h+='<div style="margin-bottom:16px"><div style="font-size:0.8rem;color:var(--blue);margin-bottom:8px;font-weight:600">支撑卖点</div>';
       h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
-      sp.support_points.forEach(p=>{h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px"><strong style="color:var(--text)">${p.title}</strong><div style="color:var(--text2);font-size:0.8rem;margin-top:2px">${p.detail}</div></div>`});
+      sp.support_points.forEach(p=>{h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:10px"><strong style="color:var(--text)">${esc(p.title)}</strong><div style="color:var(--text2);font-size:0.8rem;margin-top:2px">${esc(p.detail)}</div></div>`});
       h+='</div></div>';
     }
     if(sp.evidence&&sp.evidence.length){
       h+='<div style="margin-bottom:12px"><div style="font-size:0.8rem;color:var(--green);margin-bottom:8px;font-weight:600">证据素材</div>';
-      sp.evidence.forEach(e=>{h+=`<span style="display:inline-block;padding:4px 10px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.3);border-radius:6px;font-size:0.8rem;color:var(--green);margin:0 6px 6px 0">${e}</span>`});
+      sp.evidence.forEach(e=>{h+=`<span style="display:inline-block;padding:4px 10px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.3);border-radius:6px;font-size:0.8rem;color:var(--green);margin:0 6px 6px 0">${esc(e)}</span>`});
       h+='</div>';
     }
     h+='</div>';
@@ -401,10 +402,10 @@ function renderDetailPlan(d){
       const imgPrompt=d.image_prompts&&d.image_prompts[i]?d.image_prompts[i]:'';
       h+=`<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;padding:16px;margin-bottom:12px">`;
       h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:8px"><span style="display:inline-flex;align-items:center;justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--accent);color:white;font-size:0.75rem;font-weight:700">${s.screen||i+1}</span><span style="font-size:0.75rem;color:var(--text2)">${s.type||''}</span></div>`;
-      h+=`<div style="font-size:1.05rem;font-weight:700;margin-bottom:4px">${s.title||''}</div>`;
-      if(s.subtitle)h+=`<div style="font-size:0.85rem;color:var(--accent);margin-bottom:6px">${s.subtitle}</div>`;
-      h+=`<div style="font-size:0.9rem;color:var(--text);line-height:1.6;margin-bottom:8px">${s.body||''}</div>`;
-      if(s.design_tip)h+=`<div style="font-size:0.8rem;color:var(--text2);padding:8px;background:var(--surface);border-radius:6px">🎨 ${s.design_tip}</div>`;
+      h+=`<div style="font-size:1.05rem;font-weight:700;margin-bottom:4px">${esc(s.title||'')}</div>`;
+      if(s.subtitle)h+=`<div style="font-size:0.85rem;color:var(--accent);margin-bottom:6px">${esc(s.subtitle)}</div>`;
+      h+=`<div style="font-size:0.9rem;color:var(--text);line-height:1.6;margin-bottom:8px">${esc(s.body||'')}</div>`;
+      if(s.design_tip)h+=`<div style="font-size:0.8rem;color:var(--text2);padding:8px;background:var(--surface);border-radius:6px">🎨 ${esc(s.design_tip)}</div>`;
       if(imgPrompt)h+=`<div style="font-size:0.75rem;color:var(--text2);margin-top:8px;padding:8px;background:var(--surface2);border-radius:6px;border:1px dashed var(--border)">📷 图片提示词：<span style="color:var(--purple)">${imgPrompt.substring(0,120)}${imgPrompt.length>120?'...':''}</span></div>`;
       h+=`</div>`;
     });

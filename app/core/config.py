@@ -25,7 +25,7 @@ class Settings(BaseSettings):
     VERSION: str = "0.1.0"
     DESCRIPTION: str = "FastAPI + PostgreSQL + Redis backend"
     ENVIRONMENT: str = "development"  # development | staging | production
-    DEBUG: bool = True
+    DEBUG: bool = False
 
     # ── API ──────────────────────────────────────────────────────────
     API_V1_STR: str = "/api/v1"
@@ -47,7 +47,9 @@ class Settings(BaseSettings):
         return [i.strip() for i in v.split(",") if i.strip()]
 
     # ── Security ─────────────────────────────────────────────────────
-    SECRET_KEY: str = ""
+    SECRET_KEY: str = "change-me-in-production-use-openssl-rand-hex-32"
+    JWT_SECRET: str = ""
+    ADMIN_KEY: str = ""
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 60 * 24   # 1 day
     REFRESH_TOKEN_EXPIRE_DAYS: int = 7
     ALGORITHM: str = "HS256"
@@ -68,7 +70,6 @@ class Settings(BaseSettings):
 
     @property
     def DATABASE_URL_SYNC(self) -> str:
-        """Used by Alembic (sync driver)."""
         return (
             f"postgresql+psycopg2://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}"
             f"@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
