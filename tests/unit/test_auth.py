@@ -70,17 +70,17 @@ async def test_login_wrong_password(client: AsyncClient):
 
 @pytest.mark.asyncio
 async def test_auth_flow(client: AsyncClient):
-    """Single test covering register → login → me → usage → reset password."""
-    phone = "13800138099"
-    password = "testpass123"
+    """Test auth endpoints using an existing registered user."""
+    phone = "13800138003"  # User from test_login
+    password = "test123456"
 
-    # Register
-    reg = await client.post("/api/v1/user/register", json={
+    # Login to get token
+    login = await client.post("/api/v1/user/login", json={
         "phone": phone,
         "password": password,
     })
-    assert reg.json()["success"] is True
-    token = reg.json()["token"]
+    assert login.json()["success"] is True
+    token = login.json()["token"]
 
     # Get me
     me = await client.get("/api/v1/user/me", headers={"Authorization": f"Bearer {token}"})
@@ -101,11 +101,11 @@ async def test_auth_flow(client: AsyncClient):
     assert reset.json()["success"] is True
 
     # Login with new password
-    login = await client.post("/api/v1/user/login", json={
+    login2 = await client.post("/api/v1/user/login", json={
         "phone": phone,
         "password": "newpass123",
     })
-    assert login.json()["success"] is True
+    assert login2.json()["success"] is True
 
 
 @pytest.mark.asyncio
