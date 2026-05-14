@@ -96,6 +96,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <button class="tab active" onclick="switchTab('score')">📊 评分 <span style="font-size:0.7rem;opacity:0.7">免费</span></button>
 <button class="tab" onclick="switchTab('optimize')">✨ AI优化</button>
 <button class="tab" onclick="switchTab('detail')">🎨 详情图</button>
+<button class="tab" onclick="switchTab('competitor')">🔍 竞品</button>
 <button class="tab" onclick="switchTab('hot')">🔥 热搜词</button>
 <button class="tab" onclick="switchTab('batch')">📦 批量</button>
 <button class="tab" onclick="switchTab('favorites')">⭐ 收藏</button>
@@ -118,6 +119,15 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <div class="input-group"><label>数量</label><select id="opt-count"><option value="3">3条</option><option value="5" selected>5条</option></select></div></div>
 <button class="btn btn-primary" onclick="doOptimize()" id="btn-opt">🚀 AI生成优化标题</button></div>
 <div id="opt-result" class="hidden"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0" id="opt-result-title"></div><button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportOptResult()">📥 导出</button></div><div id="opt-titles"></div></div></div>
+</div>
+
+<div id="panel-competitor" class="hidden">
+<div class="card"><div class="card-title">🔍 竞品标题分析（需要登录）</div>
+<div class="input-group"><textarea id="comp-titles" placeholder="每行粘贴一个竞品标题（最多10条）&#10;&#10;例如：&#10;法式碎花方领短袖连衣裙女夏季新款收腰显瘦设计感中长裙&#10;纯棉T恤男宽松百搭圆领打底衫白色2026夏季新款" rows="6" style="font-size:0.9rem"></textarea></div>
+<div class="row"><div class="input-group"><label>品类</label><select id="comp-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
+<button class="btn btn-primary" onclick="doCompetitorAnalyze()" id="btn-comp">🔍 开始竞品分析</button>
+</div>
+<div id="comp-result" class="hidden"></div>
 </div>
 
 <div id="panel-hot" class="hidden">
@@ -283,7 +293,7 @@ async function refreshUser(){
 
 // === Platform ===
 function selectPlatform(p,el){currentPlatform=p;document.querySelectorAll('.platform-pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');const i=PI[p];document.getElementById('platform-hint').textContent=i.hint;document.getElementById('score-title').placeholder=i.ph;document.getElementById('max-chars').textContent=i.maxLen;document.getElementById('score-title').maxLength=i.maxLen}
-function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));if(event&&event.target)event.target.closest('.tab').classList.add('active');['score','optimize','detail','hot','batch','favorites','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory();if(t==='favorites')loadFavorites()}
+function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));if(event&&event.target)event.target.closest('.tab').classList.add('active');['score','optimize','detail','competitor','hot','batch','favorites','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory();if(t==='favorites')loadFavorites()}
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
 function copyTitle(t){navigator.clipboard.writeText(t).then(()=>showToast('已复制到剪贴板！'))}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
@@ -472,6 +482,157 @@ document.getElementById('pay-modal').addEventListener('click',function(e){if(e.t
 // Enter key for login/register
 document.getElementById('login-pwd').addEventListener('keyup',function(e){if(e.key==='Enter')doLogin()});
 document.getElementById('reg-pwd2').addEventListener('keyup',function(e){if(e.key==='Enter')doRegister()});
+
+// === Competitor Analysis ===
+let compResult = null;
+
+async function doCompetitorAnalyze() {
+  if (!authToken) { showAuth(); showToast('请先登录'); return; }
+  const text = document.getElementById('comp-titles').value.trim();
+  if (!text) { showToast('请输入竞品标题'); return; }
+  const titles = text.split('\n').map(l => l.trim()).filter(l => l);
+  if (titles.length === 0) { showToast('请输入竞品标题'); return; }
+  if (titles.length > 10) { showToast('最多10条竞品标题'); return; }
+
+  const btn = document.getElementById('btn-comp');
+  btn.disabled = true; showLoading(true, 'AI竞品分析中...');
+  try {
+    const r = await fetch(`${API}/title/competitor-analyze`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({titles, platform: currentPlatform, category: document.getElementById('comp-category').value})
+    });
+    if (r.status === 401) { showAuth(); return; }
+    if (r.status === 429) { document.getElementById('pay-modal').classList.add('show'); return; }
+    const d = await r.json();
+    compResult = d;
+    renderCompetitorResult(d);
+    refreshUser();
+  } catch(e) { showToast('分析失败'); }
+  finally { btn.disabled = false; showLoading(false); }
+}
+
+function renderCompetitorResult(d) {
+  const el = document.getElementById('comp-result');
+  el.classList.remove('hidden');
+  const a = d.analysis || {};
+  let h = '';
+
+  // Scored titles summary
+  if (d.scored_titles && d.scored_titles.length) {
+    h += '<div class="card"><div class="card-title">竞品标题评分</div>';
+    d.scored_titles.forEach((t, i) => {
+      const color = gc(t.score);
+      h += '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">';
+      h += '<span style="color:var(--text2);font-size:0.85rem;min-width:24px">' + (i+1) + '</span>';
+      h += '<div style="flex:1;font-size:0.9rem">' + esc(t.title) + '</div>';
+      h += '<span style="color:' + color + ';font-weight:700;font-size:0.9rem">' + t.score + '分 ' + esc(t.grade) + '</span>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  // Keyword analysis
+  if (a.keyword_analysis && a.keyword_analysis.length) {
+    h += '<div class="card"><div class="card-title">关键词分析</div>';
+    const typeColors = {'品类词':'var(--accent)','属性词':'var(--blue)','修饰词':'var(--green)','营销词':'var(--purple)'};
+    const maxCount = a.keyword_analysis[0].count || 1;
+    h += '<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">';
+    a.keyword_analysis.forEach(kw => {
+      const size = 0.8 + (kw.count / maxCount) * 0.6;
+      const color = typeColors[kw.type] || 'var(--text2)';
+      h += '<span style="display:inline-flex;align-items:center;gap:4px;padding:6px 14px;background:var(--bg);border:1px solid var(--border);border-radius:20px;font-size:' + size + 'rem;cursor:pointer;transition:all 0.2s" onclick="copyTitle(\'' + esc(kw.word).replace(/'/g, "\\'") + '\')" title="' + esc(kw.type) + ' · 出现' + kw.count + '次">';
+      h += esc(kw.word);
+      h += '<span style="font-size:0.7rem;color:' + color + ';background:rgba(255,255,255,0.05);padding:1px 6px;border-radius:10px">' + kw.count + '</span>';
+      h += '</span>';
+    });
+    h += '</div>';
+    h += '<div style="margin-top:12px;display:flex;gap:12px;font-size:0.75rem;color:var(--text2)">';
+    h += '<span><span style="color:var(--accent)">●</span> 品类词</span><span><span style="color:var(--blue)">●</span> 属性词</span><span><span style="color:var(--green)">●</span> 修饰词</span><span><span style="color:var(--purple)">●</span> 营销词</span>';
+    h += '</div></div>';
+  }
+
+  // Title structure
+  if (a.title_structure && a.title_structure.length) {
+    h += '<div class="card"><div class="card-title">标题结构拆解</div>';
+    a.title_structure.forEach(ts => {
+      h += '<div style="padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:10px">';
+      h += '<div style="font-size:0.9rem;margin-bottom:6px">' + esc(ts.title) + '</div>';
+      h += '<div style="font-size:0.8rem;color:var(--accent);margin-bottom:6px">结构：' + esc(ts.pattern) + '</div>';
+      if (ts.keywords && ts.keywords.length) {
+        h += '<div style="display:flex;flex-wrap:wrap;gap:4px">';
+        ts.keywords.forEach(k => { h += '<span style="padding:2px 8px;background:var(--accent-glow);border:1px solid rgba(255,107,53,0.2);border-radius:4px;font-size:0.75rem;color:var(--accent2)">' + esc(k) + '</span>'; });
+        h += '</div>';
+      }
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  // Selling points
+  if (a.selling_points && a.selling_points.length) {
+    h += '<div class="card"><div class="card-title">卖点提炼</div>';
+    a.selling_points.forEach(sp => {
+      const bar = Math.min(100, sp.count * 30);
+      h += '<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">';
+      h += '<span style="min-width:80px;font-size:0.85rem;font-weight:500">' + esc(sp.point) + '</span>';
+      h += '<div style="flex:1;height:6px;background:var(--bg);border-radius:3px;overflow:hidden"><div style="height:100%;width:' + bar + '%;background:var(--accent);border-radius:3px"></div></div>';
+      h += '<span style="font-size:0.75rem;color:var(--text2)">' + sp.count + '次</span>';
+      h += '<span style="font-size:0.7rem;padding:2px 6px;background:var(--surface2);border-radius:8px;color:var(--text2)">' + esc(sp.type) + '</span>';
+      h += '</div>';
+    });
+    h += '</div>';
+  }
+
+  // Strategy summary + Counter suggestions
+  h += '<div class="card">';
+  if (a.strategy_summary) {
+    h += '<div style="padding:14px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.2);border-radius:8px;margin-bottom:16px;font-size:0.9rem">📋 ' + esc(a.strategy_summary) + '</div>';
+  }
+  if (a.counter_suggestions && a.counter_suggestions.length) {
+    h += '<div class="card-title">💡 反制策略建议</div>';
+    a.counter_suggestions.forEach((s, i) => {
+      h += '<div style="padding:10px 12px;background:var(--bg);border:1px solid var(--border);border-radius:6px;margin-bottom:8px;font-size:0.85rem;color:var(--text)">';
+      h += '<span style="color:var(--accent);font-weight:700;margin-right:8px">' + (i+1) + '</span>' + esc(s);
+      h += '</div>';
+    });
+  }
+  if (a.recommended_keywords && a.recommended_keywords.length) {
+    h += '<div style="margin-top:12px;font-size:0.8rem;color:var(--text2);margin-bottom:6px">推荐添加关键词：</div>';
+    h += '<div style="display:flex;flex-wrap:wrap;gap:6px">';
+    a.recommended_keywords.forEach(kw => {
+      h += '<span style="padding:4px 12px;background:var(--accent-glow);border:1px solid var(--accent);border-radius:16px;font-size:0.85rem;color:var(--accent);cursor:pointer" onclick="copyTitle(\'' + esc(kw).replace(/'/g, "\\'") + '\')">' + esc(kw) + '</span>';
+    });
+    h += '</div>';
+  }
+  h += '<div style="margin-top:16px;text-align:right"><button class="btn" style="width:auto;padding:6px 14px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportCompetitorResult()">📥 导出分析报告</button></div>';
+  h += '</div>';
+
+  el.innerHTML = h;
+}
+
+function exportCompetitorResult() {
+  if (!compResult) return;
+  const a = compResult.analysis || {};
+  const rows = [];
+  // Keywords
+  if (a.keyword_analysis) {
+    a.keyword_analysis.forEach(k => rows.push(['关键词', k.word, k.type, k.count]));
+  }
+  // Selling points
+  if (a.selling_points) {
+    a.selling_points.forEach(s => rows.push(['卖点', s.point, s.type, s.count]));
+  }
+  // Suggestions
+  if (a.counter_suggestions) {
+    a.counter_suggestions.forEach(s => rows.push(['建议', s, '', '']));
+  }
+  // Recommended keywords
+  if (a.recommended_keywords) {
+    a.recommended_keywords.forEach(k => rows.push(['推荐关键词', k, '', '']));
+  }
+  exportCSV(['类型', '内容', '分类', '次数'], rows, 'competitor_analysis_' + new Date().toISOString().slice(0, 10) + '.csv');
+}
 
 // === Batch Operations ===
 let batchResults = [];

@@ -6,6 +6,7 @@ from pydantic import BaseModel, Field
 from app.ai.llm_client import llm_client
 from app.ai.title_scorer import title_scorer
 from app.ai.title_pipeline import title_pipeline
+from app.ai.competitor_analyzer import competitor_analyzer
 from app.ai.user_manager import user_manager
 
 router = APIRouter()
@@ -40,6 +41,12 @@ class BatchScoreRequest(BaseModel):
 class BatchOptimizeRequest(BaseModel):
     items: list[dict] = Field(..., max_length=20)
     platform: str = Field(default="pinduoduo")
+
+
+class CompetitorAnalyzeRequest(BaseModel):
+    titles: list[str] = Field(..., min_length=1, max_length=10)
+    platform: str = Field(default="pinduoduo")
+    category: str = Field(default="")
 
 
 def _get_verified_user(authorization: str):
@@ -213,5 +220,47 @@ async def optimize_title(
                 verify["user_id"], "generate", req.platform,
                 t["title"], t["total_score"], t["grade"], req.product_info,
             )
+
+    return result
+
+
+@router.post("/competitor-analyze")
+async def competitor_analyze(
+    req: CompetitorAnalyzeRequest,
+    authorization: str = Header(default=""),
+):
+    """竞品标题AI分析（需要登录并消耗次数）。"""
+    verify = _get_verified_user(authorization)
+    if not verify:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="请先登录后再使用竞品分析功能",
+        )
+
+    credit = user_manager.use_credit(verify["user_id"])
+    if not credit["success"]:
+        raise HTTPException(
+            status_code=status.HTTP_429_TOO_MANY_REQUESTS,
+            detail=credit["error"],
+        )
+
+    cleaned = [t.strip() for t in req.titles if t.strip()]
+    if not cleaned:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="请输入至少一个竞品标题",
+        )
+
+    result = await competitor_analyzer.analyze(
+        titles=cleaned[:10],
+        platform=req.platform,
+        category=req.category,
+    )
+
+    summary = result.get("analysis", {}).get("strategy_summary", "")
+    user_manager.save_history(
+        verify["user_id"], "competitor", req.platform,
+        f"竞品分析({len(cleaned)}条)", 0, "", summary,
+    )
 
     return result
