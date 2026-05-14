@@ -4,6 +4,10 @@ import os
 import sqlite3
 import hashlib
 from datetime import datetime, timedelta
+from pathlib import Path
+
+from dotenv import load_dotenv
+load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
 
 from passlib.hash import bcrypt as passlib_bcrypt
 import jwt
