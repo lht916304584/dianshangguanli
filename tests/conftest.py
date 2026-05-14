@@ -15,3 +15,19 @@ async def client():
     transport = ASGITransport(app=app)
     async with AsyncClient(transport=transport, base_url="http://test") as ac:
         yield ac
+
+
+# Disable rate limiting in tests
+@pytest.fixture(autouse=True)
+def disable_rate_limits(monkeypatch):
+    """Monkeypatch slowapi limiter to be a no-op during tests."""
+    from app.api.v1.endpoints import user
+
+    original_limit = user._limiter.limit
+
+    def no_op_limit(*args, **kwargs):
+        def decorator(f):
+            return f
+        return decorator
+
+    monkeypatch.setattr(user._limiter, "limit", no_op_limit)
