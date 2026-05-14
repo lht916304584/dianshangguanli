@@ -90,7 +90,8 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
   <div class="auth-card">
     <div class="auth-tabs">
       <button class="auth-tab active" id="tab-login" onclick="switchTab('login')">登录</button>
-      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">注册新账号</button>
+      <button class="auth-tab" id="tab-register" onclick="switchTab('register')">注册</button>
+      <button class="auth-tab" id="tab-reset" onclick="switchTab('reset')">忘记密码</button>
     </div>
 
     <!-- Login Form -->
@@ -140,7 +141,28 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
       <button class="btn btn-primary" onclick="doRegister()" id="btn-register">注册</button>
     </div>
 
-    <div class="divider">或</div>
+    <!-- Reset Password Form -->
+    <div id="form-reset" class="hidden">
+      <div class="form-group">
+        <label>手机号</label>
+        <span class="icon">📱</span>
+        <input type="tel" id="reset-phone" placeholder="请输入注册时的手机号" maxlength="11">
+      </div>
+      <div class="form-group">
+        <label>新密码</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="reset-pwd" placeholder="至少6位，建议字母+数字">
+      </div>
+      <div class="form-group">
+        <label>确认新密码</label>
+        <span class="icon">🔒</span>
+        <input type="password" id="reset-pwd2" placeholder="请再次输入新密码">
+      </div>
+      <div class="error-msg" id="reset-error"></div>
+      <button class="btn btn-primary" onclick="doReset()" id="btn-reset">重置密码</button>
+    </div>
+
+    <div id="login-extras">
     <div class="guest-link">
       <a href="/tool.html">先免费体验标题评分 →</a>
     </div>
@@ -165,10 +187,14 @@ if (existingToken) {
 function switchTab(t) {
   document.getElementById('tab-login').classList.toggle('active', t === 'login');
   document.getElementById('tab-register').classList.toggle('active', t === 'register');
+  document.getElementById('tab-reset').classList.toggle('active', t === 'reset');
   document.getElementById('form-login').classList.toggle('hidden', t !== 'login');
   document.getElementById('form-register').classList.toggle('hidden', t !== 'register');
+  document.getElementById('form-reset').classList.toggle('hidden', t !== 'reset');
+  document.getElementById('login-extras').classList.toggle('hidden', t !== 'login');
   document.getElementById('login-error').textContent = '';
   document.getElementById('reg-error').textContent = '';
+  document.getElementById('reset-error').textContent = '';
 }
 
 function showToast(msg, type) {
@@ -259,6 +285,41 @@ async function doRegister() {
     errEl.textContent = '网络错误，请重试';
   } finally {
     btn.disabled = false; btn.textContent = '注册';
+  }
+}
+
+async function doReset() {
+  const phone = document.getElementById('reset-phone').value.trim();
+  const pwd = document.getElementById('reset-pwd').value;
+  const pwd2 = document.getElementById('reset-pwd2').value;
+  const errEl = document.getElementById('reset-error');
+  errEl.textContent = '';
+
+  if (!phone || !pwd || !pwd2) { errEl.textContent = '请填写完整信息'; return; }
+  if (phone.length !== 11) { errEl.textContent = '请输入11位手机号'; return; }
+  if (pwd.length < 6) { errEl.textContent = '密码至少6位'; return; }
+  if (pwd !== pwd2) { errEl.textContent = '两次密码不一致'; return; }
+
+  const btn = document.getElementById('btn-reset');
+  btn.disabled = true; btn.textContent = '重置中...';
+
+  try {
+    const r = await fetch(`${API}/user/reset-password`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({phone, password: pwd, confirm_password: pwd2})
+    });
+    const d = await r.json();
+    if (d.success) {
+      showToast('密码重置成功！请登录', 'success');
+      setTimeout(() => switchTab('login'), 1000);
+    } else {
+      errEl.textContent = d.error || '重置失败';
+    }
+  } catch(e) {
+    errEl.textContent = '网络错误，请重试';
+  } finally {
+    btn.disabled = false; btn.textContent = '重置密码';
   }
 }
 

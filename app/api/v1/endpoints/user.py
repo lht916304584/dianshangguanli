@@ -21,6 +21,12 @@ class LoginRequest(BaseModel):
     password: str
 
 
+class ResetPasswordRequest(BaseModel):
+    phone: str = Field(..., description="手机号")
+    password: str = Field(..., min_length=6, description="新密码")
+    confirm_password: str = Field(..., min_length=6, description="确认密码")
+
+
 @router.post("/register")
 @_limiter.limit("5/minute")
 async def register(request: Request, req: RegisterRequest):
@@ -31,6 +37,14 @@ async def register(request: Request, req: RegisterRequest):
 @_limiter.limit("10/minute")
 async def login(request: Request, req: LoginRequest):
     return user_manager.login(req.phone, req.password)
+
+
+@router.post("/reset-password")
+@_limiter.limit("3/minute")
+async def reset_password(request: Request, req: ResetPasswordRequest):
+    if req.password != req.confirm_password:
+        return {"success": False, "error": "两次密码不一致"}
+    return user_manager.reset_password(req.phone, req.password)
 
 
 @router.get("/me")

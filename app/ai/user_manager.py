@@ -96,6 +96,27 @@ class UserManager:
         finally:
             conn.close()
 
+    def reset_password(self, phone: str, new_password: str):
+        if len(phone) != 11 or not phone.isdigit():
+            return {"success": False, "error": "请输入11位手机号"}
+        if len(new_password) < 6:
+            return {"success": False, "error": "密码至少6位"}
+
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("SELECT id FROM users WHERE phone=?", (phone,))
+            if not c.fetchone():
+                return {"success": False, "error": "该手机号未注册"}
+            pw_hash = self._hash_password(new_password)
+            c.execute("UPDATE users SET password_hash=? WHERE phone=?", (pw_hash, phone))
+            conn.commit()
+            return {"success": True, "msg": "密码重置成功"}
+        except Exception as e:
+            return {"success": False, "error": f"重置失败：{str(e)}"}
+        finally:
+            conn.close()
+
     def login(self, phone: str, password: str):
         conn = sqlite3.connect(DB_PATH)
         c = conn.cursor()
