@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import admin, detail, health, platform, title, user
+from app.api.v1.endpoints import admin, detail, health, image, platform, title, user
 
 api_router = APIRouter()
 
@@ -12,6 +12,8 @@ api_router.include_router(title.router, prefix="/title", tags=["标题优化"])
 api_router.include_router(admin.router, prefix="/admin", tags=["管理员"])
 # 详情图AI策划
 api_router.include_router(detail.router, prefix="/detail", tags=["详情图策划"])
+# AI生图
+api_router.include_router(image.router, prefix="/image", tags=["AI生图"])
 # 平台与热搜词
 api_router.include_router(platform.router, tags=["平台"])
 # 健康检查

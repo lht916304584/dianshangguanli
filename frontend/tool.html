@@ -139,6 +139,7 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <button class="tab active" onclick="switchTab('score')">📊 评分 <span style="font-size:0.7rem;opacity:0.7">免费</span></button>
 <button class="tab" onclick="switchTab('optimize')">✨ AI优化</button>
 <button class="tab" onclick="switchTab('detail')">🎨 详情图</button>
+<button class="tab" onclick="switchTab('image')">🖼️ 生图</button>
 <button class="tab" onclick="switchTab('competitor')">🔍 竞品</button>
 <button class="tab" onclick="switchTab('hot')">🔥 热搜词</button>
 <button class="tab" onclick="switchTab('batch')">📦 批量</button>
@@ -202,6 +203,38 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <div class="row"><div class="input-group"><label>品类</label><select id="detail-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
 <button class="btn btn-primary" onclick="doDetailPlan()">🎨 生成详情页策划</button></div>
 <div id="detail-result" class="hidden"></div>
+</div>
+
+<div id="panel-image" class="hidden">
+<!-- 配置面板 -->
+<div id="image-config-panel">
+<div class="card"><div class="card-title">🛠️ 生图API配置</div>
+<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">你的生图API由你自己管理，平台不保存密钥原文</div>
+<div class="input-group"><label>API Key</label><input type="password" id="img-api-key" placeholder="sk-..."></div>
+<div class="input-group"><label>Base URL</label><input type="text" id="img-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
+<div class="row">
+<div class="input-group"><label>模型</label><select id="img-model"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
+<div class="input-group"><label>图片尺寸</label><select id="img-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
+</div>
+<button class="btn btn-primary" onclick="saveImageConfig()">💾 保存配置</button>
+</div>
+</div>
+<!-- 生成面板 -->
+<div id="image-generate-panel" class="hidden">
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div class="card-title" style="margin-bottom:0">🖼️ AI商品图生成</div>
+<button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="showImageConfigPanel()">⚙️ 修改配置</button>
+</div>
+<div class="input-group"><label>商品描述 / 提示词</label><textarea id="img-prompt" placeholder="例如：法式碎花连衣裙，夏季新款，收腰显瘦，气质优雅..." rows="3"></textarea></div>
+<div class="row">
+<div class="input-group"><label>图片类型</label><select id="img-type"><option value="main">主图（商品突出）</option><option value="detail">详情图（场景展示）</option></select></div>
+<div class="input-group"><label>生成数量</label><select id="img-count"><option value="1">1张</option><option value="2">2张</option><option value="3">3张</option><option value="4">4张</option></select></div>
+</div>
+<button class="btn btn-primary" onclick="doImageGenerate()" id="btn-img-gen">✨ 开始生成</button>
+</div>
+<div id="image-result" class="hidden"></div>
+</div>
 </div>
 
 <div id="panel-batch" class="hidden">
@@ -336,7 +369,7 @@ async function refreshUser(){
 
 // === Platform ===
 function selectPlatform(p,el){currentPlatform=p;document.querySelectorAll('.platform-pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');const i=PI[p];document.getElementById('platform-hint').textContent=i.hint;document.getElementById('score-title').placeholder=i.ph;document.getElementById('max-chars').textContent=i.maxLen;document.getElementById('score-title').maxLength=i.maxLen}
-function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));if(event&&event.target)event.target.closest('.tab').classList.add('active');['score','optimize','detail','competitor','hot','batch','favorites','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory();if(t==='favorites')loadFavorites()}
+function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));if(event&&event.target)event.target.closest('.tab').classList.add('active');['score','optimize','detail','image','competitor','hot','batch','favorites','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory();if(t==='favorites')loadFavorites();if(t==='image')checkImageConfig()}
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
 function copyTitle(t){navigator.clipboard.writeText(t).then(()=>showToast('已复制到剪贴板！'))}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
@@ -929,6 +962,145 @@ async function removeFav(id, el) {
   await fetch(`${API}/user/favorite/${id}`, {method: 'DELETE', headers: {'Authorization': 'Bearer ' + authToken}});
   el.closest('div[style*="margin-bottom:10px"]').remove();
   showToast('已取消收藏');
+}
+
+// === AI Image Generation ===
+let imageConfigLoaded = false;
+
+async function checkImageConfig() {
+  if (!authToken) {
+    document.getElementById('image-config-panel').classList.remove('hidden');
+    document.getElementById('image-generate-panel').classList.add('hidden');
+    return;
+  }
+  if (imageConfigLoaded) return;
+  try {
+    const r = await fetch(`${API}/image/config`, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const d = await r.json();
+    if (d.success && d.config && d.config.api_key) {
+      // 已配置
+      document.getElementById('image-config-panel').classList.add('hidden');
+      document.getElementById('image-generate-panel').classList.remove('hidden');
+      imageConfigLoaded = true;
+    } else {
+      document.getElementById('image-config-panel').classList.remove('hidden');
+      document.getElementById('image-generate-panel').classList.add('hidden');
+    }
+  } catch(e) {
+    document.getElementById('image-config-panel').classList.remove('hidden');
+    document.getElementById('image-generate-panel').classList.add('hidden');
+  }
+}
+
+function showImageConfigPanel() {
+  document.getElementById('image-config-panel').classList.remove('hidden');
+  document.getElementById('image-generate-panel').classList.add('hidden');
+  if (!authToken) { showAuth(); return; }
+  // 预填充现有配置
+  fetch(`${API}/image/config`, {headers: {'Authorization': 'Bearer ' + authToken}})
+    .then(r => r.json())
+    .then(d => {
+      if (d.success && d.config) {
+        const cfg = d.config;
+        if (cfg.base_url) document.getElementById('img-base-url').value = cfg.base_url;
+        if (cfg.model) document.getElementById('img-model').value = cfg.model;
+        if (cfg.size) document.getElementById('img-size').value = cfg.size;
+      }
+    });
+}
+
+async function saveImageConfig() {
+  if (!authToken) { showAuth(); return; }
+  const apiKey = document.getElementById('img-api-key').value.trim();
+  const baseUrl = document.getElementById('img-base-url').value.trim();
+  const model = document.getElementById('img-model').value;
+  const size = document.getElementById('img-size').value;
+
+  if (!apiKey) {
+    showToast('请输入 API Key');
+    return;
+  }
+
+  try {
+    const r = await fetch(`${API}/image/config`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({api_key: apiKey, base_url: baseUrl, model: model, size: size})
+    });
+    const d = await r.json();
+    if (d.success) {
+      showToast('配置已保存 ✅');
+      document.getElementById('image-config-panel').classList.add('hidden');
+      document.getElementById('image-generate-panel').classList.remove('hidden');
+      imageConfigLoaded = true;
+    } else {
+      showToast(d.error || '保存失败');
+    }
+  } catch(e) { showToast('保存失败'); }
+}
+
+async function doImageGenerate() {
+  if (!authToken) { showAuth(); showToast('请先登录'); return; }
+  const prompt = document.getElementById('img-prompt').value.trim();
+  if (!prompt) { showToast('请输入商品描述'); return; }
+
+  const imageType = document.getElementById('img-type').value;
+  const count = parseInt(document.getElementById('img-count').value);
+  const btn = document.getElementById('btn-img-gen');
+  const resultEl = document.getElementById('image-result');
+
+  btn.disabled = true;
+  showLoading(true, 'AI正在生成图片...');
+  resultEl.classList.add('hidden');
+
+  try {
+    const r = await fetch(`${API}/image/generate`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({prompt, image_type: imageType, count})
+    });
+    const d = await r.json();
+
+    if (r.status === 401) { showAuth(); return; }
+    if (r.status === 400 && d.detail && d.detail.includes('配置')) {
+      showToast('请先配置生图API');
+      showImageConfigPanel();
+      return;
+    }
+    if (r.status === 429) { document.getElementById('pay-modal').classList.add('show'); return; }
+
+    if (d.success && d.urls && d.urls.length) {
+      renderImageResult(d);
+      refreshUser();
+    } else {
+      showToast(d.error || d.detail || '生成失败');
+    }
+  } catch(e) { showToast('生成失败，请检查网络或API配置'); }
+  finally { btn.disabled = false; showLoading(false); }
+}
+
+function renderImageResult(d) {
+  const el = document.getElementById('image-result');
+  el.classList.remove('hidden');
+  let h = '<div class="card"><div class="card-title">生成结果</div>';
+  h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:16px">';
+  d.urls.forEach((url, i) => {
+    h += `<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden">`;
+    h += `<img src="${esc(url)}" style="width:100%;height:auto;display:block;min-height:150px;background:var(--surface2)" alt="生成图片${i+1}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
+    h += `<div style="display:none;align-items:center;justify-content:center;height:150px;color:var(--text2);font-size:0.85rem">图片加载失败</div>`;
+    h += `<div style="padding:10px;display:flex;justify-content:space-between;align-items:center">`;
+    h += `<span style="font-size:0.8rem;color:var(--text2)">图 ${i+1}</span>`;
+    h += `<a href="${esc(url)}" target="_blank" download style="padding:4px 10px;background:var(--accent);color:white;border-radius:6px;font-size:0.75rem;text-decoration:none;font-weight:600">📥 下载</a>`;
+    h += `</div></div>`;
+  });
+  h += '</div>';
+  // Prompt 展示
+  h += `<div style="padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;font-size:0.8rem;color:var(--text2)">`;
+  h += `<div style="font-weight:600;margin-bottom:4px;color:var(--accent)">实际使用的提示词</div>`;
+  h += `<div style="cursor:pointer" onclick="copyTitle(this.textContent)" title="点击复制">${esc(d.prompt)}</div>`;
+  h += `</div>`;
+  h += '</div>';
+  el.innerHTML = h;
 }
 </script>
 </body>

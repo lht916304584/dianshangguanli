@@ -27,6 +27,13 @@ class ResetPasswordRequest(BaseModel):
     confirm_password: str = Field(..., min_length=6, description="确认密码")
 
 
+class FavoriteRequest(BaseModel):
+    title: str
+    platform: str = ""
+    score: float = 0
+    source: str = ""
+
+
 @router.post("/register")
 @_limiter.limit("5/minute")
 async def register(request: Request, req: RegisterRequest):
@@ -79,4 +86,39 @@ async def get_history(authorization: str = Header(default="")):
     if not verify["valid"]:
         return {"success": False, "error": verify["error"]}
     records = user_manager.get_history(verify["user_id"])
+    return {"success": True, "records": records}
+
+
+def _get_uid(authorization: str):
+    token = authorization.replace("Bearer ", "")
+    if not token:
+        return None, {"success": False, "error": "未登录"}
+    verify = user_manager.verify_token(token)
+    if not verify["valid"]:
+        return None, {"success": False, "error": verify["error"]}
+    return verify["user_id"], None
+
+
+@router.post("/favorite")
+async def add_favorite(req: FavoriteRequest, authorization: str = Header(default="")):
+    uid, err = _get_uid(authorization)
+    if err:
+        return err
+    return user_manager.add_favorite(uid, req.title, req.platform, req.score, req.source)
+
+
+@router.delete("/favorite/{favorite_id}")
+async def remove_favorite(favorite_id: int, authorization: str = Header(default="")):
+    uid, err = _get_uid(authorization)
+    if err:
+        return err
+    return user_manager.remove_favorite(uid, favorite_id)
+
+
+@router.get("/favorites")
+async def get_favorites(authorization: str = Header(default="")):
+    uid, err = _get_uid(authorization)
+    if err:
+        return err
+    records = user_manager.get_favorites(uid)
     return {"success": True, "records": records}

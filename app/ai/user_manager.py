@@ -59,6 +59,24 @@ class UserManager:
             result_json TEXT,
             created_at TEXT DEFAULT CURRENT_TIMESTAMP
         )''')
+        c.execute('''CREATE TABLE IF NOT EXISTS favorites (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER,
+            title TEXT,
+            platform TEXT,
+            score REAL DEFAULT 0,
+            source TEXT DEFAULT '',
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP
+        )''')
+        c.execute('''CREATE TABLE IF NOT EXISTS user_config (
+            user_id INTEGER PRIMARY KEY,
+            image_api_key TEXT DEFAULT '',
+            image_base_url TEXT DEFAULT 'https://api.openai.com/v1',
+            image_model TEXT DEFAULT 'dall-e-3',
+            image_size TEXT DEFAULT '1024x1024',
+            updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES users(id)
+        )''')
         conn.commit()
         conn.close()
 
@@ -256,6 +274,135 @@ class UserManager:
             "exp": datetime.utcnow() + timedelta(hours=JWT_EXPIRE_HOURS),
         }
         return jwt.encode(payload, JWT_SECRET, algorithm="HS256")
+
+    # ── 收藏夹 ──────────────────────────────────────────────────
+    def add_favorite(self, user_id, title, platform="", score=0, source=""):
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("SELECT id FROM favorites WHERE user_id=? AND title=? AND platform=?",
+                      (user_id, title, platform))
+            if c.fetchone():
+                return {"success": False, "error": "已收藏过该标题"}
+            c.execute("INSERT INTO favorites (user_id, title, platform, score, source) VALUES (?, ?, ?, ?, ?)",
+                      (user_id, title, platform, score, source))
+            conn.commit()
+            return {"success": True, "id": c.lastrowid}
+        finally:
+            conn.close()
+
+    def remove_favorite(self, user_id, favorite_id):
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("DELETE FROM favorites WHERE id=? AND user_id=?", (favorite_id, user_id))
+            conn.commit()
+            return {"success": True}
+        finally:
+            conn.close()
+
+    def get_favorites(self, user_id, limit=100):
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("SELECT id, title, platform, score, source, created_at FROM favorites WHERE user_id=? ORDER BY id DESC LIMIT ?",
+                      (user_id, limit))
+            records = []
+            for row in c.fetchall():
+                records.append({"id": row[0], "title": row[1], "platform": row[2], "score": row[3], "source": row[4], "created_at": row[5]})
+            return records
+        finally:
+            conn.close()
+
+    # ── 生图配置 ──────────────────────────────────────────────────
+    def get_image_config(self, user_id: int):
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("SELECT image_api_key, image_base_url, image_model, image_size, updated_at FROM user_config WHERE user_id=?", (user_id,))
+            row = c.fetchone()
+            if not row:
+                return {
+                    "api_key": "",
+                    "base_url": "https://api.openai.com/v1",
+                    "model": "dall-e-3",
+                    "size": "1024x1024",
+                    "updated_at": "",
+                }
+            key = row[0]
+            # 脱敏显示
+            masked = ""
+            if key:
+                decoded = key
+                try:
+                    import base64
+                    decoded = base64.b64decode(key.encode()).decode()
+                except Exception:
+                    pass
+                if len(decoded) > 8:
+                    masked = decoded[:3] + "****" + decoded[-4:]
+                else:
+                    masked = "****"
+            return {
+                "api_key": masked,
+                "base_url": row[1],
+                "model": row[2],
+                "size": row[3],
+                "updated_at": row[4],
+            }
+        finally:
+            conn.close()
+
+    def save_image_config(self, user_id: int, api_key: str = "", base_url: str = "", model: str = "", size: str = ""):
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            # 如果 api_key 为空，保留原值
+            if not api_key:
+                c.execute("SELECT image_api_key FROM user_config WHERE user_id=?", (user_id,))
+                row = c.fetchone()
+                if row and row[0]:
+                    api_key = row[0]
+            else:
+                # base64 编码存储
+                import base64
+                api_key = base64.b64encode(api_key.encode()).decode()
+
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            c.execute("""INSERT INTO user_config (user_id, image_api_key, image_base_url, image_model, image_size, updated_at)
+                        VALUES (?, ?, ?, ?, ?, ?)
+                        ON CONFLICT(user_id)
+                        DO UPDATE SET
+                            image_api_key=excluded.image_api_key,
+                            image_base_url=excluded.image_base_url,
+                            image_model=excluded.image_model,
+                            image_size=excluded.image_size,
+                            updated_at=excluded.updated_at""",
+                     (user_id, api_key, base_url or "https://api.openai.com/v1", model or "dall-e-3", size or "1024x1024", now))
+            conn.commit()
+            return {"success": True}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+        finally:
+            conn.close()
+
+    def _get_raw_image_api_key(self, user_id: int) -> str:
+        """获取未脱敏的 API key（用于后端调用）"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("SELECT image_api_key FROM user_config WHERE user_id=?", (user_id,))
+            row = c.fetchone()
+            if not row or not row[0]:
+                return ""
+            key = row[0]
+            try:
+                import base64
+                return base64.b64decode(key.encode()).decode()
+            except Exception:
+                return key
+        finally:
+            conn.close()
 
 
 user_manager = UserManager()
