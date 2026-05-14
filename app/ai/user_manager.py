@@ -9,7 +9,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv(Path(__file__).resolve().parent.parent.parent / ".env")
 
-from passlib.hash import bcrypt as passlib_bcrypt
+import bcrypt
 import jwt
 
 DB_PATH = "data/users.db"
@@ -63,11 +63,11 @@ class UserManager:
         conn.close()
 
     def _hash_password(self, password: str) -> str:
-        return passlib_bcrypt.hash(password)
+        return bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
     def _verify_password(self, password: str, password_hash: str) -> bool:
         if password_hash.startswith("$2b$"):
-            return passlib_bcrypt.verify(password, password_hash)
+            return bcrypt.checkpw(password.encode("utf-8"), password_hash.encode("utf-8"))
         # 旧 SHA256 验证（迁移用）
         old_hash = hashlib.sha256(f"aititles_salt_2026{password}".encode()).hexdigest()
         return old_hash == password_hash
