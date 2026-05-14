@@ -16,6 +16,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 
 /* User bar */
 .user-bar{display:flex;align-items:center;justify-content:space-between;margin:16px 0;padding:10px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);font-size:0.85rem}
+#top-right-area .user-bar{margin:0;gap:8px}
 .user-bar .left{display:flex;align-items:center;gap:8px}
 .user-bar .avatar{width:28px;height:28px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;font-size:0.75rem;color:white;font-weight:700}
 .user-bar .phone{color:var(--text)}
@@ -28,6 +29,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 .user-bar .logout-btn{padding:4px 12px;background:none;border:1px solid var(--border);border-radius:6px;color:var(--text2);cursor:pointer;font-size:0.75rem;font-family:inherit;transition:all 0.3s}
 .user-bar .logout-btn:hover{border-color:var(--red);color:var(--red)}
 .login-prompt{text-align:center;margin:16px 0;padding:12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+#top-right-area .login-prompt{margin:0;padding:0;background:none;border:none}
 .login-prompt span{color:var(--text2);font-size:0.85rem}
 .login-prompt a{color:var(--accent);cursor:pointer;text-decoration:none;font-weight:600}
 
@@ -70,19 +72,20 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 </style>
 </head>
 <body>
-<div class="container">
-<div class="header"><h1>🔥 电商AI优化工具箱</h1><p>多平台智能评分 & 一键生成高分标题</p>
-<div class="badge-row"><span class="badge"><span class="dot green"></span>海量关键词库</span><span class="badge"><span class="dot orange"></span>5维度AI评分</span><span class="badge"><span class="dot blue"></span>智能标题生成</span><span class="badge"><span class="dot purple"></span>4大平台支持</span></div></div>
-
-<!-- User Bar (logged in) -->
-<div class="user-bar hidden" id="user-bar">
+<!-- Top Right User Area -->
+<div id="top-right-area" style="position:fixed;top:0;right:0;z-index:100;padding:12px 20px;display:flex;align-items:center;gap:10px">
+<div class="user-bar hidden" id="user-bar" style="margin:0;padding:6px 12px">
 <div class="left"><div class="avatar" id="user-avatar">U</div><span class="phone" id="user-phone"></span><span class="plan-tag plan-free" id="user-plan">免费版</span></div>
 <div class="right"><span class="usage-info">今日AI生成：<strong id="user-remaining">3</strong>次剩余</span><button class="logout-btn" onclick="logout()">退出</button></div>
 </div>
-<!-- Login Prompt (not logged in) -->
-<div class="login-prompt" id="login-prompt">
-<span>📊 标题评分免费使用 · AI生成需 <a onclick="showAuth()">登录/注册</a> · 每日3次免费</span>
+<div class="login-prompt" id="login-prompt" style="margin:0;padding:6px 12px">
+<button onclick="showAuth()" style="padding:6px 16px;background:linear-gradient(135deg,var(--accent),#ff4500);color:white;border:none;border-radius:8px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit">登录/注册</button>
 </div>
+</div>
+
+<div class="container">
+<div class="header"><h1>🔥 电商AI优化工具箱</h1><p>多平台智能评分 & 一键生成高分标题</p>
+<div class="badge-row"><span class="badge"><span class="dot green"></span>海量关键词库</span><span class="badge"><span class="dot orange"></span>5维度AI评分</span><span class="badge"><span class="dot blue"></span>智能标题生成</span><span class="badge"><span class="dot purple"></span>4大平台支持</span></div></div>
 
 <div class="platform-pills">
 <div class="platform-pill active" onclick="selectPlatform('pinduoduo',this)">🟠 拼多多</div>
