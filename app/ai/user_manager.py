@@ -26,6 +26,7 @@ class UserManager:
     def __init__(self):
         os.makedirs("data", exist_ok=True)
         self._init_db()
+        self._dummy_hash = self._hash_password("dummyfortiming")
 
     def _init_db(self):
         conn = sqlite3.connect(DB_PATH)
@@ -124,7 +125,7 @@ class UserManager:
             c.execute("SELECT id, phone, plan, daily_ai_limit, password_hash FROM users WHERE phone=?", (phone,))
             user = c.fetchone()
             # 防止时序攻击：即使用户不存在也执行一次哈希比对
-            dummy_hash = "$2b$12$invalidhashfortimingprotection000000000000000000000000"
+            dummy_hash = self._dummy_hash
             stored_hash = user[4] if user else dummy_hash
             if not self._verify_password(password, stored_hash) or not user:
                 return {"success": False, "error": "手机号或密码错误"}
