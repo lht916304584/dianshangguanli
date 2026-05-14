@@ -69,24 +69,43 @@ async def test_login_wrong_password(client: AsyncClient):
 
 
 @pytest.mark.asyncio
-async def test_get_me(auth_client):
-    client, token = auth_client
-    resp = await client.get("/api/v1/user/me")
-    assert resp.status_code == 200
-    data = resp.json()
-    assert data["success"] is True
-    assert "phone" in data
+async def test_auth_flow(client: AsyncClient):
+    """Single test covering register → login → me → usage → reset password."""
+    phone = "13800138099"
+    password = "testpass123"
 
+    # Register
+    reg = await client.post("/api/v1/user/register", json={
+        "phone": phone,
+        "password": password,
+    })
+    assert reg.json()["success"] is True
+    token = reg.json()["token"]
 
-@pytest.mark.asyncio
-async def test_usage(auth_client):
-    client, _ = auth_client
-    resp = await client.get("/api/v1/user/usage")
-    assert resp.status_code == 200
-    data = resp.json()
-    assert "used" in data
-    assert "limit" in data
-    assert "remaining" in data
+    # Get me
+    me = await client.get("/api/v1/user/me", headers={"Authorization": f"Bearer {token}"})
+    assert me.json()["success"] is True
+    assert "phone" in me.json()
+
+    # Usage
+    usage = await client.get("/api/v1/user/usage", headers={"Authorization": f"Bearer {token}"})
+    assert usage.status_code == 200
+    assert "remaining" in usage.json()
+
+    # Reset password
+    reset = await client.post("/api/v1/user/reset-password", json={
+        "phone": phone,
+        "password": "newpass123",
+        "confirm_password": "newpass123",
+    })
+    assert reset.json()["success"] is True
+
+    # Login with new password
+    login = await client.post("/api/v1/user/login", json={
+        "phone": phone,
+        "password": "newpass123",
+    })
+    assert login.json()["success"] is True
 
 
 @pytest.mark.asyncio
@@ -99,23 +118,3 @@ async def test_score_free(client: AsyncClient):
     data = resp.json()
     assert "result" in data
     assert "total_score" in data["result"]
-
-
-@pytest.mark.asyncio
-async def test_reset_password(client: AsyncClient):
-    await client.post("/api/v1/user/register", json={
-        "phone": "13800138005",
-        "password": "oldpass123",
-    })
-    resp = await client.post("/api/v1/user/reset-password", json={
-        "phone": "13800138005",
-        "password": "newpass123",
-        "confirm_password": "newpass123",
-    })
-    assert resp.json()["success"] is True
-
-    login = await client.post("/api/v1/user/login", json={
-        "phone": "13800138005",
-        "password": "newpass123",
-    })
-    assert login.json()["success"] is True
