@@ -68,7 +68,47 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 .hidden{display:none!important}.footer{text-align:center;padding:30px 20px;color:var(--text2);font-size:0.75rem;width:100%;clear:both}
 .active-fav{color:var(--accent)!important;font-size:1.1rem}
 #batch-table table{width:100%}#batch-table td{vertical-align:middle}
-@media(max-width:600px){.container{padding:12px}.header h1{font-size:1.5rem}.score-circle{width:120px;height:120px}.score-number{font-size:2.2rem}.dim-label{width:60px;font-size:0.75rem}.row{flex-direction:column;gap:0}.modal{padding:24px}.user-bar{flex-direction:column;gap:8px;text-align:center}.user-bar .right{justify-content:center}}
+@media(max-width:600px){
+.container{padding:10px}
+.header{padding:20px 0 12px}
+.header h1{font-size:1.3rem}
+.header p{font-size:0.8rem}
+.badge-row{gap:6px;margin-top:10px}
+.badge{padding:3px 8px;font-size:0.65rem}
+.platform-pills{gap:6px;margin-bottom:14px}
+.platform-pill{padding:6px 12px;font-size:0.8rem}
+.platform-hint{font-size:0.7rem;margin-bottom:14px}
+.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;flex-wrap:nowrap;padding:3px;gap:2px}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:0 0 auto;padding:10px 8px;font-size:0.75rem;white-space:nowrap;min-width:auto}
+.card{padding:16px;margin-bottom:14px}
+.card-title{font-size:0.8rem;margin-bottom:10px}
+.row{flex-direction:column;gap:0}
+textarea,input[type="text"],input[type="password"],input[type="tel"],select{padding:12px 14px;font-size:16px}
+.btn{padding:14px}
+.score-circle{width:110px;height:110px}
+.score-number{font-size:2rem}
+.dim-label{width:50px;font-size:0.7rem}
+.dim-score{width:32px;font-size:0.75rem}
+.title-card{padding:12px}
+.title-rank{width:24px;height:24px;font-size:0.7rem;margin-right:8px}
+.title-text{font-size:0.9rem}
+.title-meta{gap:8px;font-size:0.7rem}
+.suggestion{font-size:0.8rem;padding:8px 10px}
+.modal{padding:20px;width:95%}
+.modal h2{font-size:1.1rem;margin-bottom:16px}
+.modal .close-x{top:12px;right:14px;font-size:1rem}
+#top-right-area{padding:8px 10px;max-width:55vw;flex-wrap:wrap;justify-content:flex-end}
+#top-right-area .user-bar{padding:4px 8px;flex-wrap:wrap;font-size:0.75rem}
+#top-right-area .user-bar .right{gap:6px}
+#top-right-area .usage-info{font-size:0.7rem}
+#top-right-area .logout-btn{font-size:0.65rem;padding:3px 8px}
+#top-right-area .avatar{width:24px;height:24px;font-size:0.65rem}
+#top-right-area .phone{font-size:0.75rem}
+#batch-table{overflow-x:auto;-webkit-overflow-scrolling:touch}
+#batch-table table{min-width:500px;font-size:0.8rem}
+.footer{padding:20px 12px;font-size:0.7rem}
+}
 </style>
 </head>
 <body>
