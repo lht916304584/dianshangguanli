@@ -64,6 +64,8 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green);color:white;padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:500;box-shadow:0 4px 20px rgba(34,197,94,0.3);transition:transform 0.3s;z-index:300}.toast.show{transform:translateX(-50%) translateY(0)}
 .hidden{display:none!important}.footer{text-align:center;padding:30px 20px;color:var(--text2);font-size:0.75rem;width:100%;clear:both}
+.active-fav{color:var(--accent)!important;font-size:1.1rem}
+#batch-table table{width:100%}#batch-table td{vertical-align:middle}
 @media(max-width:600px){.container{padding:12px}.header h1{font-size:1.5rem}.score-circle{width:120px;height:120px}.score-number{font-size:2.2rem}.dim-label{width:60px;font-size:0.75rem}.row{flex-direction:column;gap:0}.modal{padding:24px}.user-bar{flex-direction:column;gap:8px;text-align:center}.user-bar .right{justify-content:center}}
 </style>
 </head>
@@ -95,6 +97,8 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <button class="tab" onclick="switchTab('optimize')">✨ AI优化</button>
 <button class="tab" onclick="switchTab('detail')">🎨 详情图</button>
 <button class="tab" onclick="switchTab('hot')">🔥 热搜词</button>
+<button class="tab" onclick="switchTab('batch')">📦 批量</button>
+<button class="tab" onclick="switchTab('favorites')">⭐ 收藏</button>
 <button class="tab" onclick="switchTab('history')">📋 历史</button>
 </div>
 
@@ -103,7 +107,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <div class="input-group"><textarea id="score-title" placeholder="粘贴你的商品标题..." maxlength="80"></textarea><div style="text-align:right;font-size:0.75rem;color:var(--text2);margin-top:4px"><span id="char-count">0</span>/<span id="max-chars">60</span>字符</div></div>
 <div class="input-group"><label>商品品类</label><select id="score-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div>
 <button class="btn btn-primary" onclick="doScore()">开始评分（免费）</button></div>
-<div id="score-result" class="hidden"><div class="card"><div class="score-hero"><div class="score-circle" id="score-circle" style="--score-pct:0;--score-color:var(--text2)"><div class="score-number" id="score-num">0</div><div class="score-grade" id="score-grade">—</div></div><div class="score-platform-tag" id="score-platform-tag"></div></div><div id="dimensions"></div></div>
+<div id="score-result" class="hidden"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0">评分结果</div><button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportScoreResult()">📥 导出</button></div><div class="score-hero"><div class="score-circle" id="score-circle" style="--score-pct:0;--score-color:var(--text2)"><div class="score-number" id="score-num">0</div><div class="score-grade" id="score-grade">—</div></div><div class="score-platform-tag" id="score-platform-tag"></div></div><div id="dimensions"></div></div>
 <div class="card"><div class="card-title">优化建议</div><div id="suggestions"></div></div></div>
 </div>
 
@@ -113,7 +117,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <div class="row"><div class="input-group"><label>品类</label><select id="opt-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div>
 <div class="input-group"><label>数量</label><select id="opt-count"><option value="3">3条</option><option value="5" selected>5条</option></select></div></div>
 <button class="btn btn-primary" onclick="doOptimize()" id="btn-opt">🚀 AI生成优化标题</button></div>
-<div id="opt-result" class="hidden"><div class="card"><div class="card-title" id="opt-result-title"></div><div id="opt-titles"></div></div></div>
+<div id="opt-result" class="hidden"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0" id="opt-result-title"></div><button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportOptResult()">📥 导出</button></div><div id="opt-titles"></div></div></div>
 </div>
 
 <div id="panel-hot" class="hidden">
@@ -145,6 +149,53 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 <div class="row"><div class="input-group"><label>品类</label><select id="detail-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
 <button class="btn btn-primary" onclick="doDetailPlan()">🎨 生成详情页策划</button></div>
 <div id="detail-result" class="hidden"></div>
+</div>
+
+<div id="panel-batch" class="hidden">
+<div class="card"><div class="card-title">📦 批量操作（需要登录）</div>
+<div style="display:flex;gap:8px;margin-bottom:16px">
+<button class="btn" style="flex:1;padding:10px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.9rem" onclick="switchBatchMode('score')" id="batch-mode-score">批量评分</button>
+<button class="btn" style="flex:1;padding:10px;background:var(--bg);color:var(--text2);border:1px solid var(--border);font-size:0.9rem" onclick="switchBatchMode('optimize')" id="batch-mode-opt">批量AI优化</button>
+</div>
+<div id="batch-score-input">
+<div style="margin-bottom:12px;font-size:0.85rem;color:var(--text2)">每行输入一个标题（最多50条），或上传CSV文件</div>
+<div class="input-group"><textarea id="batch-titles" placeholder="标题1&#10;标题2&#10;标题3&#10;..." rows="8" style="font-size:0.9rem"></textarea></div>
+<div style="display:flex;gap:8px;align-items:center;margin-bottom:16px">
+<label style="padding:8px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);cursor:pointer;font-size:0.85rem;white-space:nowrap"><input type="file" accept=".csv,.txt" onchange="handleCSVUpload(event,'score')" style="display:none">📂 上传CSV</label>
+<a href="javascript:downloadBatchTemplate('score')" style="color:var(--accent);font-size:0.8rem;text-decoration:none">下载模板</a>
+</div>
+<button class="btn btn-primary" onclick="doBatchScore()">开始批量评分</button>
+</div>
+<div id="batch-opt-input" class="hidden">
+<div style="margin-bottom:12px;font-size:0.85rem;color:var(--text2)">每行输入一个商品描述（最多20条），或上传CSV文件。每条消耗1次AI额度</div>
+<div class="input-group"><textarea id="batch-products" placeholder="商品描述1&#10;商品描述2&#10;商品描述3&#10;..." rows="8" style="font-size:0.9rem"></textarea></div>
+<div style="display:flex;gap:8px;align-items:center;margin-bottom:16px">
+<label style="padding:8px 16px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);cursor:pointer;font-size:0.85rem;white-space:nowrap"><input type="file" accept=".csv,.txt" onchange="handleCSVUpload(event,'optimize')" style="display:none">📂 上传CSV</label>
+<a href="javascript:downloadBatchTemplate('optimize')" style="color:var(--accent);font-size:0.8rem;text-decoration:none">下载模板</a>
+</div>
+<button class="btn btn-primary" onclick="doBatchOptimize()">开始批量AI优化</button>
+</div>
+</div>
+<div id="batch-result" class="hidden">
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+<div class="card-title" style="margin-bottom:0" id="batch-result-title">批量结果</div>
+<button class="btn" style="width:auto;padding:6px 14px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportBatchResult()">📥 导出CSV</button>
+</div>
+<div id="batch-progress" class="hidden" style="margin-bottom:16px"><div style="background:var(--bg);border-radius:4px;height:6px;overflow:hidden"><div id="batch-progress-bar" style="height:100%;background:var(--accent);border-radius:4px;transition:width 0.3s;width:0%"></div></div><div style="font-size:0.75rem;color:var(--text2);margin-top:4px" id="batch-progress-text">0%</div></div>
+<div id="batch-table"></div>
+</div>
+</div>
+</div>
+
+<div id="panel-favorites" class="hidden">
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+<div class="card-title" style="margin-bottom:0">⭐ 我的收藏</div>
+<button class="btn" style="width:auto;padding:6px 14px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportFavorites()">📥 导出CSV</button>
+</div>
+<div id="favorites-list" style="color:var(--text2);font-size:0.9rem">登录后查看收藏</div>
+</div>
 </div>
 
 </div>
@@ -232,7 +283,7 @@ async function refreshUser(){
 
 // === Platform ===
 function selectPlatform(p,el){currentPlatform=p;document.querySelectorAll('.platform-pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');const i=PI[p];document.getElementById('platform-hint').textContent=i.hint;document.getElementById('score-title').placeholder=i.ph;document.getElementById('max-chars').textContent=i.maxLen;document.getElementById('score-title').maxLength=i.maxLen}
-function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));event.target.closest('.tab').classList.add('active');['score','optimize','detail','hot','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory()}
+function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));if(event&&event.target)event.target.closest('.tab').classList.add('active');['score','optimize','detail','hot','batch','favorites','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory();if(t==='favorites')loadFavorites()}
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
 function copyTitle(t){navigator.clipboard.writeText(t).then(()=>showToast('已复制到剪贴板！'))}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
@@ -421,6 +472,260 @@ document.getElementById('pay-modal').addEventListener('click',function(e){if(e.t
 // Enter key for login/register
 document.getElementById('login-pwd').addEventListener('keyup',function(e){if(e.key==='Enter')doLogin()});
 document.getElementById('reg-pwd2').addEventListener('keyup',function(e){if(e.key==='Enter')doRegister()});
+
+// === Batch Operations ===
+let batchResults = [];
+let batchMode = 'score';
+
+function switchBatchMode(mode) {
+  batchMode = mode;
+  document.getElementById('batch-mode-score').style.background = mode === 'score' ? 'var(--surface2)' : 'var(--bg)';
+  document.getElementById('batch-mode-score').style.color = mode === 'score' ? 'var(--text)' : 'var(--text2)';
+  document.getElementById('batch-mode-opt').style.background = mode === 'optimize' ? 'var(--surface2)' : 'var(--bg)';
+  document.getElementById('batch-mode-opt').style.color = mode === 'optimize' ? 'var(--text)' : 'var(--text2)';
+  document.getElementById('batch-score-input').classList.toggle('hidden', mode !== 'score');
+  document.getElementById('batch-opt-input').classList.toggle('hidden', mode !== 'optimize');
+}
+
+function handleCSVUpload(event, mode) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const lines = text.split(/\r?\n/).map(l => l.trim()).filter(l => l);
+    if (mode === 'score') {
+      // Skip header if it looks like one
+      const first = lines[0].toLowerCase();
+      const start = (first.includes('title') || first.includes('标题')) ? 1 : 0;
+      const titles = lines.slice(start).map(l => l.split(',')[0].trim());
+      document.getElementById('batch-titles').value = titles.join('\n');
+    } else {
+      const first = lines[0].toLowerCase();
+      const start = (first.includes('product') || first.includes('商品')) ? 1 : 0;
+      const products = lines.slice(start).map(l => l.split(',')[0].trim());
+      document.getElementById('batch-products').value = products.join('\n');
+    }
+    showToast('已导入 ' + (lines.length - (lines[0].toLowerCase().includes('title') || lines[0].toLowerCase().includes('product') || lines[0].includes('标题') || lines[0].includes('商品') ? 1 : 0)) + ' 条数据');
+  };
+  reader.readAsText(file);
+  event.target.value = '';
+}
+
+function downloadBatchTemplate(mode) {
+  let csv = '';
+  if (mode === 'score') {
+    csv = 'title\n法式碎花方领短袖连衣裙女夏季新款\n纯棉T恤男宽松百搭圆领打底衫\n';
+  } else {
+    csv = 'product_info\n法式碎花方领短袖连衣裙女夏季新款收腰显瘦设计感中长裙\n纯棉T恤男宽松百搭圆领打底衫白色\n';
+  }
+  const blob = new Blob(['﻿' + csv], {type: 'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = mode === 'score' ? 'batch_score_template.csv' : 'batch_optimize_template.csv';
+  a.click();
+}
+
+async function doBatchScore() {
+  if (!authToken) { showAuth(); showToast('请先登录'); return; }
+  const text = document.getElementById('batch-titles').value.trim();
+  if (!text) { showToast('请输入标题'); return; }
+  const titles = text.split('\n').map(l => l.trim()).filter(l => l);
+  if (titles.length === 0) { showToast('请输入标题'); return; }
+  if (titles.length > 50) { showToast('最多50条'); return; }
+
+  showLoading(true, '批量评分中...');
+  try {
+    const r = await fetch(`${API}/title/batch-score`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({titles, category: document.getElementById('score-category').value, platform: currentPlatform})
+    });
+    const d = await r.json();
+    if (r.status === 401) { showAuth(); return; }
+    batchResults = d.results || [];
+    renderBatchResult(batchResults, '批量评分结果');
+  } catch(e) { showToast('批量评分失败'); }
+  finally { showLoading(false); }
+}
+
+async function doBatchOptimize() {
+  if (!authToken) { showAuth(); showToast('请先登录'); return; }
+  const text = document.getElementById('batch-products').value.trim();
+  if (!text) { showToast('请输入商品描述'); return; }
+  const products = text.split('\n').map(l => l.trim()).filter(l => l);
+  if (products.length === 0) { showToast('请输入商品描述'); return; }
+  if (products.length > 20) { showToast('最多20条'); return; }
+
+  showLoading(true, '批量AI优化中，请耐心等待...');
+  try {
+    const items = products.map(p => ({product_info: p, category: document.getElementById('opt-category').value}));
+    const r = await fetch(`${API}/title/batch-optimize`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({items, platform: currentPlatform})
+    });
+    const d = await r.json();
+    if (r.status === 401) { showAuth(); return; }
+    if (d.error) { showToast(d.error); return; }
+    batchResults = d.results || [];
+    renderBatchResult(batchResults, '批量AI优化结果');
+    refreshUser();
+  } catch(e) { showToast('批量优化失败'); }
+  finally { showLoading(false); }
+}
+
+function renderBatchResult(results, title) {
+  document.getElementById('batch-result').classList.remove('hidden');
+  document.getElementById('batch-result-title').textContent = title + '（' + results.length + '条）';
+  let h = '<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:0.85rem">';
+  h += '<thead><tr style="border-bottom:2px solid var(--border)">';
+  h += '<th style="padding:10px;text-align:left;color:var(--text2);font-weight:600">排名</th>';
+  if (results[0] && results[0].product_info !== undefined) h += '<th style="padding:10px;text-align:left;color:var(--text2);font-weight:600">商品信息</th>';
+  h += '<th style="padding:10px;text-align:left;color:var(--text2);font-weight:600">标题</th>';
+  h += '<th style="padding:10px;text-align:center;color:var(--text2);font-weight:600">评分</th>';
+  h += '<th style="padding:10px;text-align:center;color:var(--text2);font-weight:600">等级</th>';
+  h += '<th style="padding:10px;text-align:center;color:var(--text2);font-weight:600">操作</th>';
+  h += '</tr></thead><tbody>';
+  results.forEach((item, i) => {
+    const sc = item.total_score || 0;
+    const color = gc(sc);
+    h += '<tr style="border-bottom:1px solid var(--border)">';
+    h += '<td style="padding:10px;color:var(--text2)">' + (i + 1) + '</td>';
+    if (item.product_info !== undefined) h += '<td style="padding:10px;color:var(--text2);max-width:150px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc((item.product_info || '').substring(0, 20)) + '</td>';
+    h += '<td style="padding:10px;cursor:pointer;max-width:300px" onclick="copyTitle(this.dataset.title)" data-title="' + esc(item.title || '') + '">' + esc(item.title || item.error || '-') + '</td>';
+    h += '<td style="padding:10px;text-align:center;color:' + color + ';font-weight:700">' + sc + '</td>';
+    h += '<td style="padding:10px;text-align:center">' + esc(item.grade || '-') + '</td>';
+    h += '<td style="padding:10px;text-align:center"><span style="cursor:pointer;font-size:1rem" onclick="toggleFavorite(this,\'' + esc((item.title || '').replace(/'/g, "\\'")) + '\',' + sc + ',\'' + esc(item.grade || '') + '\')">⭐</span></td>';
+    h += '</tr>';
+  });
+  h += '</tbody></table></div>';
+  document.getElementById('batch-table').innerHTML = h;
+}
+
+// === Export ===
+function exportCSV(headers, rows, filename) {
+  let csv = headers.join(',') + '\n';
+  rows.forEach(row => {
+    csv += row.map(cell => '"' + String(cell || '').replace(/"/g, '""') + '"').join(',') + '\n';
+  });
+  const blob = new Blob(['﻿' + csv], {type: 'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  a.click();
+}
+
+function exportBatchResult() {
+  if (!batchResults.length) return;
+  const hasProductInfo = batchResults[0].product_info !== undefined;
+  const headers = hasProductInfo
+    ? ['排名', '商品信息', '标题', '评分', '等级']
+    : ['排名', '标题', '评分', '等级'];
+  const rows = batchResults.map((item, i) => {
+    const row = [i + 1];
+    if (hasProductInfo) row.push(item.product_info || '');
+    row.push(item.title || '', item.total_score || 0, item.grade || '');
+    return row;
+  });
+  exportCSV(headers, rows, 'batch_results_' + new Date().toISOString().slice(0, 10) + '.csv');
+}
+
+function exportScoreResult() {
+  const title = document.getElementById('score-title').value.trim();
+  const score = document.getElementById('score-num').textContent;
+  const grade = document.getElementById('score-grade').textContent;
+  if (!title) return;
+  exportCSV(['标题', '评分', '等级', '平台'], [[title, score, grade, currentPlatform]], 'score_result.csv');
+}
+
+function exportOptResult() {
+  const cards = document.querySelectorAll('#opt-titles .title-text');
+  if (!cards.length) return;
+  const rows = [];
+  cards.forEach((card, i) => {
+    const title = card.dataset.title || '';
+    const meta = card.parentElement.querySelector('.title-meta');
+    const scoreText = meta ? meta.querySelector('span').textContent : '';
+    rows.push([i + 1, title, scoreText]);
+  });
+  exportCSV(['排名', '标题', '评分'], rows, 'optimize_results_' + new Date().toISOString().slice(0, 10) + '.csv');
+}
+
+function exportFavorites() {
+  const favs = window._favoritesData;
+  if (!favs || !favs.length) { showToast('暂无收藏'); return; }
+  const rows = favs.map(f => [f.title, f.platform || '', f.score || 0, f.source || '', f.created_at || '']);
+  exportCSV(['标题', '平台', '评分', '来源', '收藏时间'], rows, 'favorites_' + new Date().toISOString().slice(0, 10) + '.csv');
+}
+
+// === Favorites ===
+window._favoritesData = [];
+
+async function toggleFavorite(el, title, score, grade) {
+  if (!authToken) { showAuth(); return; }
+  const isActive = el.classList.contains('active-fav');
+  if (isActive) {
+    const fid = el.dataset.favId;
+    if (fid) {
+      await fetch(`${API}/user/favorite/${fid}`, {method: 'DELETE', headers: {'Authorization': 'Bearer ' + authToken}});
+    }
+    el.classList.remove('active-fav');
+    el.textContent = '⭐';
+  } else {
+    const r = await fetch(`${API}/user/favorite`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({title, platform: currentPlatform, score, source: batchMode || 'score'})
+    });
+    const d = await r.json();
+    if (d.success) {
+      el.classList.add('active-fav');
+      el.textContent = '★';
+      el.dataset.favId = d.id;
+      showToast('已收藏');
+    } else {
+      showToast(d.error || '收藏失败');
+    }
+  }
+}
+
+async function loadFavorites() {
+  if (!authToken) { document.getElementById('favorites-list').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">请先 <a onclick="showAuth()" style="color:var(--accent);cursor:pointer">登录</a> 查看收藏</div>'; return; }
+  document.getElementById('favorites-list').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">加载中...</div>';
+  try {
+    const r = await fetch(API + '/user/favorites', {headers: {'Authorization': 'Bearer ' + authToken}});
+    const d = await r.json();
+    if (!d.success || !d.records || d.records.length === 0) {
+      document.getElementById('favorites-list').innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无收藏，评分或生成标题后点击 ⭐ 收藏</div>';
+      return;
+    }
+    window._favoritesData = d.records;
+    let h = '';
+    d.records.forEach(f => {
+      const sc = f.score || 0;
+      const color = gc(sc);
+      const platName = {pinduoduo:'拼多多',taobao:'淘宝',douyin:'抖音',xiaohongshu:'小红书'}[f.platform] || f.platform || '';
+      const time = f.created_at ? f.created_at.substring(5, 16).replace('T', ' ') : '';
+      h += '<div style="padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:10px">';
+      h += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
+      h += '<span style="font-size:0.8rem;color:var(--text2)">⭐ ' + esc(platName) + (f.source ? ' · ' + esc(f.source) : '') + '</span>';
+      h += '<div style="display:flex;align-items:center;gap:8px">';
+      h += '<span style="font-size:0.75rem;color:var(--text2)">' + time + '</span>';
+      h += '<span style="cursor:pointer;font-size:0.85rem;color:var(--red)" onclick="removeFav(' + f.id + ',this)">删除</span></div></div>';
+      h += '<div style="font-size:0.95rem;margin-bottom:4px;cursor:pointer" onclick="copyTitle(this.textContent)">' + esc(f.title) + '</div>';
+      h += '<span style="color:' + color + ';font-weight:700;font-size:0.85rem">' + sc + '分</span>';
+      h += '</div>';
+    });
+    document.getElementById('favorites-list').innerHTML = h;
+  } catch(e) { document.getElementById('favorites-list').innerHTML = '加载失败'; }
+}
+
+async function removeFav(id, el) {
+  await fetch(`${API}/user/favorite/${id}`, {method: 'DELETE', headers: {'Authorization': 'Bearer ' + authToken}});
+  el.closest('div[style*="margin-bottom:10px"]').remove();
+  showToast('已取消收藏');
+}
 </script>
 </body>
 </html>
