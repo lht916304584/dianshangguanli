@@ -56,7 +56,7 @@ class ImageEngine:
         }
 
         try:
-            async with httpx.AsyncClient(timeout=60.0) as client:
+            async with httpx.AsyncClient(timeout=300.0) as client:
                 resp = await client.post(url, json=payload, headers=headers)
                 raw_text = resp.text
                 try:
