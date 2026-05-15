@@ -1,5 +1,6 @@
 """AI 生图 API — 用户自管 API Key 模式"""
 
+import httpx
 from fastapi import APIRouter, Header, HTTPException, status
 from pydantic import BaseModel, Field
 
@@ -134,3 +135,83 @@ async def generate_image(
         "image_type": req.image_type,
         "count": len(result["urls"]),
     }
+
+
+@router.get("/test")
+async def test_image_api(authorization: str = Header(default="")):
+    """测试生图 API 连通性（不消耗额度）。"""
+    verify = _get_verified_user(authorization)
+    if not verify:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="请先登录",
+        )
+
+    raw_key = user_manager._get_raw_image_api_key(verify["user_id"])
+    if not raw_key:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="请先配置生图 API Key",
+        )
+
+    config_dict = user_manager.get_image_config(verify["user_id"])
+    base_url = config_dict.get("base_url", "https://api.openai.com/v1").rstrip("/")
+    model = config_dict.get("model", "dall-e-3")
+
+    test_url = f"{base_url}/models"
+    headers = {
+        "Authorization": f"Bearer {raw_key}",
+    }
+
+    try:
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            resp = await client.get(test_url, headers=headers)
+            raw_text = resp.text
+            if resp.status_code == 200:
+                # 尝试解析，确认返回的是 JSON
+                try:
+                    data = resp.json()
+                    models = data.get("data", [])
+                    # 检查目标模型是否在列表中
+                    model_found = any(
+                        m.get("id") == model for m in models
+                    )
+                    return {
+                        "success": True,
+                        "status": "connected",
+                        "model_found": model_found,
+                        "model": model,
+                        "message": "API 连通正常" + (
+                            "" if model_found else "，但目标模型未在列表中找到，请确认模型名称"
+                        ),
+                    }
+                except Exception:
+                    return {
+                        "success": False,
+                        "status": "error",
+                        "message": f"API 返回非 JSON 数据: {raw_text[:200]}",
+                    }
+            else:
+                try:
+                    data = resp.json()
+                    err = data.get("error", {})
+                    msg = err.get("message", f"HTTP {resp.status_code}")
+                except Exception:
+                    msg = f"HTTP {resp.status_code}: {raw_text[:200]}"
+                return {
+                    "success": False,
+                    "status": "error",
+                    "message": msg,
+                }
+    except httpx.TimeoutException:
+        return {
+            "success": False,
+            "status": "timeout",
+            "message": "连接超时，请检查网络或 Base URL",
+        }
+    except Exception as e:
+        return {
+            "success": False,
+            "status": "error",
+            "message": f"请求异常: {str(e)}",
+        }

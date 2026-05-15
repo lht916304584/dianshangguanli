@@ -55,7 +55,19 @@ class ImageEngine:
         try:
             async with httpx.AsyncClient(timeout=60.0) as client:
                 resp = await client.post(url, json=payload, headers=headers)
-                data = resp.json()
+                # 先记录原始响应，便于排查非 JSON 返回
+                raw_text = resp.text
+                try:
+                    data = resp.json()
+                except Exception:
+                    # 返回的不是合法 JSON，把原始内容截断后抛给用户
+                    preview = raw_text[:300].replace("\n", " ")
+                    return {
+                        "urls": [],
+                        "prompt": enhanced,
+                        "status": "error",
+                        "error": f"API 返回非 JSON 数据（HTTP {resp.status_code}）: {preview}",
+                    }
 
                 if resp.status_code != 200:
                     err = data.get("error", {})
