@@ -73,6 +73,7 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 .modal .close-btn{padding:10px 30px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text2);cursor:pointer;font-size:0.85rem;font-family:inherit;margin-top:12px;transition:all 0.3s}.modal .close-btn:hover{border-color:var(--text2);color:var(--text)}
 
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green);color:white;padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:500;box-shadow:0 4px 20px rgba(34,197,94,0.3);transition:transform 0.3s;z-index:300}.toast.show{transform:translateX(-50%) translateY(0)}
+.img-lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:400;align-items:center;justify-content:center;cursor:zoom-out;backdrop-filter:blur(8px)}.img-lightbox-overlay.show{display:flex}.img-lightbox-overlay img{max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 0 60px rgba(0,0,0,0.6);object-fit:contain}
 .hidden{display:none!important}.footer{text-align:center;padding:30px 20px;color:var(--text2);font-size:0.75rem;width:100%;clear:both}
 .active-fav{color:var(--accent)!important;font-size:1.1rem}
 #batch-table table{width:100%}#batch-table td{vertical-align:middle}
@@ -376,6 +377,7 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 </div></div>
 
 <div class="toast" id="toast"></div>
+<div class="img-lightbox-overlay" id="img-lightbox" onclick="closeImageLightbox()"><img src="" id="img-lightbox-img" alt="放大预览" style="pointer-events:none"></div>
 
 <script>
 const API='/api/v1';let currentPlatform='pinduoduo',authToken=localStorage.getItem('token')||'';
@@ -1229,14 +1231,23 @@ async function doImageGenerate() {
   finally { btn.disabled = false; showLoading(false); }
 }
 
+function showImageLightbox(url) {
+  document.getElementById('img-lightbox-img').src = url;
+  document.getElementById('img-lightbox').classList.add('show');
+}
+function closeImageLightbox() {
+  document.getElementById('img-lightbox').classList.remove('show');
+}
+
 function renderImageResult(d) {
   const el = document.getElementById('image-result');
   el.classList.remove('hidden');
   let h = '<div class="card"><div class="card-title">生成结果</div>';
   h += '<div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:16px">';
   d.urls.forEach((url, i) => {
+    const safeUrl = esc(url).replace(/'/g, "\\'");
     h += `<div style="background:var(--bg);border:1px solid var(--border);border-radius:8px;overflow:hidden">`;
-    h += `<img src="${esc(url)}" style="width:100%;height:auto;display:block;min-height:150px;background:var(--surface2)" alt="生成图片${i+1}" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
+    h += `<img src="${esc(url)}" style="width:100%;height:auto;display:block;min-height:150px;background:var(--surface2);cursor:zoom-in" alt="生成图片${i+1}" onclick="showImageLightbox('${safeUrl}')" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">`;
     h += `<div style="display:none;align-items:center;justify-content:center;height:150px;color:var(--text2);font-size:0.85rem">图片加载失败</div>`;
     h += `<div style="padding:10px;display:flex;justify-content:space-between;align-items:center">`;
     h += `<span style="font-size:0.8rem;color:var(--text2)">图 ${i+1}</span>`;
