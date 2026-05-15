@@ -68,13 +68,15 @@ class ImageEngine:
                     }
 
                 # 情况 A：异步任务模式（创建任务 -> 轮询）
-                task_id = data.get("task_id") or data.get("id")
-                if task_id and not data.get("data"):
+                task_id = self._extract_task_id(data)
+                if task_id:
+                    print(f"[ImageEngine] Async task created: {task_id}")
                     return await self._poll_task(base_url, task_id, api_key, enhanced)
 
                 if resp.status_code != 200:
                     err = data.get("error", {})
                     msg = err.get("message", f"API 错误: HTTP {resp.status_code}")
+                    print(f"[ImageEngine] API error: {msg}")
                     if self._is_not_image_model_error(msg):
                         return await self._generate_via_chat(enhanced, config, count)
                     return {"urls": [], "prompt": enhanced, "status": "error", "error": msg}
@@ -82,9 +84,11 @@ class ImageEngine:
                 # 情况 B：标准 DALL-E 同步模式
                 urls = [item["url"] for item in data.get("data", []) if item.get("url")]
                 if urls:
+                    print(f"[ImageEngine] Sync mode, returned {len(urls)} URLs")
                     return {"urls": urls, "prompt": enhanced, "status": "success"}
 
                 # 仍未找到 URL
+                print(f"[ImageEngine] No URLs in response: {raw_text[:300]}")
                 return {"urls": [], "prompt": enhanced, "status": "error", "error": "未返回图片 URL"}
 
         except httpx.TimeoutException:
@@ -104,12 +108,15 @@ class ImageEngine:
         """轮询异步任务状态，直到完成或超时。"""
         headers = {"Authorization": f"Bearer {api_key}"}
         poll_url = f"{base_url}/tasks/{task_id}"
+        print(f"[ImageEngine] Polling task: {poll_url}")
 
         try:
             async with httpx.AsyncClient(timeout=15.0) as client:
-                for _ in range(max_retries):
+                for attempt in range(max_retries):
                     await __import__("asyncio").sleep(interval)
                     resp = await client.get(poll_url, headers=headers)
+                    raw = resp.text
+                    print(f"[ImageEngine] Poll #{attempt + 1} HTTP {resp.status_code}: {raw[:300]}")
                     try:
                         data = resp.json()
                     except Exception:
@@ -124,6 +131,7 @@ class ImageEngine:
                     # 任务完成/成功
                     if status in ("completed", "success", "done", "succeeded"):
                         urls = self._extract_urls_from_task(data)
+                        print(f"[ImageEngine] Task completed, URLs: {urls}")
                         if urls:
                             return {
                                 "urls": urls,
@@ -140,6 +148,7 @@ class ImageEngine:
                     # 任务失败
                     if status in ("failed", "error", "failure"):
                         err_msg = data.get("error", "") or data.get("message", "")
+                        print(f"[ImageEngine] Task failed: {err_msg}")
                         return {
                             "urls": [],
                             "prompt": prompt,
@@ -147,6 +156,7 @@ class ImageEngine:
                             "error": f"任务失败: {err_msg}" if err_msg else "任务失败",
                         }
 
+                print("[ImageEngine] Poll timeout")
                 return {
                     "urls": [],
                     "prompt": prompt,
@@ -154,6 +164,7 @@ class ImageEngine:
                     "error": "任务轮询超时，请稍后到历史记录查看结果",
                 }
         except Exception as e:
+            print(f"[ImageEngine] Poll exception: {e}")
             return {
                 "urls": [],
                 "prompt": prompt,
@@ -204,6 +215,23 @@ class ImageEngine:
                 seen.add(u)
                 unique.append(u)
         return unique
+
+    def _extract_task_id(self, data: dict) -> str | None:
+        """从响应中提取任务 ID，支持多种字段名和嵌套结构。"""
+        candidates = ["task_id", "id", "taskId", "job_id", "request_id", "jobId"]
+        for key in candidates:
+            val = data.get(key)
+            if val and isinstance(val, str):
+                return val
+        # 尝试嵌套结构
+        for nested in ["data", "result", "task"]:
+            obj = data.get(nested)
+            if isinstance(obj, dict):
+                for key in candidates:
+                    val = obj.get(key)
+                    if val and isinstance(val, str):
+                        return val
+        return None
 
     def _is_not_image_model_error(self, msg: str) -> bool:
         """判断错误是否因为模型不是图像模型（如 GPT-5.5 被拒）。"""
