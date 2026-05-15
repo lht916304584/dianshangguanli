@@ -222,25 +222,21 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <button class="sub-tab" onclick="switchSubTab('detail')">🎨 详情图</button>
 </div>
 <div id="panel-image">
-<!-- 配置面板 -->
-<div id="image-config-panel">
-<div class="card"><div class="card-title">🛠️ 生图API配置</div>
-<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">你的生图API由你自己管理，平台不保存密钥原文</div>
-<div class="input-group"><label>API Key</label><input type="password" id="img-api-key" placeholder="sk-..."></div>
-<div class="input-group"><label>Base URL</label><input type="text" id="img-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
-<div class="row">
-<div class="input-group"><label>模型</label><select id="img-model"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
-<div class="input-group"><label>图片尺寸</label><select id="img-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
-</div>
-<button class="btn btn-primary" onclick="saveImageConfig()">💾 保存配置</button>
+<!-- 未配置提示 -->
+<div id="image-unconfigured" class="hidden">
+<div class="card" style="text-align:center;padding:40px 20px">
+<div style="font-size:3rem;margin-bottom:16px">🖼️</div>
+<div style="font-size:1.1rem;font-weight:600;margin-bottom:8px">尚未配置生图API</div>
+<div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px">请在设置中配置你的API密钥，即可开始生成商品图</div>
+<button class="btn btn-primary" onclick="goToSettings()" style="max-width:200px;margin:0 auto">⚙️ 前往设置</button>
 </div>
 </div>
 <!-- 生成面板 -->
-<div id="image-generate-panel" class="hidden">
+<div id="image-generate-panel">
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
 <div class="card-title" style="margin-bottom:0">🖼️ AI商品图生成</div>
-<button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="showImageConfigPanel()">⚙️ 修改配置</button>
+<button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="goToSettings()">⚙️ 修改配置</button>
 </div>
 <div class="input-group"><label>商品描述 / 提示词</label><textarea id="img-prompt" placeholder="例如：法式碎花连衣裙，夏季新款，收腰显瘦，气质优雅..." rows="3"></textarea></div>
 <div class="row">
@@ -299,6 +295,7 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <div class="sub-tabs">
 <button class="sub-tab active" onclick="switchSubTab('favorites')">⭐ 收藏</button>
 <button class="sub-tab" onclick="switchSubTab('history')">📋 历史</button>
+<button class="sub-tab" onclick="switchSubTab('settings')">⚙️ 设置</button>
 </div>
 <div id="panel-favorites">
 <div class="card">
@@ -314,6 +311,19 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <div class="card">
 <div class="card-title">我的使用记录</div>
 <div id="history-list" style="color:var(--text2);font-size:0.9rem;">登录后查看历史记录</div>
+</div>
+</div>
+
+<div id="panel-settings" class="hidden">
+<div class="card"><div class="card-title">🛠️ 生图API配置</div>
+<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">你的生图API由你自己管理，平台不保存密钥原文</div>
+<div class="input-group"><label>API Key</label><input type="password" id="img-api-key" placeholder="sk-..."></div>
+<div class="input-group"><label>Base URL</label><input type="text" id="img-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
+<div class="row">
+<div class="input-group"><label>模型</label><select id="img-model"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
+<div class="input-group"><label>图片尺寸</label><select id="img-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
+</div>
+<button class="btn btn-primary" onclick="saveImageConfig()">💾 保存配置</button>
 </div>
 </div>
 </div>
@@ -407,13 +417,15 @@ function selectPlatform(p,el){currentPlatform=p;document.querySelectorAll('.plat
 // === Category & Sub Tab Switching ===
 let currentCategory='title';
 const CATEGORY_DEFAULTS={title:'score',image:'image',data:'competitor',me:'favorites'};
-const CATEGORY_TABS={title:['score','optimize','batch'],image:['image','detail'],data:['competitor','hot'],me:['favorites','history']};
+const CATEGORY_TABS={title:['score','optimize','batch'],image:['image','detail'],data:['competitor','hot'],me:['favorites','history','settings']};
 
 function switchCategory(cat){
   currentCategory=cat;
   // Update cat-pill active state
   document.querySelectorAll('.cat-pill').forEach(x=>x.classList.remove('active'));
-  if(event&&event.target)event.target.closest('.cat-pill').classList.add('active');
+  const btns=Array.from(document.querySelectorAll('.cat-pill'));
+  const target=btns.find(b=>b.getAttribute('onclick').includes(`'${cat}'`));
+  if(target)target.classList.add('active');
   // Show/hide category sections
   document.querySelectorAll('.category-section').forEach(sec=>sec.classList.remove('active'));
   const secEl=document.getElementById('category-'+cat);
@@ -443,6 +455,7 @@ function switchSubTab(tab,skipEvent){
   if(tab==='history')loadHistory();
   if(tab==='favorites')loadFavorites();
   if(tab==='image'&&currentCategory==='image')checkImageConfig();
+  if(tab==='settings')loadImageConfig();
 }
 
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
@@ -1013,45 +1026,52 @@ async function removeFav(id, el) {
 let imageConfigLoaded = false;
 
 async function checkImageConfig() {
+  const unconfigured = document.getElementById('image-unconfigured');
+  const generatePanel = document.getElementById('image-generate-panel');
   if (!authToken) {
-    document.getElementById('image-config-panel').classList.remove('hidden');
-    document.getElementById('image-generate-panel').classList.add('hidden');
+    unconfigured.classList.remove('hidden');
+    generatePanel.classList.add('hidden');
     return;
   }
-  if (imageConfigLoaded) return;
+  if (imageConfigLoaded) {
+    unconfigured.classList.add('hidden');
+    generatePanel.classList.remove('hidden');
+    return;
+  }
   try {
     const r = await fetch(`${API}/image/config`, {headers: {'Authorization': 'Bearer ' + authToken}});
     const d = await r.json();
     if (d.success && d.config && d.config.api_key) {
-      // 已配置
-      document.getElementById('image-config-panel').classList.add('hidden');
-      document.getElementById('image-generate-panel').classList.remove('hidden');
+      unconfigured.classList.add('hidden');
+      generatePanel.classList.remove('hidden');
       imageConfigLoaded = true;
     } else {
-      document.getElementById('image-config-panel').classList.remove('hidden');
-      document.getElementById('image-generate-panel').classList.add('hidden');
+      unconfigured.classList.remove('hidden');
+      generatePanel.classList.add('hidden');
     }
   } catch(e) {
-    document.getElementById('image-config-panel').classList.remove('hidden');
-    document.getElementById('image-generate-panel').classList.add('hidden');
+    unconfigured.classList.remove('hidden');
+    generatePanel.classList.add('hidden');
   }
 }
 
-function showImageConfigPanel() {
-  document.getElementById('image-config-panel').classList.remove('hidden');
-  document.getElementById('image-generate-panel').classList.add('hidden');
-  if (!authToken) { showAuth(); return; }
-  // 预填充现有配置
-  fetch(`${API}/image/config`, {headers: {'Authorization': 'Bearer ' + authToken}})
-    .then(r => r.json())
-    .then(d => {
-      if (d.success && d.config) {
-        const cfg = d.config;
-        if (cfg.base_url) document.getElementById('img-base-url').value = cfg.base_url;
-        if (cfg.model) document.getElementById('img-model').value = cfg.model;
-        if (cfg.size) document.getElementById('img-size').value = cfg.size;
-      }
-    });
+function goToSettings() {
+  switchCategory('me');
+  switchSubTab('settings');
+}
+
+async function loadImageConfig() {
+  if (!authToken) return;
+  try {
+    const r = await fetch(`${API}/image/config`, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const d = await r.json();
+    if (d.success && d.config) {
+      const cfg = d.config;
+      if (cfg.base_url) document.getElementById('img-base-url').value = cfg.base_url;
+      if (cfg.model) document.getElementById('img-model').value = cfg.model;
+      if (cfg.size) document.getElementById('img-size').value = cfg.size;
+    }
+  } catch(e) {}
 }
 
 async function saveImageConfig() {
@@ -1075,8 +1095,6 @@ async function saveImageConfig() {
     const d = await r.json();
     if (d.success) {
       showToast('配置已保存 ✅');
-      document.getElementById('image-config-panel').classList.add('hidden');
-      document.getElementById('image-generate-panel').classList.remove('hidden');
       imageConfigLoaded = true;
     } else {
       showToast(d.error || '保存失败');
@@ -1109,7 +1127,7 @@ async function doImageGenerate() {
     if (r.status === 401) { showAuth(); return; }
     if (r.status === 400 && d.detail && d.detail.includes('配置')) {
       showToast('请先配置生图API');
-      showImageConfigPanel();
+      goToSettings();
       return;
     }
     if (r.status === 429) { document.getElementById('pay-modal').classList.add('show'); return; }
