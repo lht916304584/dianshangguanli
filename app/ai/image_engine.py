@@ -29,6 +29,9 @@ class ImageEngine:
         """
         api_key = config.get("api_key", "")
         base_url = config.get("base_url", "https://api.openai.com/v1").rstrip("/")
+        # 自动修正常见多余路径：如 https://api.xxx.com/v1/images/generations -> https://api.xxx.com/v1
+        if base_url.endswith("/images/generations"):
+            base_url = base_url[: -len("/images/generations")]
         model = config.get("model", "dall-e-3")
         size = config.get("size", "1024x1024")
 
