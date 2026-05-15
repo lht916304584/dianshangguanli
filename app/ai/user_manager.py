@@ -88,6 +88,16 @@ class UserManager:
             created_at TEXT DEFAULT CURRENT_TIMESTAMP,
             updated_at TEXT DEFAULT CURRENT_TIMESTAMP
         )''')
+        # 兼容升级：为已有数据库添加 LLM 配置列
+        for col_def in [
+            "llm_api_key TEXT DEFAULT ''",
+            "llm_base_url TEXT DEFAULT 'https://api.deepseek.com'",
+            "llm_model TEXT DEFAULT 'deepseek-chat'",
+        ]:
+            try:
+                c.execute(f"ALTER TABLE user_config ADD COLUMN {col_def}")
+            except sqlite3.OperationalError:
+                pass
         conn.commit()
         conn.close()
 
@@ -436,6 +446,95 @@ class UserManager:
         if len(decoded) > 8:
             return decoded[:3] + "****" + decoded[-4:]
         return "****"
+
+    # ── LLM 文案配置 ──────────────────────────────────────────────────
+    def get_llm_config(self, user_id: int):
+        """获取用户的LLM配置（api_key已脱敏）"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute(
+                "SELECT llm_api_key, llm_base_url, llm_model, updated_at FROM user_config WHERE user_id=?",
+                (user_id,),
+            )
+            row = c.fetchone()
+            if not row:
+                return {
+                    "api_key": "",
+                    "base_url": "https://api.deepseek.com",
+                    "model": "deepseek-chat",
+                    "updated_at": "",
+                }
+            return {
+                "api_key": self._mask_key(row[0]),
+                "base_url": row[1] or "https://api.deepseek.com",
+                "model": row[2] or "deepseek-chat",
+                "updated_at": row[3] or "",
+            }
+        finally:
+            conn.close()
+
+    def save_llm_config(self, user_id: int, api_key: str = "", base_url: str = "", model: str = ""):
+        """保存/更新LLM配置。api_key为空表示不修改已有key。"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            if not api_key:
+                c.execute("SELECT llm_api_key FROM user_config WHERE user_id=?", (user_id,))
+                row = c.fetchone()
+                if row and row[0]:
+                    api_key = row[0]
+            else:
+                import base64
+
+                api_key = base64.b64encode(api_key.encode()).decode()
+
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            c.execute(
+                """INSERT INTO user_config (user_id, llm_api_key, llm_base_url, llm_model, updated_at)
+                    VALUES (?, ?, ?, ?, ?)
+                    ON CONFLICT(user_id)
+                    DO UPDATE SET
+                        llm_api_key=excluded.llm_api_key,
+                        llm_base_url=excluded.llm_base_url,
+                        llm_model=excluded.llm_model,
+                        updated_at=excluded.updated_at""",
+                (user_id, api_key, base_url or "https://api.deepseek.com", model or "deepseek-chat", now),
+            )
+            conn.commit()
+            return {"success": True}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+        finally:
+            conn.close()
+
+    def get_raw_llm_config(self, user_id: int) -> dict:
+        """获取未脱敏的LLM配置（用于后端调用）"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute(
+                "SELECT llm_api_key, llm_base_url, llm_model FROM user_config WHERE user_id=?",
+                (user_id,),
+            )
+            row = c.fetchone()
+            if not row:
+                return {"api_key": "", "base_url": "", "model": ""}
+            key = row[0] or ""
+            if key:
+                try:
+                    import base64
+
+                    key = base64.b64decode(key.encode()).decode()
+                except Exception:
+                    pass
+            return {
+                "api_key": key,
+                "base_url": row[1] or "https://api.deepseek.com",
+                "model": row[2] or "deepseek-chat",
+            }
+        finally:
+            conn.close()
 
     # ── 多模型管理 ──────────────────────────────────────────────────
     def get_image_models(self, user_id: int):

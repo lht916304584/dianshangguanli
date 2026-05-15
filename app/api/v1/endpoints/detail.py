@@ -4,6 +4,7 @@ from fastapi import APIRouter, Header
 from pydantic import BaseModel, Field
 
 from app.ai.detail_planner import detail_planner
+from app.ai.llm_client import LLMClient
 from app.ai.user_manager import user_manager
 
 router = APIRouter()
@@ -29,8 +30,13 @@ async def create_detail_plan(req: DetailPlanRequest, authorization: str = Header
     if not credit["success"]:
         return {"success": False, "error": credit["error"], "usage": credit["usage"]}
 
+    config = user_manager.get_raw_llm_config(verify["user_id"])
+    if not config or not config.get("api_key"):
+        return {"success": False, "error": "请先配置AI文案API Key"}
+    client = LLMClient(api_key=config["api_key"], base_url=config["base_url"], model=config["model"])
+
     try:
-        result = await detail_planner.run(req.product_info, req.platform, req.category)
+        result = await detail_planner.run(req.product_info, req.platform, req.category, llm=client)
         user_manager.save_history(
             verify["user_id"], "detail_plan", req.platform,
             result.get("page_structure", [{}])[0].get("title", "") if result.get("page_structure") else "",

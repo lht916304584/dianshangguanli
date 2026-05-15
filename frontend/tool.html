@@ -391,6 +391,19 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
   <div id="model-test-result" style="margin-top:12px;font-size:0.85rem;display:none"></div>
 </div>
 </div>
+
+<!-- AI文案配置 -->
+<div class="card" style="margin-top:20px"><div class="card-title">📝 AI文案配置</div>
+<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">配置标题生成、详情策划、竞品分析等文案类AI功能所使用的API。所有文案AI功能将使用您自己的API Key调用。</div>
+<div class="input-group"><label>Base URL</label><input type="text" id="llm-base-url" placeholder="https://api.deepseek.com" value="https://api.deepseek.com"></div>
+<div class="input-group"><label>API Key</label><input type="password" id="llm-api-key" placeholder="sk-..."><div style="font-size:0.75rem;color:var(--text2)">留空表示不修改已有 key</div></div>
+<div class="input-group"><label>模型</label><input type="text" id="llm-model" placeholder="deepseek-chat" value="deepseek-chat"></div>
+<div style="display:flex;gap:10px;margin-top:12px">
+  <button class="btn btn-primary" onclick="saveLlmConfig()" style="flex:2">💾 保存</button>
+  <button class="btn" onclick="testLlmConnection()" style="flex:1;background:var(--surface2);color:var(--text);border:1px solid var(--border)">🧪 测试连通</button>
+</div>
+<div id="llm-test-result" style="margin-top:12px;font-size:0.85rem;display:none"></div>
+</div>
 </div>
 
 </div>
@@ -521,7 +534,7 @@ function switchSubTab(tab,skipEvent){
   if(tab==='history')loadHistory();
   if(tab==='favorites')loadFavorites();
   if(tab==='image'&&currentCategory==='image'){checkImageConfig();loadImageModels();}
-  if(tab==='settings')renderImageModelsList();
+  if(tab==='settings'){renderImageModelsList();loadLlmConfig();}
 }
 
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
@@ -1226,6 +1239,59 @@ async function deleteImageModel(id) {
       showToast(d.error || '删除失败');
     }
   } catch(e) { showToast('删除失败'); }
+}
+
+async function loadLlmConfig() {
+  if (!authToken) return;
+  try {
+    const r = await fetch(`${API}/llm/config`, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const d = await r.json();
+    if (d.success && d.config) {
+      document.getElementById('llm-base-url').value = d.config.base_url || 'https://api.deepseek.com';
+      document.getElementById('llm-model').value = d.config.model || 'deepseek-chat';
+      // api_key 是脱敏的，不要回填到输入框
+    }
+  } catch(e) {}
+}
+
+async function saveLlmConfig() {
+  if (!authToken) { showAuth(); return; }
+  const base_url = document.getElementById('llm-base-url').value.trim();
+  const api_key = document.getElementById('llm-api-key').value.trim();
+  const model = document.getElementById('llm-model').value.trim();
+  try {
+    const r = await fetch(`${API}/llm/config`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({base_url, api_key, model})
+    });
+    const d = await r.json();
+    if (d.success) {
+      showToast('配置已保存');
+      document.getElementById('llm-api-key').value = '';
+    } else {
+      showToast(d.detail || d.error || '保存失败');
+    }
+  } catch(e) { showToast('保存失败'); }
+}
+
+async function testLlmConnection() {
+  if (!authToken) { showAuth(); return; }
+  const resultEl = document.getElementById('llm-test-result');
+  resultEl.style.display = 'none';
+  try {
+    const r = await fetch(`${API}/llm/test`, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const d = await r.json();
+    if (d.success) {
+      resultEl.innerHTML = `<div style="padding:10px 14px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.3);border-radius:8px;color:var(--green)">✅ ${esc(d.message || '连通正常')}</div>`;
+    } else {
+      resultEl.innerHTML = `<div style="padding:10px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;color:var(--red)">❌ ${esc(d.message || '测试失败')}</div>`;
+    }
+    resultEl.style.display = 'block';
+  } catch(e) {
+    resultEl.innerHTML = `<div style="padding:10px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;color:var(--red)">❌ 网络错误，请重试</div>`;
+    resultEl.style.display = 'block';
+  }
 }
 
 async function testImageModelConnection(modelId) {

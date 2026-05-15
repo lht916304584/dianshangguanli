@@ -15,10 +15,10 @@ PLATFORM_CONTEXT = {
 
 class DetailPlanner:
 
-    async def run(self, product_info: str, platform: str, category: str) -> dict:
-        selling_points = await self._extract_selling_points(product_info, category)
-        page_structure = await self._generate_page_structure(selling_points, platform, product_info)
-        image_prompts = await self._generate_image_prompts(page_structure, product_info)
+    async def run(self, product_info: str, platform: str, category: str, llm=None) -> dict:
+        selling_points = await self._extract_selling_points(product_info, category, llm=llm)
+        page_structure = await self._generate_page_structure(selling_points, platform, product_info, llm=llm)
+        image_prompts = await self._generate_image_prompts(page_structure, product_info, llm=llm)
 
         # 预留图片生成（当前仅提示词）
         images = []
@@ -36,7 +36,7 @@ class DetailPlanner:
             "platform": platform,
         }
 
-    async def _extract_selling_points(self, product_info: str, category: str) -> dict:
+    async def _extract_selling_points(self, product_info: str, category: str, llm=None) -> dict:
         prompt = f"""你是一位资深电商运营专家，请根据以下商品信息提炼卖点。
 
 商品信息：{product_info}
@@ -67,13 +67,14 @@ class DetailPlanner:
 - 痛点要切中目标用户的真实困扰"""
 
         system = "你是电商详情页策划专家，擅长提炼产品卖点和用户心理分析。只输出JSON。"
-        raw = await llm_client.chat(prompt, system_prompt=system, temperature=0.7, max_tokens=2000)
+        client = llm or llm_client
+        raw = await client.chat(prompt, system_prompt=system, temperature=0.7, max_tokens=2000)
         return self._parse_json(raw, {
             "core_points": [], "support_points": [], "evidence": [], "pain_points": []
         })
 
     async def _generate_page_structure(
-        self, selling_points: dict, platform: str, product_info: str
+        self, selling_points: dict, platform: str, product_info: str, llm=None
     ) -> list:
         platform_ctx = PLATFORM_CONTEXT.get(platform, "")
         points_desc = json.dumps(selling_points, ensure_ascii=False, indent=2)
@@ -146,13 +147,14 @@ class DetailPlanner:
 - 第6屏要制造紧迫感促成下单"""
 
         system = "你是电商详情页文案策划专家，擅长高转化率页面设计。只输出JSON数组。"
-        raw = await llm_client.chat(prompt, system_prompt=system, temperature=0.7, max_tokens=3000)
+        client = llm or llm_client
+        raw = await client.chat(prompt, system_prompt=system, temperature=0.7, max_tokens=3000)
         result = self._parse_json(raw, [])
         if isinstance(result, dict) and "screens" in result:
             result = result["screens"]
         return result if isinstance(result, list) else []
 
-    async def _generate_image_prompts(self, page_structure: list, product_info: str) -> list:
+    async def _generate_image_prompts(self, page_structure: list, product_info: str, llm=None) -> list:
         if not page_structure:
             return []
 
@@ -182,7 +184,8 @@ class DetailPlanner:
 - 不要包含任何品牌名称或logo描述"""
 
         system = "You are an expert in AI image prompt engineering for e-commerce product photography. Output JSON array only."
-        raw = await llm_client.chat(prompt, system_prompt=system, temperature=0.7, max_tokens=2000)
+        client = llm or llm_client
+        raw = await client.chat(prompt, system_prompt=system, temperature=0.7, max_tokens=2000)
         result = self._parse_json(raw, [])
         if isinstance(result, list):
             return [item.get("prompt", "") if isinstance(item, dict) else str(item) for item in result]

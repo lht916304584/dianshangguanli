@@ -7,12 +7,12 @@ from app.core.config import settings
 class LLMClient:
     """统一的 LLM 调用客户端"""
 
-    def __init__(self):
+    def __init__(self, api_key=None, base_url=None, model=None):
         self.client = AsyncOpenAI(
-            api_key=settings.DEEPSEEK_API_KEY,
-            base_url=settings.DEEPSEEK_BASE_URL,
+            api_key=api_key or settings.DEEPSEEK_API_KEY,
+            base_url=base_url or settings.DEEPSEEK_BASE_URL,
         )
-        self.model = settings.DEFAULT_LLM_MODEL
+        self.model = model or settings.DEFAULT_LLM_MODEL
 
     async def chat(
         self,

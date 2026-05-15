@@ -18,6 +18,7 @@ class ImageEngine:
         reference_image: str = "",
         mode: str = "product_fidelity",
         text_content: str = "",
+        llm=None,
     ) -> dict:
         """
         生成图片。
@@ -46,8 +47,8 @@ class ImageEngine:
         if not api_key:
             return {"urls": [], "prompt": prompt, "status": "error", "error": "未配置 API Key"}
 
-        # 1. Prompt 增强
-        enhanced = await self._enhance_prompt(prompt, image_type, mode, text_content)
+        # 1. Prompt 增强（优先使用用户配置的文本AI，如未配置则fallback到全局）
+        enhanced = await self._enhance_prompt(prompt, image_type, mode, text_content, llm=llm)
 
         # 2. 如果有图片输入，优先使用 chat completions 接口（支持 vision + image generation 的模型）
         if product_image or reference_image:
@@ -396,7 +397,7 @@ class ImageEngine:
             return {"urls": [], "prompt": prompt, "status": "error", "error": f"Chat 接口请求异常: {str(e)}"}
 
     async def _enhance_prompt(
-        self, prompt: str, image_type: str, mode: str = "product_fidelity", text_content: str = ""
+        self, prompt: str, image_type: str, mode: str = "product_fidelity", text_content: str = "", llm=None
     ) -> str:
         """使用 LLM 将用户描述扩展为专业英文生图提示词。"""
         prefixes = {
@@ -442,7 +443,8 @@ class ImageEngine:
         full_prompt = mode_prefix + user_prompt if mode_prefix else user_prompt
 
         try:
-            enhanced = await llm_client.chat(full_prompt, system_prompt=system_prompt, temperature=0.6, max_tokens=300)
+            client = llm or llm_client
+            enhanced = await client.chat(full_prompt, system_prompt=system_prompt, temperature=0.6, max_tokens=300)
             # 清理可能的引号和多余换行
             enhanced = enhanced.strip().strip('"').strip("'")
             return prefix + enhanced

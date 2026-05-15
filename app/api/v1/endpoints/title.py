@@ -3,7 +3,7 @@
 from fastapi import APIRouter, Header, HTTPException, status
 from pydantic import BaseModel, Field
 
-from app.ai.llm_client import llm_client
+from app.ai.llm_client import LLMClient, llm_client
 from app.ai.title_scorer import title_scorer
 from app.ai.title_pipeline import title_pipeline
 from app.ai.competitor_analyzer import competitor_analyzer
@@ -78,7 +78,14 @@ async def generate_titles(
             detail=credit["error"],
         )
 
-    result = await llm_client.generate_titles(req.product_info, req.platform, req.count)
+    config = user_manager.get_raw_llm_config(verify["user_id"])
+    if not config or not config.get("api_key"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="请先配置AI文案API Key",
+        )
+    client = LLMClient(api_key=config["api_key"], base_url=config["base_url"], model=config["model"])
+    result = await client.generate_titles(req.product_info, req.platform, req.count)
     return {"titles": result, "platform": req.platform, "product_info": req.product_info}
 
 
@@ -146,6 +153,14 @@ async def batch_optimize(
             detail="今日次数已用完",
         )
 
+    config = user_manager.get_raw_llm_config(verify["user_id"])
+    if not config or not config.get("api_key"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="请先配置AI文案API Key",
+        )
+    client = LLMClient(api_key=config["api_key"], base_url=config["base_url"], model=config["model"])
+
     results = []
     for item in req.items[:max_count]:
         credit = user_manager.use_credit(verify["user_id"])
@@ -157,6 +172,7 @@ async def batch_optimize(
                 platform=req.platform,
                 category=item.get("category", ""),
                 count=1,
+                llm=client,
             )
             if r.get("success") and r.get("top_titles"):
                 best = r["top_titles"][0]
@@ -206,11 +222,19 @@ async def optimize_title(
             detail=credit["error"],
         )
 
+    config = user_manager.get_raw_llm_config(verify["user_id"])
+    if not config or not config.get("api_key"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="请先配置AI文案API Key",
+        )
+    client = LLMClient(api_key=config["api_key"], base_url=config["base_url"], model=config["model"])
     result = await title_pipeline.run(
         product_info=req.product_info,
         platform=req.platform,
         category=req.category,
         count=req.count,
+        llm=client,
     )
 
     # 保存历史记录
@@ -244,6 +268,14 @@ async def competitor_analyze(
             detail=credit["error"],
         )
 
+    config = user_manager.get_raw_llm_config(verify["user_id"])
+    if not config or not config.get("api_key"):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="请先配置AI文案API Key",
+        )
+    client = LLMClient(api_key=config["api_key"], base_url=config["base_url"], model=config["model"])
+
     cleaned = [t.strip() for t in req.titles if t.strip()]
     if not cleaned:
         raise HTTPException(
@@ -255,6 +287,7 @@ async def competitor_analyze(
         titles=cleaned[:10],
         platform=req.platform,
         category=req.category,
+        llm=client,
     )
 
     summary = result.get("analysis", {}).get("strategy_summary", "")

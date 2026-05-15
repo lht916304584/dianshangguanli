@@ -22,6 +22,7 @@ class CompetitorAnalyzer:
         titles: list[str],
         platform: str = "pinduoduo",
         category: str = "",
+        llm=None,
     ) -> dict:
         # 1. Score each title for reference
         scored = []
@@ -65,7 +66,8 @@ class CompetitorAnalyzer:
 - 只输出JSON，不要任何解释"""
 
         try:
-            raw = await llm_client.chat(
+            client = llm or llm_client
+            raw = await client.chat(
                 prompt=user_prompt,
                 system_prompt=SYSTEM_PROMPT,
                 temperature=0.5,

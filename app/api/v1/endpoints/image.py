@@ -5,6 +5,7 @@ from fastapi import APIRouter, Header, HTTPException, status
 from pydantic import BaseModel, Field
 
 from app.ai.image_engine import image_engine
+from app.ai.llm_client import LLMClient
 from app.ai.user_manager import user_manager
 
 router = APIRouter()
@@ -186,6 +187,16 @@ async def generate_image(
             detail=credit["error"],
         )
 
+    # 获取用户文本AI配置（用于prompt增强，可选）
+    llm_client_for_prompt = None
+    llm_config = user_manager.get_raw_llm_config(verify["user_id"])
+    if llm_config and llm_config.get("api_key"):
+        llm_client_for_prompt = LLMClient(
+            api_key=llm_config["api_key"],
+            base_url=llm_config["base_url"],
+            model=llm_config["model"],
+        )
+
     # 调用生图引擎
     result = await image_engine.generate(
         prompt=req.prompt,
@@ -196,6 +207,7 @@ async def generate_image(
         reference_image=req.reference_image,
         mode=req.mode,
         text_content=req.text_content,
+        llm=llm_client_for_prompt,
     )
 
     if result["status"] == "error":

@@ -10,7 +10,7 @@ class TitlePipeline:
     """完整标题优化Pipeline：生成 → 评分 → 排序 → 输出"""
 
     async def run(self, product_info: str, platform: str = "pinduoduo",
-                  category: str = "", count: int = 5) -> dict:
+                  category: str = "", count: int = 5, llm=None) -> dict:
         """
         执行完整Pipeline
         1. 解析商品信息
@@ -21,7 +21,7 @@ class TitlePipeline:
         """
         # Step 1: AI生成候选标题（多生成一些，过滤后保留最好的）
         generate_count = count * 2  # 生成双倍数量，过滤后取最好的
-        raw_titles = await self._generate_titles(product_info, platform, generate_count)
+        raw_titles = await self._generate_titles(product_info, platform, generate_count, llm=llm)
 
         if not raw_titles:
             return {"success": False, "error": "标题生成失败，请检查商品信息", "titles": []}
@@ -66,10 +66,11 @@ class TitlePipeline:
             "summary": summary,
         }
 
-    async def _generate_titles(self, product_info: str, platform: str, count: int) -> list:
+    async def _generate_titles(self, product_info: str, platform: str, count: int, llm=None) -> list:
         """调用LLM生成标题"""
+        client = llm or llm_client
         try:
-            result = await llm_client.generate_titles(product_info, platform, count)
+            result = await client.generate_titles(product_info, platform, count)
 
             # 解析JSON
             json_str = result
