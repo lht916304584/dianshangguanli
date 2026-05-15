@@ -101,6 +101,7 @@ async function loadDashboard(){
     if(!r.ok){alert('请求失败 ('+r.status+')');return}
     const users=await r.json();
     if(users.error||users.detail){alert(users.error||users.detail||'无权限');return}
+    if(!Array.isArray(users)){alert('返回数据格式错误：'+JSON.stringify(users).slice(0,100));return}
 
     loginDiv.classList.add('hidden');
     dashDiv.classList.remove('hidden');
