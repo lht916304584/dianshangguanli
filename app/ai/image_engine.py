@@ -179,7 +179,21 @@ class ImageEngine:
         """从异步任务结果中提取图片 URL。"""
         urls = []
 
-        # 常见格式 1: {"result": {"image_url": "..."}}
+        # 供应商格式 1: {"result_data": [{"url": "..."}]}
+        result_data = data.get("result_data", [])
+        if isinstance(result_data, list):
+            for item in result_data:
+                if isinstance(item, dict) and item.get("url"):
+                    urls.append(item["url"])
+                elif isinstance(item, str):
+                    urls.append(item)
+
+        # 供应商格式 2: {"results": ["https://..."]}
+        results = data.get("results", [])
+        if isinstance(results, list):
+            urls.extend([u for u in results if isinstance(u, str)])
+
+        # 常见格式 3: {"result": {"image_url": "..."}}
         result = data.get("result", {})
         if isinstance(result, dict):
             if result.get("image_url"):
@@ -191,7 +205,7 @@ class ImageEngine:
             if result.get("urls"):
                 urls.extend(result["urls"])
 
-        # 常见格式 2: {"images": [{"url": "..."}]}
+        # 常见格式 4: {"images": [{"url": "..."}]}
         images = data.get("images", [])
         if isinstance(images, list):
             for img in images:
@@ -200,12 +214,12 @@ class ImageEngine:
                 elif isinstance(img, str):
                     urls.append(img)
 
-        # 常见格式 3: {"data": [{"url": "..."}]}
+        # 常见格式 5: {"data": [{"url": "..."}]}
         for item in data.get("data", []):
             if isinstance(item, dict) and item.get("url"):
                 urls.append(item["url"])
 
-        # 常见格式 4: {"output": ["..."]}
+        # 常见格式 6: {"output": ["..."]}
         output = data.get("output", [])
         if isinstance(output, list):
             urls.extend([u for u in output if isinstance(u, str)])
