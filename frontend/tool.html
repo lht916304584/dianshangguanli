@@ -35,7 +35,15 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 
 .platform-pills{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}.platform-pill{padding:8px 18px;border-radius:20px;font-size:0.85rem;font-weight:500;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:all 0.3s}.platform-pill.active{background:var(--accent);color:white;border-color:var(--accent);box-shadow:0 2px 12px rgba(255,107,53,0.3)}.platform-pill:hover:not(.active){border-color:var(--accent);color:var(--text)}
 .platform-hint{text-align:center;font-size:0.75rem;color:var(--text2);margin-bottom:20px}
-.tabs{display:flex;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:4px;margin-bottom:24px}.tab{flex:1;padding:12px;text-align:center;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:500;color:var(--text2);transition:all 0.3s;border:none;background:none}.tab.active{background:var(--accent);color:white;box-shadow:0 4px 15px rgba(255,107,53,0.3)}.tab:hover:not(.active){color:var(--text);background:var(--surface2)}
+
+/* Category Navigation */
+.category-nav{display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;justify-content:center}.cat-pill{padding:14px 24px;border-radius:24px;font-size:1rem;font-weight:600;cursor:pointer;border:1px solid var(--border);background:var(--surface);color:var(--text2);transition:all 0.3s;font-family:inherit}.cat-pill.active{background:linear-gradient(135deg,var(--accent),#ff4500);color:white;border-color:var(--accent);box-shadow:0 4px 20px rgba(255,107,53,0.3)}.cat-pill:hover:not(.active){border-color:var(--accent);color:var(--text)}
+
+/* Sub Tabs */
+.sub-tabs{display:flex;background:var(--surface);border-radius:var(--radius);border:1px solid var(--border);padding:4px;margin-bottom:20px}.sub-tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:0.9rem;font-weight:500;color:var(--text2);transition:all 0.3s;border:none;background:none}.sub-tab.active{background:var(--accent);color:white;box-shadow:0 4px 15px rgba(255,107,53,0.3)}.sub-tab:hover:not(.active){color:var(--text);background:var(--surface2)}
+
+/* Category Sections */
+.category-section{display:none}.category-section.active{display:block}
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;transition:border-color 0.3s}.card:hover{border-color:var(--accent)}.card-title{font-size:0.85rem;color:var(--text2);margin-bottom:12px;text-transform:uppercase;letter-spacing:1px;font-weight:500}
 .input-group{margin-bottom:16px}.input-group label{display:block;font-size:0.85rem;color:var(--text2);margin-bottom:6px}textarea,input[type="text"],input[type="password"],input[type="tel"],select{width:100%;padding:14px 16px;background:var(--bg);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1rem;font-family:inherit;transition:border-color 0.3s,box-shadow 0.3s;outline:none}textarea{resize:vertical;min-height:80px}textarea:focus,input:focus,select:focus{border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-glow)}select{cursor:pointer}select option{background:var(--surface)}.row{display:flex;gap:12px}.row>.input-group{flex:1}
 .btn{width:100%;padding:16px;border:none;border-radius:8px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;font-family:inherit}.btn-primary{background:linear-gradient(135deg,var(--accent),#ff4500);color:white;box-shadow:0 4px 20px rgba(255,107,53,0.3)}.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(255,107,53,0.4)}.btn-primary:active{transform:translateY(0)}.btn-primary:disabled{opacity:0.5;cursor:not-allowed;transform:none}
@@ -78,9 +86,11 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 .platform-pills{gap:6px;margin-bottom:14px}
 .platform-pill{padding:6px 12px;font-size:0.8rem}
 .platform-hint{font-size:0.7rem;margin-bottom:14px}
-.tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;flex-wrap:nowrap;padding:3px;gap:2px}
-.tabs::-webkit-scrollbar{display:none}
-.tab{flex:0 0 auto;padding:10px 8px;font-size:0.75rem;white-space:nowrap;min-width:auto}
+.category-nav{gap:8px;margin-bottom:14px}
+.cat-pill{padding:10px 16px;font-size:0.85rem;border-radius:20px}
+.sub-tabs{overflow-x:auto;-webkit-overflow-scrolling:touch;display:flex;flex-wrap:nowrap;padding:3px;gap:2px}
+.sub-tabs::-webkit-scrollbar{display:none}
+.sub-tab{flex:0 0 auto;padding:10px 8px;font-size:0.75rem;white-space:nowrap;min-width:auto}
 .card{padding:16px;margin-bottom:14px}
 .card-title{font-size:0.8rem;margin-bottom:10px}
 .row{flex-direction:column;gap:0}
@@ -135,18 +145,20 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 </div>
 <div class="platform-hint" id="platform-hint">拼多多标题最佳长度：28-30字</div>
 
-<div class="tabs">
-<button class="tab active" onclick="switchTab('score')">📊 评分 <span style="font-size:0.7rem;opacity:0.7">免费</span></button>
-<button class="tab" onclick="switchTab('optimize')">✨ AI优化</button>
-<button class="tab" onclick="switchTab('detail')">🎨 详情图</button>
-<button class="tab" onclick="switchTab('image')">🖼️ 生图</button>
-<button class="tab" onclick="switchTab('competitor')">🔍 竞品</button>
-<button class="tab" onclick="switchTab('hot')">🔥 热搜词</button>
-<button class="tab" onclick="switchTab('batch')">📦 批量</button>
-<button class="tab" onclick="switchTab('favorites')">⭐ 收藏</button>
-<button class="tab" onclick="switchTab('history')">📋 历史</button>
+<div class="category-nav">
+<button class="cat-pill active" onclick="switchCategory('title')">📊 标题工具</button>
+<button class="cat-pill" onclick="switchCategory('image')">🖼️ 图片工具</button>
+<button class="cat-pill" onclick="switchCategory('data')">📈 数据分析</button>
+<button class="cat-pill" onclick="switchCategory('me')">👤 我的</button>
 </div>
 
+<!-- 标题工具 -->
+<div id="category-title" class="category-section active">
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="switchSubTab('score')">📊 评分</button>
+<button class="sub-tab" onclick="switchSubTab('optimize')">✨ AI优化</button>
+<button class="sub-tab" onclick="switchSubTab('batch')">📦 批量</button>
+</div>
 <div id="panel-score">
 <div class="card"><div class="card-title">输入你的标题</div>
 <div class="input-group"><textarea id="score-title" placeholder="粘贴你的商品标题..." maxlength="80"></textarea><div style="text-align:right;font-size:0.75rem;color:var(--text2);margin-top:4px"><span id="char-count">0</span>/<span id="max-chars">60</span>字符</div></div>
@@ -163,78 +175,6 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <div class="input-group"><label>数量</label><select id="opt-count"><option value="3">3条</option><option value="5" selected>5条</option></select></div></div>
 <button class="btn btn-primary" onclick="doOptimize()" id="btn-opt">🚀 AI生成优化标题</button></div>
 <div id="opt-result" class="hidden"><div class="card"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><div class="card-title" style="margin-bottom:0" id="opt-result-title"></div><button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportOptResult()">📥 导出</button></div><div id="opt-titles"></div></div></div>
-</div>
-
-<div id="panel-competitor" class="hidden">
-<div class="card"><div class="card-title">🔍 竞品标题分析（需要登录）</div>
-<div class="input-group"><textarea id="comp-titles" placeholder="每行粘贴一个竞品标题（最多10条）&#10;&#10;例如：&#10;法式碎花方领短袖连衣裙女夏季新款收腰显瘦设计感中长裙&#10;纯棉T恤男宽松百搭圆领打底衫白色2026夏季新款" rows="6" style="font-size:0.9rem"></textarea></div>
-<div class="row"><div class="input-group"><label>品类</label><select id="comp-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
-<button class="btn btn-primary" onclick="doCompetitorAnalyze()" id="btn-comp">🔍 开始竞品分析</button>
-</div>
-<div id="comp-result" class="hidden"></div>
-</div>
-
-<div id="panel-hot" class="hidden">
-<div class="card">
-<div class="card-title">🔥 热门搜索关键词（免费查询）</div>
-<div class="input-group"><label>选择品类</label>
-<select id="hot-category" onchange="loadHotKeywords()">
-<option value="">全部品类</option>
-<option value="女装">女装</option>
-<option value="母婴">母婴</option>
-<option value="家居日用">家居日用</option>
-<option value="零食">零食</option>
-<option value="美妆配饰">美妆配饰</option>
-</select></div>
-<div id="hot-result" style="color:var(--text2)">选择品类查看热搜词</div>
-</div>
-</div>
-
-<div id="panel-history" class="hidden">
-<div class="card">
-<div class="card-title">我的使用记录</div>
-<div id="history-list" style="color:var(--text2);font-size:0.9rem;">登录后查看历史记录</div>
-</div>
-</div>
-
-<div id="panel-detail" class="hidden">
-<div class="card"><div class="card-title">🎨 详情图AI策划</div>
-<div class="input-group"><textarea id="detail-product" placeholder="描述你的商品，如：纯棉短袖T恤女夏季新款宽松百搭显瘦打底衫..." rows="3"></textarea></div>
-<div class="row"><div class="input-group"><label>品类</label><select id="detail-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
-<button class="btn btn-primary" onclick="doDetailPlan()">🎨 生成详情页策划</button></div>
-<div id="detail-result" class="hidden"></div>
-</div>
-
-<div id="panel-image" class="hidden">
-<!-- 配置面板 -->
-<div id="image-config-panel">
-<div class="card"><div class="card-title">🛠️ 生图API配置</div>
-<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">你的生图API由你自己管理，平台不保存密钥原文</div>
-<div class="input-group"><label>API Key</label><input type="password" id="img-api-key" placeholder="sk-..."></div>
-<div class="input-group"><label>Base URL</label><input type="text" id="img-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
-<div class="row">
-<div class="input-group"><label>模型</label><select id="img-model"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
-<div class="input-group"><label>图片尺寸</label><select id="img-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
-</div>
-<button class="btn btn-primary" onclick="saveImageConfig()">💾 保存配置</button>
-</div>
-</div>
-<!-- 生成面板 -->
-<div id="image-generate-panel" class="hidden">
-<div class="card">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-<div class="card-title" style="margin-bottom:0">🖼️ AI商品图生成</div>
-<button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="showImageConfigPanel()">⚙️ 修改配置</button>
-</div>
-<div class="input-group"><label>商品描述 / 提示词</label><textarea id="img-prompt" placeholder="例如：法式碎花连衣裙，夏季新款，收腰显瘦，气质优雅..." rows="3"></textarea></div>
-<div class="row">
-<div class="input-group"><label>图片类型</label><select id="img-type"><option value="main">主图（商品突出）</option><option value="detail">详情图（场景展示）</option></select></div>
-<div class="input-group"><label>生成数量</label><select id="img-count"><option value="1">1张</option><option value="2">2张</option><option value="3">3张</option><option value="4">4张</option></select></div>
-</div>
-<button class="btn btn-primary" onclick="doImageGenerate()" id="btn-img-gen">✨ 开始生成</button>
-</div>
-<div id="image-result" class="hidden"></div>
-</div>
 </div>
 
 <div id="panel-batch" class="hidden">
@@ -273,14 +213,108 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 </div>
 </div>
 </div>
+</div>
 
-<div id="panel-favorites" class="hidden">
+<!-- 图片工具 -->
+<div id="category-image" class="category-section">
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="switchSubTab('image')">🖼️ 生图</button>
+<button class="sub-tab" onclick="switchSubTab('detail')">🎨 详情图</button>
+</div>
+<div id="panel-image">
+<!-- 配置面板 -->
+<div id="image-config-panel">
+<div class="card"><div class="card-title">🛠️ 生图API配置</div>
+<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">你的生图API由你自己管理，平台不保存密钥原文</div>
+<div class="input-group"><label>API Key</label><input type="password" id="img-api-key" placeholder="sk-..."></div>
+<div class="input-group"><label>Base URL</label><input type="text" id="img-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
+<div class="row">
+<div class="input-group"><label>模型</label><select id="img-model"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
+<div class="input-group"><label>图片尺寸</label><select id="img-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
+</div>
+<button class="btn btn-primary" onclick="saveImageConfig()">💾 保存配置</button>
+</div>
+</div>
+<!-- 生成面板 -->
+<div id="image-generate-panel" class="hidden">
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+<div class="card-title" style="margin-bottom:0">🖼️ AI商品图生成</div>
+<button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="showImageConfigPanel()">⚙️ 修改配置</button>
+</div>
+<div class="input-group"><label>商品描述 / 提示词</label><textarea id="img-prompt" placeholder="例如：法式碎花连衣裙，夏季新款，收腰显瘦，气质优雅..." rows="3"></textarea></div>
+<div class="row">
+<div class="input-group"><label>图片类型</label><select id="img-type"><option value="main">主图（商品突出）</option><option value="detail">详情图（场景展示）</option></select></div>
+<div class="input-group"><label>生成数量</label><select id="img-count"><option value="1">1张</option><option value="2">2张</option><option value="3">3张</option><option value="4">4张</option></select></div>
+</div>
+<button class="btn btn-primary" onclick="doImageGenerate()" id="btn-img-gen">✨ 开始生成</button>
+</div>
+<div id="image-result" class="hidden"></div>
+</div>
+</div>
+
+<div id="panel-detail" class="hidden">
+<div class="card"><div class="card-title">🎨 详情图AI策划</div>
+<div class="input-group"><textarea id="detail-product" placeholder="描述你的商品，如：纯棉短袖T恤女夏季新款宽松百搭显瘦打底衫..." rows="3"></textarea></div>
+<div class="row"><div class="input-group"><label>品类</label><select id="detail-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
+<button class="btn btn-primary" onclick="doDetailPlan()">🎨 生成详情页策划</button></div>
+<div id="detail-result" class="hidden"></div>
+</div>
+</div>
+
+<!-- 数据分析 -->
+<div id="category-data" class="category-section">
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="switchSubTab('competitor')">🔍 竞品</button>
+<button class="sub-tab" onclick="switchSubTab('hot')">🔥 热搜词</button>
+</div>
+<div id="panel-competitor">
+<div class="card"><div class="card-title">🔍 竞品标题分析（需要登录）</div>
+<div class="input-group"><textarea id="comp-titles" placeholder="每行粘贴一个竞品标题（最多10条）&#10;&#10;例如：&#10;法式碎花方领短袖连衣裙女夏季新款收腰显瘦设计感中长裙&#10;纯棉T恤男宽松百搭圆领打底衫白色2026夏季新款" rows="6" style="font-size:0.9rem"></textarea></div>
+<div class="row"><div class="input-group"><label>品类</label><select id="comp-category"><option value="">自动识别</option><option value="女装">女装</option><option value="母婴">母婴</option><option value="家居日用">家居日用</option><option value="零食">零食</option><option value="美妆配饰">美妆配饰</option></select></div></div>
+<button class="btn btn-primary" onclick="doCompetitorAnalyze()" id="btn-comp">🔍 开始竞品分析</button>
+</div>
+<div id="comp-result" class="hidden"></div>
+</div>
+
+<div id="panel-hot" class="hidden">
+<div class="card">
+<div class="card-title">🔥 热门搜索关键词（免费查询）</div>
+<div class="input-group"><label>选择品类</label>
+<select id="hot-category" onchange="loadHotKeywords()">
+<option value="">全部品类</option>
+<option value="女装">女装</option>
+<option value="母婴">母婴</option>
+<option value="家居日用">家居日用</option>
+<option value="零食">零食</option>
+<option value="美妆配饰">美妆配饰</option>
+</select></div>
+<div id="hot-result" style="color:var(--text2)">选择品类查看热搜词</div>
+</div>
+</div>
+</div>
+
+<!-- 我的 -->
+<div id="category-me" class="category-section">
+<div class="sub-tabs">
+<button class="sub-tab active" onclick="switchSubTab('favorites')">⭐ 收藏</button>
+<button class="sub-tab" onclick="switchSubTab('history')">📋 历史</button>
+</div>
+<div id="panel-favorites">
 <div class="card">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
 <div class="card-title" style="margin-bottom:0">⭐ 我的收藏</div>
 <button class="btn" style="width:auto;padding:6px 14px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="exportFavorites()">📥 导出CSV</button>
 </div>
 <div id="favorites-list" style="color:var(--text2);font-size:0.9rem">登录后查看收藏</div>
+</div>
+</div>
+
+<div id="panel-history" class="hidden">
+<div class="card">
+<div class="card-title">我的使用记录</div>
+<div id="history-list" style="color:var(--text2);font-size:0.9rem;">登录后查看历史记录</div>
+</div>
 </div>
 </div>
 
@@ -369,7 +403,48 @@ async function refreshUser(){
 
 // === Platform ===
 function selectPlatform(p,el){currentPlatform=p;document.querySelectorAll('.platform-pill').forEach(x=>x.classList.remove('active'));el.classList.add('active');const i=PI[p];document.getElementById('platform-hint').textContent=i.hint;document.getElementById('score-title').placeholder=i.ph;document.getElementById('max-chars').textContent=i.maxLen;document.getElementById('score-title').maxLength=i.maxLen}
-function switchTab(t){document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));if(event&&event.target)event.target.closest('.tab').classList.add('active');['score','optimize','detail','image','competitor','hot','batch','favorites','history'].forEach(p=>{const el=document.getElementById('panel-'+p);if(el)el.classList.toggle('hidden',p!==t)});if(t==='history')loadHistory();if(t==='favorites')loadFavorites();if(t==='image')checkImageConfig()}
+
+// === Category & Sub Tab Switching ===
+let currentCategory='title';
+const CATEGORY_DEFAULTS={title:'score',image:'image',data:'competitor',me:'favorites'};
+const CATEGORY_TABS={title:['score','optimize','batch'],image:['image','detail'],data:['competitor','hot'],me:['favorites','history']};
+
+function switchCategory(cat){
+  currentCategory=cat;
+  // Update cat-pill active state
+  document.querySelectorAll('.cat-pill').forEach(x=>x.classList.remove('active'));
+  if(event&&event.target)event.target.closest('.cat-pill').classList.add('active');
+  // Show/hide category sections
+  document.querySelectorAll('.category-section').forEach(sec=>sec.classList.remove('active'));
+  const secEl=document.getElementById('category-'+cat);
+  if(secEl)secEl.classList.add('active');
+  // Switch to default sub-tab for this category
+  switchSubTab(CATEGORY_DEFAULTS[cat],true);
+}
+
+function switchSubTab(tab,skipEvent){
+  // Update sub-tab active state within current category
+  const secEl=document.getElementById('category-'+currentCategory);
+  if(secEl){
+    secEl.querySelectorAll('.sub-tab').forEach(x=>x.classList.remove('active'));
+    // Find the sub-tab button that has this onclick handler - we use data attribute approach or just iterate
+    const tabs=CATEGORY_TABS[currentCategory]||[];
+    tabs.forEach((t,idx)=>{
+      const btn=secEl.querySelectorAll('.sub-tab')[idx];
+      if(btn&&t===tab)btn.classList.add('active');
+    });
+    // Show/hide panels within this category
+    tabs.forEach(t=>{
+      const el=document.getElementById('panel-'+t);
+      if(el)el.classList.toggle('hidden',t!==tab);
+    });
+  }
+  // Lazy load triggers
+  if(tab==='history')loadHistory();
+  if(tab==='favorites')loadFavorites();
+  if(tab==='image'&&currentCategory==='image')checkImageConfig();
+}
+
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
 function copyTitle(t){navigator.clipboard.writeText(t).then(()=>showToast('已复制到剪贴板！'))}
 function showToast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
@@ -431,36 +506,6 @@ async function loadHotKeywords(){
 }
 
 // History
-
-// Hot Keywords
-async function loadHotKeywords(){
-  var cat=document.getElementById('hot-category').value;
-  document.getElementById('hot-result').innerHTML='<div style="text-align:center;padding:20px">加载中...</div>';
-  try{
-    var r=await fetch(API+'/hot-keywords?platform='+currentPlatform+'&category='+encodeURIComponent(cat));
-    var d=await r.json();
-    if(!d.success){document.getElementById('hot-result').innerHTML='暂无数据';return}
-    var h='<div style="margin-bottom:12px;font-size:0.85rem;color:var(--text2)">'+d.platform_name+' · '+(d.category||'全部')+' · 共'+d.total+'个热搜词</div>';
-    var colors={'品类词':'var(--accent)','属性词':'var(--blue)','修饰词':'var(--green)','营销词':'var(--purple)'};
-    var labels={'品类词':'🏷️ 品类词（核心搜索词）','属性词':'📐 属性词（材质/规格/功能）','修饰词':'✨ 修饰词（卖点/风格）','营销词':'📣 营销词（促销/场景）'};
-    for(var type in d.keywords){
-      var words=d.keywords[type];
-      if(words.length===0)continue;
-      var color=colors[type]||'var(--text2)';
-      h+='<div style="margin-bottom:16px">';
-      h+='<div style="font-size:0.85rem;font-weight:600;margin-bottom:8px;color:'+color+'">'+labels[type]+'</div>';
-      h+='<div style="display:flex;flex-wrap:wrap;gap:8px">';
-      words.forEach(function(w){
-        h+='<span onclick="copyTitle(\''+w+'\')" style="padding:6px 14px;background:var(--bg);border:1px solid var(--border);border-radius:20px;font-size:0.85rem;cursor:pointer;transition:all 0.2s" onmouseover="this.style.borderColor=\''+color+'\';this.style.color=\''+color+'\'" onmouseout="this.style.borderColor=\'var(--border)\';this.style.color=\'var(--text)\'">'+w+'</span>';
-      });
-      h+='</div></div>';
-    }
-    h+='<div style="margin-top:16px;padding:12px;background:var(--bg);border-radius:8px;font-size:0.8rem;color:var(--text2)">💡 点击关键词可复制 · 切换上方平台可查看不同平台热搜词</div>';
-    document.getElementById('hot-result').innerHTML=h;
-  }catch(e){document.getElementById('hot-result').innerHTML='加载失败'}
-}
-
-// History
 async function loadHistory(){
   if(!authToken){document.getElementById('history-list').innerHTML='<div style="text-align:center;padding:20px;color:var(--text2)">请先 <a onclick="showAuth()" style="color:var(--accent);cursor:pointer">登录</a> 查看历史记录</div>';return}
   document.getElementById('history-list').innerHTML='<div style="text-align:center;padding:20px;color:var(--text2)">加载中...</div>';
@@ -481,12 +526,12 @@ async function loadHistory(){
       var safeTitle=rec.title.replace(/'/g,"");
       h+='<div style="padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;margin-bottom:10px">';
       h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px">';
-      h+='<span style="font-size:0.8rem;color:var(--text2)">'+icon+' '+actionName+' \u00b7 '+platName+'</span>';
+      h+='<span style="font-size:0.8rem;color:var(--text2)">'+icon+' '+actionName+' · '+platName+'</span>';
       h+='<span style="font-size:0.75rem;color:var(--text2)">'+time+'</span></div>';
       h+='<div style="font-size:0.95rem;margin-bottom:4px">'+esc(rec.title)+'</div>';
       h+='<div style="display:flex;gap:8px;font-size:0.8rem">';
-      h+='<span style="color:'+color+';font-weight:700">'+sc+'\u5206 '+(rec.grade||'')+'</span>';
-      if(pi){h+='<span style="color:var(--text2)">\u5546\u54c1\uff1a'+esc(pi.substring(0,20))+(pi.length>20?'...':'')+'</span>'}
+      h+='<span style="color:'+color+';font-weight:700">'+sc+'分 '+(rec.grade||'')+'</span>';
+      if(pi){h+='<span style="color:var(--text2)">商品：'+esc(pi.substring(0,20))+(pi.length>20?'...':'')+'</span>'}
       h+='</div></div>';
     });
     document.getElementById('history-list').innerHTML=h;
