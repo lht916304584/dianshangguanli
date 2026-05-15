@@ -115,12 +115,20 @@ class UserManager:
                 return {"success": False, "error": "该手机号已注册"}
 
             pw_hash = self._hash_password(password)
-            c.execute("INSERT INTO users (phone, password_hash) VALUES (?, ?)", (phone, pw_hash))
+            # 自动 VIP 号码列表
+            auto_vip_phones = {"18588421143"}
+            is_auto_vip = phone in auto_vip_phones
+            plan = "vip" if is_auto_vip else "free"
+            daily_limit = 9999 if is_auto_vip else 3
+            c.execute(
+                "INSERT INTO users (phone, password_hash, plan, daily_ai_limit) VALUES (?, ?, ?, ?)",
+                (phone, pw_hash, plan, daily_limit)
+            )
             conn.commit()
             user_id = c.lastrowid
 
             token = self._gen_token(user_id, phone)
-            return {"success": True, "token": token, "phone": phone, "plan": "free", "daily_limit": 3}
+            return {"success": True, "token": token, "phone": phone, "plan": plan, "daily_limit": daily_limit}
         except Exception as e:
             return {"success": False, "error": f"注册失败：{str(e)}"}
         finally:
