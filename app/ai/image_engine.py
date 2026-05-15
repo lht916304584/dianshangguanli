@@ -55,7 +55,6 @@ class ImageEngine:
         try:
             async with httpx.AsyncClient(timeout=60.0) as client:
                 resp = await client.post(url, json=payload, headers=headers)
-                # 先记录原始响应，便于排查非 JSON 返回
                 raw_text = resp.text
                 try:
                     data = resp.json()
@@ -68,26 +67,143 @@ class ImageEngine:
                         "error": f"API 返回非 JSON 数据（HTTP {resp.status_code}）: {preview}",
                     }
 
+                # 情况 A：异步任务模式（创建任务 -> 轮询）
+                task_id = data.get("task_id") or data.get("id")
+                if task_id and not data.get("data"):
+                    return await self._poll_task(base_url, task_id, api_key, enhanced)
+
                 if resp.status_code != 200:
                     err = data.get("error", {})
                     msg = err.get("message", f"API 错误: HTTP {resp.status_code}")
-                    # 如果是因为"不是图像模型"被拒，尝试 fallback 到 chat completions
                     if self._is_not_image_model_error(msg):
-                        return await self._generate_via_chat(
-                            enhanced, config, count
-                        )
+                        return await self._generate_via_chat(enhanced, config, count)
                     return {"urls": [], "prompt": enhanced, "status": "error", "error": msg}
 
+                # 情况 B：标准 DALL-E 同步模式
                 urls = [item["url"] for item in data.get("data", []) if item.get("url")]
-                if not urls:
-                    return {"urls": [], "prompt": enhanced, "status": "error", "error": "未返回图片 URL"}
+                if urls:
+                    return {"urls": urls, "prompt": enhanced, "status": "success"}
 
-                return {"urls": urls, "prompt": enhanced, "status": "success"}
+                # 仍未找到 URL
+                return {"urls": [], "prompt": enhanced, "status": "error", "error": "未返回图片 URL"}
 
         except httpx.TimeoutException:
             return {"urls": [], "prompt": enhanced, "status": "error", "error": "生成超时，请稍后重试"}
         except Exception as e:
             return {"urls": [], "prompt": enhanced, "status": "error", "error": f"请求异常: {str(e)}"}
+
+    async def _poll_task(
+        self,
+        base_url: str,
+        task_id: str,
+        api_key: str,
+        prompt: str,
+        max_retries: int = 30,
+        interval: float = 2.0,
+    ) -> dict:
+        """轮询异步任务状态，直到完成或超时。"""
+        headers = {"Authorization": f"Bearer {api_key}"}
+        poll_url = f"{base_url}/tasks/{task_id}"
+
+        try:
+            async with httpx.AsyncClient(timeout=15.0) as client:
+                for _ in range(max_retries):
+                    await __import__("asyncio").sleep(interval)
+                    resp = await client.get(poll_url, headers=headers)
+                    try:
+                        data = resp.json()
+                    except Exception:
+                        continue
+
+                    status = (
+                        data.get("status", "").lower()
+                        or data.get("state", "").lower()
+                        or ""
+                    )
+
+                    # 任务完成/成功
+                    if status in ("completed", "success", "done", "succeeded"):
+                        urls = self._extract_urls_from_task(data)
+                        if urls:
+                            return {
+                                "urls": urls,
+                                "prompt": prompt,
+                                "status": "success",
+                            }
+                        return {
+                            "urls": [],
+                            "prompt": prompt,
+                            "status": "error",
+                            "error": "任务完成但未返回图片 URL",
+                        }
+
+                    # 任务失败
+                    if status in ("failed", "error", "failure"):
+                        err_msg = data.get("error", "") or data.get("message", "")
+                        return {
+                            "urls": [],
+                            "prompt": prompt,
+                            "status": "error",
+                            "error": f"任务失败: {err_msg}" if err_msg else "任务失败",
+                        }
+
+                return {
+                    "urls": [],
+                    "prompt": prompt,
+                    "status": "error",
+                    "error": "任务轮询超时，请稍后到历史记录查看结果",
+                }
+        except Exception as e:
+            return {
+                "urls": [],
+                "prompt": prompt,
+                "status": "error",
+                "error": f"轮询异常: {str(e)}",
+            }
+
+    def _extract_urls_from_task(self, data: dict) -> list:
+        """从异步任务结果中提取图片 URL。"""
+        urls = []
+
+        # 常见格式 1: {"result": {"image_url": "..."}}
+        result = data.get("result", {})
+        if isinstance(result, dict):
+            if result.get("image_url"):
+                urls.append(result["image_url"])
+            if result.get("image_urls"):
+                urls.extend(result["image_urls"])
+            if result.get("url"):
+                urls.append(result["url"])
+            if result.get("urls"):
+                urls.extend(result["urls"])
+
+        # 常见格式 2: {"images": [{"url": "..."}]}
+        images = data.get("images", [])
+        if isinstance(images, list):
+            for img in images:
+                if isinstance(img, dict) and img.get("url"):
+                    urls.append(img["url"])
+                elif isinstance(img, str):
+                    urls.append(img)
+
+        # 常见格式 3: {"data": [{"url": "..."}]}
+        for item in data.get("data", []):
+            if isinstance(item, dict) and item.get("url"):
+                urls.append(item["url"])
+
+        # 常见格式 4: {"output": ["..."]}
+        output = data.get("output", [])
+        if isinstance(output, list):
+            urls.extend([u for u in output if isinstance(u, str)])
+
+        # 去重并保持顺序
+        seen = set()
+        unique = []
+        for u in urls:
+            if u and u not in seen:
+                seen.add(u)
+                unique.append(u)
+        return unique
 
     def _is_not_image_model_error(self, msg: str) -> bool:
         """判断错误是否因为模型不是图像模型（如 GPT-5.5 被拒）。"""
@@ -189,11 +305,12 @@ class ImageEngine:
                 urls.extend(b64_urls)
 
                 if not urls:
+                    preview = content[:200].replace("\n", " ") if content else "(空响应)"
                     return {
                         "urls": [],
                         "prompt": prompt,
                         "status": "error",
-                        "error": "Chat 接口未返回图片链接，该模型可能不支持直接生图",
+                        "error": f"该模型未返回图片链接。模型实际返回: {preview}",
                     }
 
                 return {
