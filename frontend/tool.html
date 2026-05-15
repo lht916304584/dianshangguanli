@@ -1164,10 +1164,12 @@ async function saveImageModel() {
   if (!id && !apiKey) { showToast('请输入 API Key'); return; }
 
   try {
+    const body = {name, base_url: baseUrl, api_key: apiKey, model, size};
+    if (id) body.id = parseInt(id);
     const r = await fetch(`${API}/image/models`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
-      body: JSON.stringify({id: id ? parseInt(id) : null, name, base_url: baseUrl, api_key: apiKey, model, size})
+      body: JSON.stringify(body)
     });
     const d = await r.json();
     if (d.success) {

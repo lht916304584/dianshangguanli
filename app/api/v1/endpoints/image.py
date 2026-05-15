@@ -18,7 +18,7 @@ class ImageConfigRequest(BaseModel):
 
 
 class ImageModelRequest(BaseModel):
-    id: int = Field(default=None)
+    id: int | None = Field(default=None)
     name: str = Field(..., max_length=100)
     base_url: str = Field(default="https://api.openai.com/v1", max_length=500)
     api_key: str = Field(default="", max_length=500)
