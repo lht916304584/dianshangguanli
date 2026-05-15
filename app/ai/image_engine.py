@@ -14,6 +14,10 @@ class ImageEngine:
         config: dict,
         image_type: str = "main",
         count: int = 1,
+        product_image: str = "",
+        reference_image: str = "",
+        mode: str = "product_fidelity",
+        text_content: str = "",
     ) -> dict:
         """
         生成图片。
@@ -23,6 +27,10 @@ class ImageEngine:
             config: {api_key, base_url, model, size}
             image_type: "main" | "detail"
             count: 生成数量 1-4
+            product_image: base64 data URL 产品图
+            reference_image: base64 data URL 参考图
+            mode: "product_fidelity" | "background_only"
+            text_content: 要出现在图片上的文案
 
         Returns:
             {"urls": [...], "prompt": enhanced_prompt, "status": "success"|"error", "error": str}
@@ -39,9 +47,17 @@ class ImageEngine:
             return {"urls": [], "prompt": prompt, "status": "error", "error": "未配置 API Key"}
 
         # 1. Prompt 增强
-        enhanced = await self._enhance_prompt(prompt, image_type)
+        enhanced = await self._enhance_prompt(prompt, image_type, mode, text_content)
 
-        # 2. 调用 API
+        # 2. 如果有图片输入，优先使用 chat completions 接口（支持 vision + image generation 的模型）
+        if product_image or reference_image:
+            return await self._generate_via_chat(
+                enhanced, config, count,
+                product_image=product_image,
+                reference_image=reference_image,
+            )
+
+        # 3. 标准流程：调用 /images/generations
         url = f"{base_url}/images/generations"
         payload = {
             "model": model,
@@ -270,11 +286,13 @@ class ImageEngine:
         prompt: str,
         config: dict,
         count: int = 1,
+        product_image: str = "",
+        reference_image: str = "",
     ) -> dict:
-        """Fallback：通过 chat/completions 接口生成图片。
+        """通过 chat/completions 接口生成图片。
 
-        适用于某些模型（如 GPT-5.5）不支持 /images/generations，
-        但能在 chat 接口中返回图片 URL 或 base64 的场景。
+        适用于支持多模态输入和图片输出的模型（如 GPT-4o、gpt-image-2 等）。
+        如果提供了 product_image 或 reference_image，会以 vision 格式传入。
         """
         api_key = config.get("api_key", "")
         base_url = config.get("base_url", "https://api.openai.com/v1").rstrip("/")
@@ -288,14 +306,22 @@ class ImageEngine:
             "If the image is returned as base64, use ![description](data:image/png;base64,...). "
             "Output ONLY the markdown image tag, no extra explanation."
         )
+
+        # 构造 user message content
+        user_content = [{"type": "text", "text": f"Generate an image: {prompt}"}]
+        if product_image:
+            user_content.append({"type": "image_url", "image_url": {"url": product_image}})
+        if reference_image:
+            user_content.append({"type": "image_url", "image_url": {"url": reference_image}})
+
         payload = {
             "model": model,
             "messages": [
                 {"role": "system", "content": system_msg},
-                {"role": "user", "content": f"Generate an image: {prompt}"},
+                {"role": "user", "content": user_content},
             ],
             "temperature": 0.7,
-            "max_tokens": 2048,
+            "max_tokens": 4096,
         }
         headers = {
             "Authorization": f"Bearer {api_key}",
@@ -369,7 +395,9 @@ class ImageEngine:
         except Exception as e:
             return {"urls": [], "prompt": prompt, "status": "error", "error": f"Chat 接口请求异常: {str(e)}"}
 
-    async def _enhance_prompt(self, prompt: str, image_type: str) -> str:
+    async def _enhance_prompt(
+        self, prompt: str, image_type: str, mode: str = "product_fidelity", text_content: str = ""
+    ) -> str:
         """使用 LLM 将用户描述扩展为专业英文生图提示词。"""
         prefixes = {
             "main": (
@@ -383,6 +411,26 @@ class ImageEngine:
         }
         prefix = prefixes.get(image_type, prefixes["main"])
 
+        mode_instructions = {
+            "product_fidelity": (
+                "Keep the product exactly as shown in any reference image. "
+                "Maintain its color, material, shape and all details perfectly. "
+                "Only optimize the background, scene and atmosphere. "
+            ),
+            "background_only": (
+                "Replace only the background of the product image. "
+                "Keep the product itself completely unchanged including its color, material, shape and all details. "
+            ),
+        }
+        mode_prefix = mode_instructions.get(mode, "")
+
+        user_prompt = prompt
+        if text_content:
+            user_prompt += (
+                f" Please include the following text clearly in the image: '{text_content}'. "
+                "Make sure the text is readable, well-integrated into the design, and does not obscure the product."
+            )
+
         system_prompt = (
             "You are an expert e-commerce image prompt engineer. "
             "Translate and expand the user's Chinese product description into a concise, "
@@ -391,14 +439,16 @@ class ImageEngine:
             "Output ONLY the prompt text, no extra explanation."
         )
 
+        full_prompt = mode_prefix + user_prompt if mode_prefix else user_prompt
+
         try:
-            enhanced = await llm_client.chat(prompt, system_prompt=system_prompt, temperature=0.6, max_tokens=300)
+            enhanced = await llm_client.chat(full_prompt, system_prompt=system_prompt, temperature=0.6, max_tokens=300)
             # 清理可能的引号和多余换行
             enhanced = enhanced.strip().strip('"').strip("'")
             return prefix + enhanced
         except Exception:
             # LLM 失败时回退到简单拼接
-            return prefix + prompt
+            return prefix + full_prompt
 
 
 image_engine = ImageEngine()

@@ -74,6 +74,8 @@ body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%
 
 .toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(100px);background:var(--green);color:white;padding:10px 24px;border-radius:8px;font-size:0.85rem;font-weight:500;box-shadow:0 4px 20px rgba(34,197,94,0.3);transition:transform 0.3s;z-index:300}.toast.show{transform:translateX(-50%) translateY(0)}
 .img-lightbox-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:400;align-items:center;justify-content:center;cursor:zoom-out;backdrop-filter:blur(8px)}.img-lightbox-overlay.show{display:flex}.img-lightbox-overlay img{max-width:92vw;max-height:92vh;border-radius:12px;box-shadow:0 0 60px rgba(0,0,0,0.6);object-fit:contain}
+.mode-btn{padding:8px 16px;border:1px solid var(--border);border-radius:8px;background:var(--surface2);color:var(--text);font-size:0.85rem;font-weight:600;cursor:pointer;transition:all 0.2s;font-family:inherit}
+.mode-btn.active{background:var(--accent);color:white;border-color:var(--accent)}
 .hidden{display:none!important}.footer{text-align:center;padding:30px 20px;color:var(--text2);font-size:0.75rem;width:100%;clear:both}
 .active-fav{color:var(--accent)!important;font-size:1.1rem}
 #batch-table table{width:100%}#batch-table td{vertical-align:middle}
@@ -227,24 +229,76 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <div id="image-unconfigured" class="hidden">
 <div class="card" style="text-align:center;padding:40px 20px">
 <div style="font-size:3rem;margin-bottom:16px">🖼️</div>
-<div style="font-size:1.1rem;font-weight:600;margin-bottom:8px">尚未配置生图API</div>
-<div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px">请在设置中配置你的API密钥，即可开始生成商品图</div>
+<div style="font-size:1.1rem;font-weight:600;margin-bottom:8px">尚未添加生图模型</div>
+<div style="font-size:0.85rem;color:var(--text2);margin-bottom:20px">请在设置中添加至少一个生图模型配置，即可开始生成商品图</div>
 <button class="btn btn-primary" onclick="goToSettings()" style="max-width:200px;margin:0 auto">⚙️ 前往设置</button>
 </div>
 </div>
 <!-- 生成面板 -->
 <div id="image-generate-panel">
 <div class="card">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-<div class="card-title" style="margin-bottom:0">🖼️ AI商品图生成</div>
-<button class="btn" style="width:auto;padding:4px 12px;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.8rem" onclick="goToSettings()">⚙️ 修改配置</button>
+<!-- 顶部标题 + 模型选择 -->
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
+  <div>
+    <div style="font-size:1.1rem;font-weight:700">电商生图</div>
+    <div style="font-size:0.8rem;color:var(--text2)">产品图负责主体保真，参考图用于解构背景、色系、构图</div>
+  </div>
+  <div class="input-group" style="margin-bottom:0;min-width:180px">
+    <select id="img-model-select" style="font-weight:600"><option>加载中...</option></select>
+  </div>
 </div>
-<div class="input-group"><label>商品描述 / 提示词</label><textarea id="img-prompt" placeholder="例如：法式碎花连衣裙，夏季新款，收腰显瘦，气质优雅..." rows="3"></textarea></div>
-<div class="row">
-<div class="input-group"><label>图片类型</label><select id="img-type"><option value="main">主图（商品突出）</option><option value="detail">详情图（场景展示）</option></select></div>
-<div class="input-group"><label>生成数量</label><select id="img-count"><option value="1">1张</option><option value="2">2张</option><option value="3">3张</option><option value="4">4张</option></select></div>
+<!-- 图片上传区（两列） -->
+<div class="row" style="gap:16px;margin-bottom:16px">
+  <div style="flex:1;border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center"
+       onclick="document.getElementById('product-image-input').click()">
+    <div id="product-image-preview"></div>
+    <div id="product-image-placeholder">
+      <div style="font-size:1.5rem;margin-bottom:4px">📷</div>
+      <div style="font-weight:600">添加产品图</div>
+      <div style="font-size:0.75rem;color:var(--text2)">上传自己的商品图，生成时优先保留主体</div>
+    </div>
+    <input type="file" accept="image/*" id="product-image-input" style="display:none" onchange="handleImageUpload(event,'product')">
+  </div>
+  <div style="flex:1;border:2px dashed var(--border);border-radius:12px;padding:20px;text-align:center;cursor:pointer;min-height:140px;display:flex;flex-direction:column;align-items:center;justify-content:center"
+       onclick="document.getElementById('reference-image-input').click()">
+    <div id="reference-image-preview"></div>
+    <div id="reference-image-placeholder">
+      <div style="font-size:1.5rem;margin-bottom:4px">🖼️</div>
+      <div style="font-weight:600">添加参考图 / 场景风格图</div>
+      <div style="font-size:0.75rem;color:var(--text2)">解构背景、色系、构图、光影</div>
+    </div>
+    <input type="file" accept="image/*" id="reference-image-input" style="display:none" onchange="handleImageUpload(event,'reference')">
+  </div>
 </div>
-<button class="btn btn-primary" onclick="doImageGenerate()" id="btn-img-gen">✨ 开始生成</button>
+<!-- 生成模式 -->
+<div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap">
+  <button class="mode-btn active" onclick="setImageMode('product_fidelity')" id="mode-product">✅ 产品保真模式</button>
+  <button class="mode-btn" onclick="setImageMode('background_only')" id="mode-bg">⬜ 只换背景模式</button>
+  <span style="font-size:0.8rem;color:var(--text2);align-self:center">锁定产品颜色、材质、形状和细节，只优化背景、场景和氛围。</span>
+</div>
+<!-- 提示词 -->
+<div class="input-group">
+  <label>补充提示词（可选）</label>
+  <textarea id="img-prompt" placeholder="不会写也没关系，写清楚场景、感觉、重点和不要出现什么即可。例：有猫家庭的客厅沙发场景；干净省心；突出防猫抓和易清理；不要改变产品颜色。" rows="3"></textarea>
+</div>
+<!-- 控制栏 -->
+<div class="row" style="gap:10px;flex-wrap:wrap;margin-bottom:16px">
+  <div class="input-group" style="flex:1;min-width:120px;margin-bottom:0"><label>分辨率</label>
+    <select id="img-resolution"><option value="1024x1024">1K (1024×1024)</option><option value="1792x1024">1K 宽屏 (1792×1024)</option><option value="1024x1792">1K 竖屏 (1024×1792)</option></select>
+  </div>
+  <div class="input-group" style="flex:1;min-width:120px;margin-bottom:0"><label>尺寸比例</label>
+    <select id="img-size"><option value="1:1">1:1 正方形</option><option value="9:16">9:16 竖图</option><option value="16:9">16:9 横图</option></select>
+  </div>
+  <div class="input-group" style="flex:1;min-width:120px;margin-bottom:0"><label>生成张数</label>
+    <select id="img-count"><option value="1">1张</option><option value="2">2张</option><option value="3">3张</option><option value="4">4张</option></select>
+  </div>
+</div>
+<!-- 文案内容 -->
+<div class="input-group" style="margin-bottom:16px">
+  <label>文案内容（可填写要出现在图片上的文字，可选）</label>
+  <input type="text" id="img-text-content" placeholder="例如：限时特惠 买一送一">
+</div>
+<button class="btn btn-primary" onclick="doImageGenerate()" id="btn-img-gen">🚀 发送</button>
 </div>
 <div id="image-result" class="hidden"></div>
 </div>
@@ -316,20 +370,25 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 </div>
 
 <div id="panel-settings" class="hidden">
-<div class="card"><div class="card-title">🛠️ 生图API配置</div>
-<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">你的生图API由你自己管理，平台不保存密钥原文</div>
-<div class="input-group"><label>API Key</label><input type="password" id="img-api-key" placeholder="sk-..."></div>
-<div class="input-group"><label>Base URL</label><input type="text" id="img-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
-<div class="row">
-<div class="input-group"><label>模型</label><select id="img-model" onchange="toggleCustomModel()" style="min-width:0"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
-<div class="input-group"><label>图片尺寸</label><select id="img-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
-</div>
-<div class="input-group hidden" id="img-model-custom-wrap"><label>自定义模型名称</label><input type="text" id="img-model-custom" placeholder="例如：flux-schnell / stable-diffusion-xl"></div>
-<div style="display:flex;gap:10px">
-<button class="btn btn-primary" onclick="saveImageConfig()" style="flex:2">💾 保存配置</button>
-<button class="btn" onclick="testImageConnection()" id="btn-img-test" style="flex:1;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.9rem">🧪 测试连通</button>
-</div>
-<div id="img-test-result" style="margin-top:12px;font-size:0.85rem;display:none"></div>
+<div class="card"><div class="card-title">🛠️ 生图模型管理</div>
+<div style="font-size:0.8rem;color:var(--text2);margin-bottom:12px">添加多个生图模型配置（不同供应商、不同参数），在生图页面随时切换使用。</div>
+<div id="image-models-list" style="margin-bottom:16px"></div>
+<button class="btn btn-primary" onclick="showModelForm()" style="width:auto;padding:8px 16px">➕ 添加模型</button>
+<div id="model-form-wrap" class="hidden" style="margin-top:16px;padding:16px;background:var(--bg);border:1px solid var(--border);border-radius:12px">
+  <div style="font-weight:600;margin-bottom:12px" id="model-form-title">添加模型</div>
+  <input type="hidden" id="model-form-id">
+  <div class="input-group"><label>显示名称</label><input type="text" id="model-form-name" placeholder="例如：OpenAI DALL-E 3"></div>
+  <div class="input-group"><label>Base URL</label><input type="text" id="model-form-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
+  <div class="input-group"><label>API Key</label><input type="password" id="model-form-api-key" placeholder="sk-..."><div style="font-size:0.75rem;color:var(--text2)">留空表示不修改已有 key（编辑时）</div></div>
+  <div class="row">
+    <div class="input-group"><label>模型</label><input type="text" id="model-form-model" placeholder="dall-e-3" value="dall-e-3"></div>
+    <div class="input-group"><label>默认尺寸</label><select id="model-form-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:12px">
+    <button class="btn btn-primary" onclick="saveImageModel()" style="flex:2">💾 保存</button>
+    <button class="btn" onclick="hideModelForm()" style="flex:1;background:var(--surface2);color:var(--text);border:1px solid var(--border)">取消</button>
+  </div>
+  <div id="model-test-result" style="margin-top:12px;font-size:0.85rem;display:none"></div>
 </div>
 </div>
 </div>
@@ -461,8 +520,8 @@ function switchSubTab(tab,skipEvent){
   // Lazy load triggers
   if(tab==='history')loadHistory();
   if(tab==='favorites')loadFavorites();
-  if(tab==='image'&&currentCategory==='image')checkImageConfig();
-  if(tab==='settings')loadImageConfig();
+  if(tab==='image'&&currentCategory==='image'){checkImageConfig();loadImageModels();}
+  if(tab==='settings')renderImageModelsList();
 }
 
 document.getElementById('score-title').addEventListener('input',function(){document.getElementById('char-count').textContent=this.value.length});
@@ -1030,7 +1089,9 @@ async function removeFav(id, el) {
 }
 
 // === AI Image Generation ===
-let imageConfigLoaded = false;
+window.currentImageMode = 'product_fidelity';
+window.productImageBase64 = '';
+window.referenceImageBase64 = '';
 
 async function checkImageConfig() {
   const unconfigured = document.getElementById('image-unconfigured');
@@ -1040,18 +1101,12 @@ async function checkImageConfig() {
     generatePanel.classList.add('hidden');
     return;
   }
-  if (imageConfigLoaded) {
-    unconfigured.classList.add('hidden');
-    generatePanel.classList.remove('hidden');
-    return;
-  }
   try {
-    const r = await fetch(`${API}/image/config`, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const r = await fetch(`${API}/image/models`, {headers: {'Authorization': 'Bearer ' + authToken}});
     const d = await r.json();
-    if (d.success && d.config && d.config.api_key) {
+    if (d.success && d.models && d.models.length) {
       unconfigured.classList.add('hidden');
       generatePanel.classList.remove('hidden');
-      imageConfigLoaded = true;
     } else {
       unconfigured.classList.remove('hidden');
       generatePanel.classList.add('hidden');
@@ -1067,115 +1122,119 @@ function goToSettings() {
   switchSubTab('settings');
 }
 
-function toggleCustomModel() {
-  const sel = document.getElementById('img-model');
-  const wrap = document.getElementById('img-model-custom-wrap');
-  if (sel.value === '') {
-    wrap.classList.remove('hidden');
+// === 生图模型管理 ===
+function showModelForm(id) {
+  document.getElementById('model-form-wrap').classList.remove('hidden');
+  document.getElementById('model-test-result').style.display = 'none';
+  if (id) {
+    const m = window.imageModels.find(x => x.id === id);
+    if (!m) return;
+    document.getElementById('model-form-title').textContent = '编辑模型';
+    document.getElementById('model-form-id').value = m.id;
+    document.getElementById('model-form-name').value = m.name;
+    document.getElementById('model-form-base-url').value = m.base_url;
+    document.getElementById('model-form-api-key').value = '';
+    document.getElementById('model-form-model').value = m.model;
+    document.getElementById('model-form-size').value = m.size;
   } else {
-    wrap.classList.add('hidden');
+    document.getElementById('model-form-title').textContent = '添加模型';
+    document.getElementById('model-form-id').value = '';
+    document.getElementById('model-form-name').value = '';
+    document.getElementById('model-form-base-url').value = 'https://api.openai.com/v1';
+    document.getElementById('model-form-api-key').value = '';
+    document.getElementById('model-form-model').value = 'dall-e-3';
+    document.getElementById('model-form-size').value = '1024x1024';
   }
 }
-
-function getImageModel() {
-  const sel = document.getElementById('img-model');
-  if (sel.value === '') {
-    return document.getElementById('img-model-custom').value.trim();
-  }
-  return sel.value;
+function hideModelForm() {
+  document.getElementById('model-form-wrap').classList.add('hidden');
 }
 
-async function loadImageConfig() {
-  if (!authToken) return;
-  try {
-    const r = await fetch(`${API}/image/config`, {headers: {'Authorization': 'Bearer ' + authToken}});
-    const d = await r.json();
-    if (d.success && d.config) {
-      const cfg = d.config;
-      if (cfg.base_url) document.getElementById('img-base-url').value = cfg.base_url;
-      if (cfg.size) document.getElementById('img-size').value = cfg.size;
-      // 模型处理：如果不在预设列表中，选"其他"并填充自定义
-      const presetModels = ['dall-e-3', 'dall-e-2'];
-      if (cfg.model && presetModels.includes(cfg.model)) {
-        document.getElementById('img-model').value = cfg.model;
-        document.getElementById('img-model-custom-wrap').classList.add('hidden');
-      } else if (cfg.model) {
-        document.getElementById('img-model').value = '';
-        document.getElementById('img-model-custom').value = cfg.model;
-        document.getElementById('img-model-custom-wrap').classList.remove('hidden');
-      } else {
-        document.getElementById('img-model').value = 'dall-e-3';
-        document.getElementById('img-model-custom-wrap').classList.add('hidden');
-      }
-    }
-  } catch(e) {}
-}
-
-async function saveImageConfig() {
+async function saveImageModel() {
   if (!authToken) { showAuth(); return; }
-  const apiKey = document.getElementById('img-api-key').value.trim();
-  const baseUrl = document.getElementById('img-base-url').value.trim();
-  const model = getImageModel();
-  const size = document.getElementById('img-size').value;
+  const id = document.getElementById('model-form-id').value;
+  const name = document.getElementById('model-form-name').value.trim();
+  const baseUrl = document.getElementById('model-form-base-url').value.trim();
+  const apiKey = document.getElementById('model-form-api-key').value.trim();
+  const model = document.getElementById('model-form-model').value.trim();
+  const size = document.getElementById('model-form-size').value;
 
-  if (!apiKey) {
-    showToast('请输入 API Key');
-    return;
-  }
-  if (!model) {
-    showToast('请输入模型名称');
-    return;
-  }
+  if (!name) { showToast('请输入显示名称'); return; }
+  if (!model) { showToast('请输入模型名称'); return; }
+  if (!id && !apiKey) { showToast('请输入 API Key'); return; }
 
   try {
-    const r = await fetch(`${API}/image/config`, {
+    const r = await fetch(`${API}/image/models`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
-      body: JSON.stringify({api_key: apiKey, base_url: baseUrl, model: model, size: size})
+      body: JSON.stringify({id: id ? parseInt(id) : null, name, base_url: baseUrl, api_key: apiKey, model, size})
     });
     const d = await r.json();
     if (d.success) {
-      showToast('配置已保存 ✅');
-      imageConfigLoaded = true;
+      showToast('模型已保存 ✅');
+      hideModelForm();
+      renderImageModelsList();
+      loadImageModels();
     } else {
       showToast(d.error || '保存失败');
     }
   } catch(e) { showToast('保存失败'); }
 }
 
-async function testImageConnection() {
-  if (!authToken) { showAuth(); return; }
-  const btn = document.getElementById('btn-img-test');
-  const resultEl = document.getElementById('img-test-result');
-  btn.disabled = true;
-  btn.textContent = '测试中...';
-  resultEl.style.display = 'none';
-
-  // 先保存当前配置（临时），确保测试用的是最新填写的值
-  const model = getImageModel();
-  const baseUrl = document.getElementById('img-base-url').value.trim();
-  const apiKey = document.getElementById('img-api-key').value.trim();
-  const size = document.getElementById('img-size').value;
-  if (!apiKey || !model) {
-    showToast('请先填写 API Key 和模型名称');
-    btn.disabled = false;
-    btn.textContent = '🧪 测试连通';
-    return;
-  }
+async function renderImageModelsList() {
+  const el = document.getElementById('image-models-list');
+  if (!authToken) { el.innerHTML = '请先登录'; return; }
   try {
-    await fetch(`${API}/image/config`, {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
-      body: JSON.stringify({api_key: apiKey, base_url: baseUrl, model: model, size: size})
+    const r = await fetch(`${API}/image/models`, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const d = await r.json();
+    if (!d.success || !d.models || !d.models.length) {
+      el.innerHTML = '<div style="text-align:center;padding:20px;color:var(--text2)">暂无模型配置，点击上方按钮添加</div>';
+      window.imageModels = [];
+      return;
+    }
+    window.imageModels = d.models;
+    let h = '<div style="display:flex;flex-direction:column;gap:10px">';
+    d.models.forEach(m => {
+      h += `<div style="padding:12px;background:var(--bg);border:1px solid var(--border);border-radius:8px;display:flex;justify-content:space-between;align-items:center">`;
+      h += `<div><div style="font-weight:600">${esc(m.name)}</div><div style="font-size:0.8rem;color:var(--text2)">${esc(m.model)} · ${esc(m.size)}</div></div>`;
+      h += `<div style="display:flex;gap:6px">`;
+      h += `<button class="btn" style="width:auto;padding:4px 10px;font-size:0.75rem;background:var(--surface2);border:1px solid var(--border)" onclick="testImageModelConnection(${m.id})">🧪 测试</button>`;
+      h += `<button class="btn" style="width:auto;padding:4px 10px;font-size:0.75rem;background:var(--surface2);border:1px solid var(--border)" onclick="showModelForm(${m.id})">编辑</button>`;
+      h += `<button class="btn" style="width:auto;padding:4px 10px;font-size:0.75rem;background:rgba(239,68,68,0.1);color:var(--red);border:1px solid rgba(239,68,68,0.3)" onclick="deleteImageModel(${m.id})">删除</button>`;
+      h += `</div></div>`;
     });
-  } catch(e) {}
+    h += '</div>';
+    el.innerHTML = h;
+  } catch(e) { el.innerHTML = '加载失败'; }
+}
 
+async function deleteImageModel(id) {
+  if (!confirm('确定删除该模型配置？')) return;
   try {
-    const r = await fetch(`${API}/image/test`, {
+    const r = await fetch(`${API}/image/models/${id}`, {
+      method: 'DELETE',
       headers: {'Authorization': 'Bearer ' + authToken}
     });
     const d = await r.json();
+    if (d.success) {
+      showToast('已删除');
+      renderImageModelsList();
+      loadImageModels();
+    } else {
+      showToast(d.error || '删除失败');
+    }
+  } catch(e) { showToast('删除失败'); }
+}
 
+async function testImageModelConnection(modelId) {
+  if (!authToken) { showAuth(); return; }
+  const resultEl = document.getElementById('model-test-result');
+  resultEl.style.display = 'none';
+  try {
+    const r = await fetch(`${API}/image/test?model_id=${modelId}`, {
+      headers: {'Authorization': 'Bearer ' + authToken}
+    });
+    const d = await r.json();
     if (d.success) {
       resultEl.innerHTML = `<div style="padding:10px 14px;background:var(--green-glow);border:1px solid rgba(34,197,94,0.3);border-radius:8px;color:var(--green)">✅ ${esc(d.message || '连通正常')}</div>`;
     } else {
@@ -1185,19 +1244,70 @@ async function testImageConnection() {
   } catch(e) {
     resultEl.innerHTML = `<div style="padding:10px 14px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.3);border-radius:8px;color:var(--red)">❌ 网络错误，请重试</div>`;
     resultEl.style.display = 'block';
-  } finally {
-    btn.disabled = false;
-    btn.textContent = '🧪 测试连通';
+  }
+}
+
+// === 生图页面交互 ===
+async function loadImageModels() {
+  const sel = document.getElementById('img-model-select');
+  if (!authToken) { sel.innerHTML = '<option>请先登录</option>'; return; }
+  try {
+    const r = await fetch(`${API}/image/models`, {headers: {'Authorization': 'Bearer ' + authToken}});
+    const d = await r.json();
+    if (!d.success || !d.models || !d.models.length) {
+      sel.innerHTML = '<option value="">请先添加模型</option>';
+      return;
+    }
+    window.imageModels = d.models;
+    sel.innerHTML = d.models.map(m => `<option value="${m.id}">${esc(m.name)} (${esc(m.model)})</option>`).join('');
+  } catch(e) {
+    sel.innerHTML = '<option value="">加载失败</option>';
+  }
+}
+
+function handleImageUpload(event, type) {
+  const file = event.target.files[0];
+  if (!file) return;
+  if (file.size > 5 * 1024 * 1024) { showToast('图片不能超过5MB'); return; }
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const base64 = e.target.result;
+    if (type === 'product') {
+      window.productImageBase64 = base64;
+      document.getElementById('product-image-preview').innerHTML = `<img src="${base64}" style="max-width:100%;max-height:120px;border-radius:8px">`;
+      document.getElementById('product-image-placeholder').classList.add('hidden');
+    } else {
+      window.referenceImageBase64 = base64;
+      document.getElementById('reference-image-preview').innerHTML = `<img src="${base64}" style="max-width:100%;max-height:120px;border-radius:8px">`;
+      document.getElementById('reference-image-placeholder').classList.add('hidden');
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function setImageMode(mode) {
+  window.currentImageMode = mode;
+  const btnProduct = document.getElementById('mode-product');
+  const btnBg = document.getElementById('mode-bg');
+  if (mode === 'product_fidelity') {
+    btnProduct.classList.add('active');
+    btnBg.classList.remove('active');
+  } else {
+    btnProduct.classList.remove('active');
+    btnBg.classList.add('active');
   }
 }
 
 async function doImageGenerate() {
   if (!authToken) { showAuth(); showToast('请先登录'); return; }
   const prompt = document.getElementById('img-prompt').value.trim();
-  if (!prompt) { showToast('请输入商品描述'); return; }
+  const modelId = document.getElementById('img-model-select').value;
+  if (!modelId) { showToast('请先添加生图模型'); goToSettings(); return; }
 
-  const imageType = document.getElementById('img-type').value;
   const count = parseInt(document.getElementById('img-count').value);
+  const resolution = document.getElementById('img-resolution').value;
+  const mode = window.currentImageMode || 'product_fidelity';
+  const textContent = document.getElementById('img-text-content').value.trim();
   const btn = document.getElementById('btn-img-gen');
   const resultEl = document.getElementById('image-result');
 
@@ -1209,10 +1319,19 @@ async function doImageGenerate() {
   const timer = setTimeout(() => ctrl.abort(), 180000); // 3分钟超时
 
   try {
+    const body = {
+      prompt: prompt || 'Generate a product image',
+      model_id: parseInt(modelId),
+      count,
+      mode,
+      product_image: window.productImageBase64 || '',
+      reference_image: window.referenceImageBase64 || '',
+      text_content: textContent,
+    };
     const r = await fetch(`${API}/image/generate`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
-      body: JSON.stringify({prompt, image_type: imageType, count}),
+      body: JSON.stringify(body),
       signal: ctrl.signal
     });
     clearTimeout(timer);
@@ -1220,7 +1339,7 @@ async function doImageGenerate() {
 
     if (r.status === 401) { showAuth(); return; }
     if (r.status === 400 && d.detail && d.detail.includes('配置')) {
-      showToast('请先配置生图API');
+      showToast('请先添加生图模型');
       goToSettings();
       return;
     }

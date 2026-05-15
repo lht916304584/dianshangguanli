@@ -77,6 +77,17 @@ class UserManager:
             updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES users(id)
         )''')
+        c.execute('''CREATE TABLE IF NOT EXISTS user_image_models (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            name TEXT NOT NULL,
+            base_url TEXT NOT NULL DEFAULT 'https://api.openai.com/v1',
+            api_key TEXT DEFAULT '',
+            model TEXT NOT NULL DEFAULT 'dall-e-3',
+            size TEXT NOT NULL DEFAULT '1024x1024',
+            created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+            updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+        )''')
         conn.commit()
         conn.close()
 
@@ -401,6 +412,136 @@ class UserManager:
                 return base64.b64decode(key.encode()).decode()
             except Exception:
                 return key
+        finally:
+            conn.close()
+
+    def _mask_key(self, key: str) -> str:
+        """对 API key 脱敏显示"""
+        if not key:
+            return ""
+        decoded = key
+        try:
+            import base64
+            decoded = base64.b64decode(key.encode()).decode()
+        except Exception:
+            pass
+        if len(decoded) > 8:
+            return decoded[:3] + "****" + decoded[-4:]
+        return "****"
+
+    # ── 多模型管理 ──────────────────────────────────────────────────
+    def get_image_models(self, user_id: int):
+        """获取用户的生图模型列表（含旧配置自动迁移）"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            # 检查是否需要从旧配置迁移
+            c.execute("SELECT COUNT(*) FROM user_image_models WHERE user_id=?", (user_id,))
+            count = c.fetchone()[0]
+            if count == 0:
+                c.execute("SELECT image_api_key, image_base_url, image_model, image_size FROM user_config WHERE user_id=?", (user_id,))
+                old = c.fetchone()
+                if old and old[0]:
+                    # 自动迁移旧配置为第一条预设
+                    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                    c.execute(
+                        "INSERT INTO user_image_models (user_id, name, base_url, api_key, model, size, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                        (user_id, "默认模型", old[1] or "https://api.openai.com/v1", old[0], old[2] or "dall-e-3", old[3] or "1024x1024", now, now)
+                    )
+                    conn.commit()
+
+            c.execute("SELECT id, name, base_url, api_key, model, size, updated_at FROM user_image_models WHERE user_id=? ORDER BY id", (user_id,))
+            models = []
+            for row in c.fetchall():
+                models.append({
+                    "id": row[0],
+                    "name": row[1],
+                    "base_url": row[2],
+                    "api_key": self._mask_key(row[3]),
+                    "model": row[4],
+                    "size": row[5],
+                    "updated_at": row[6],
+                })
+            return {"success": True, "models": models}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+        finally:
+            conn.close()
+
+    def save_image_model(self, user_id: int, model_id: int = None, name: str = "", base_url: str = "", api_key: str = "", model: str = "", size: str = ""):
+        """保存或更新模型配置"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            if api_key:
+                import base64
+                api_key = base64.b64encode(api_key.encode()).decode()
+            else:
+                # 更新时 key 为空则保留原值
+                if model_id:
+                    c.execute("SELECT api_key FROM user_image_models WHERE id=? AND user_id=?", (model_id, user_id))
+                    row = c.fetchone()
+                    if row and row[0]:
+                        api_key = row[0]
+
+            if model_id:
+                c.execute(
+                    "UPDATE user_image_models SET name=?, base_url=?, api_key=?, model=?, size=?, updated_at=? WHERE id=? AND user_id=?",
+                    (name, base_url or "https://api.openai.com/v1", api_key, model or "dall-e-3", size or "1024x1024", now, model_id, user_id)
+                )
+                if c.rowcount == 0:
+                    return {"success": False, "error": "模型不存在"}
+            else:
+                c.execute(
+                    "INSERT INTO user_image_models (user_id, name, base_url, api_key, model, size, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+                    (user_id, name, base_url or "https://api.openai.com/v1", api_key, model or "dall-e-3", size or "1024x1024", now, now)
+                )
+                model_id = c.lastrowid
+            conn.commit()
+            return {"success": True, "id": model_id}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+        finally:
+            conn.close()
+
+    def delete_image_model(self, user_id: int, model_id: int):
+        """删除模型配置"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("DELETE FROM user_image_models WHERE id=? AND user_id=?", (model_id, user_id))
+            conn.commit()
+            if c.rowcount == 0:
+                return {"success": False, "error": "模型不存在"}
+            return {"success": True}
+        except Exception as e:
+            return {"success": False, "error": str(e)}
+        finally:
+            conn.close()
+
+    def get_image_model_by_id(self, user_id: int, model_id: int):
+        """获取单个模型的完整配置（含解码后的 api_key，供后端调用）"""
+        conn = sqlite3.connect(DB_PATH)
+        c = conn.cursor()
+        try:
+            c.execute("SELECT name, base_url, api_key, model, size FROM user_image_models WHERE id=? AND user_id=?", (model_id, user_id))
+            row = c.fetchone()
+            if not row:
+                return None
+            key = row[2]
+            try:
+                import base64
+                key = base64.b64decode(key.encode()).decode()
+            except Exception:
+                pass
+            return {
+                "name": row[0],
+                "base_url": row[1],
+                "api_key": key,
+                "model": row[3],
+                "size": row[4],
+            }
         finally:
             conn.close()
 

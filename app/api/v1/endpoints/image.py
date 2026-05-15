@@ -17,8 +17,22 @@ class ImageConfigRequest(BaseModel):
     size: str = Field(default="1024x1024", max_length=50)
 
 
+class ImageModelRequest(BaseModel):
+    id: int = Field(default=None)
+    name: str = Field(..., max_length=100)
+    base_url: str = Field(default="https://api.openai.com/v1", max_length=500)
+    api_key: str = Field(default="", max_length=500)
+    model: str = Field(default="dall-e-3", max_length=100)
+    size: str = Field(default="1024x1024", max_length=50)
+
+
 class ImageGenerateRequest(BaseModel):
     prompt: str = Field(..., min_length=2, max_length=1000)
+    model_id: int = Field(default=None)
+    product_image: str = Field(default="", max_length=2000000)
+    reference_image: str = Field(default="", max_length=2000000)
+    mode: str = Field(default="product_fidelity")
+    text_content: str = Field(default="", max_length=200)
     image_type: str = Field(default="main")
     count: int = Field(default=1, ge=1, le=4)
 
@@ -71,6 +85,65 @@ async def save_image_config(
     return {"success": True, "msg": "配置已保存"}
 
 
+@router.get("/models")
+async def get_image_models(authorization: str = Header(default="")):
+    """获取用户的生图模型列表。"""
+    verify = _get_verified_user(authorization)
+    if not verify:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="请先登录",
+        )
+    return user_manager.get_image_models(verify["user_id"])
+
+
+@router.post("/models")
+async def save_image_model(
+    req: ImageModelRequest,
+    authorization: str = Header(default=""),
+):
+    """保存/更新生图模型配置。"""
+    verify = _get_verified_user(authorization)
+    if not verify:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="请先登录",
+        )
+    result = user_manager.save_image_model(
+        verify["user_id"],
+        model_id=req.id,
+        name=req.name,
+        base_url=req.base_url,
+        api_key=req.api_key,
+        model=req.model,
+        size=req.size,
+    )
+    if not result["success"]:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=result.get("error", "保存失败"),
+        )
+    return {"success": True, "id": result["id"], "msg": "模型已保存"}
+
+
+@router.delete("/models/{model_id}")
+async def delete_image_model(model_id: int, authorization: str = Header(default="")):
+    """删除生图模型配置。"""
+    verify = _get_verified_user(authorization)
+    if not verify:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="请先登录",
+        )
+    result = user_manager.delete_image_model(verify["user_id"], model_id)
+    if not result["success"]:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail=result.get("error", "删除失败"),
+        )
+    return {"success": True, "msg": "模型已删除"}
+
+
 @router.post("/generate")
 async def generate_image(
     req: ImageGenerateRequest,
@@ -84,16 +157,26 @@ async def generate_image(
             detail="请先登录后再使用生图功能",
         )
 
-    # 读取用户配置
-    raw_key = user_manager._get_raw_image_api_key(verify["user_id"])
-    if not raw_key:
+    # 读取模型配置
+    config_dict = None
+    if req.model_id:
+        config_dict = user_manager.get_image_model_by_id(verify["user_id"], req.model_id)
+    if not config_dict:
+        # 回退到旧版单配置
+        raw_key = user_manager._get_raw_image_api_key(verify["user_id"])
+        if not raw_key:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="请先配置生图 API Key",
+            )
+        config_dict = user_manager.get_image_config(verify["user_id"])
+        config_dict["api_key"] = raw_key
+
+    if not config_dict or not config_dict.get("api_key"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="请先配置生图 API Key",
         )
-
-    config_dict = user_manager.get_image_config(verify["user_id"])
-    config_dict["api_key"] = raw_key
 
     # 消耗额度
     credit = user_manager.use_credit(verify["user_id"])
@@ -109,6 +192,10 @@ async def generate_image(
         config=config_dict,
         image_type=req.image_type,
         count=req.count,
+        product_image=req.product_image,
+        reference_image=req.reference_image,
+        mode=req.mode,
+        text_content=req.text_content,
     )
 
     if result["status"] == "error":
@@ -140,8 +227,11 @@ async def generate_image(
 
 
 @router.get("/test")
-async def test_image_api(authorization: str = Header(default="")):
-    """测试生图 API 连通性（不消耗额度）。"""
+async def test_image_api(
+    model_id: int = None,
+    authorization: str = Header(default=""),
+):
+    """测试生图 API 连通性（不消耗额度）。可通过 model_id 测试指定模型。"""
     verify = _get_verified_user(authorization)
     if not verify:
         raise HTTPException(
@@ -149,19 +239,30 @@ async def test_image_api(authorization: str = Header(default="")):
             detail="请先登录",
         )
 
-    raw_key = user_manager._get_raw_image_api_key(verify["user_id"])
-    if not raw_key:
+    config_dict = None
+    if model_id:
+        config_dict = user_manager.get_image_model_by_id(verify["user_id"], model_id)
+    if not config_dict:
+        raw_key = user_manager._get_raw_image_api_key(verify["user_id"])
+        if not raw_key:
+            raise HTTPException(
+                status_code=status.HTTP_400_BAD_REQUEST,
+                detail="请先配置生图 API Key",
+            )
+        config_dict = user_manager.get_image_config(verify["user_id"])
+        config_dict["api_key"] = raw_key
+
+    if not config_dict or not config_dict.get("api_key"):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="请先配置生图 API Key",
         )
 
-    config_dict = user_manager.get_image_config(verify["user_id"])
     base_url = config_dict.get("base_url", "https://api.openai.com/v1").rstrip("/")
     model = config_dict.get("model", "dall-e-3")
 
     headers = {
-        "Authorization": f"Bearer {raw_key}",
+        "Authorization": f"Bearer {config_dict['api_key']}",
     }
 
     try:
