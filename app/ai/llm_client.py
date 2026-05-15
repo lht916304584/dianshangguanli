@@ -40,10 +40,11 @@ class LLMClient:
         product_info: str,
         platform: str = "pinduoduo",
         count: int = 5,
+        hot_keywords: list = None,
     ) -> str:
-        """生成电商标题（基础版，后续会用 RAG 增强）"""
+        """生成电商标题（支持 RAG 关键词增强）"""
         system_prompt = self._get_platform_system_prompt(platform)
-        user_prompt = self._build_title_prompt(product_info, platform, count)
+        user_prompt = self._build_title_prompt(product_info, platform, count, hot_keywords)
         return await self.chat(user_prompt, system_prompt, temperature=0.8)
 
     def _get_platform_system_prompt(self, platform: str) -> str:
@@ -72,9 +73,9 @@ class LLMClient:
         return prompts.get(platform, prompts["pinduoduo"])
 
     def _build_title_prompt(
-        self, product_info: str, platform: str, count: int
+        self, product_info: str, platform: str, count: int, hot_keywords: list = None
     ) -> str:
-        """构建标题生成 Prompt V2 - 融入真实数据规律"""
+        """构建标题生成 Prompt V3 - 支持 RAG 关键词增强"""
         platform_names = {
             "pinduoduo": "拼多多",
             "taobao": "天猫/淘宝",
@@ -83,11 +84,24 @@ class LLMClient:
         }
         pname = platform_names.get(platform, "拼多多")
 
+        kw_section = ""
+        if hot_keywords:
+            kw_lines = "\n".join(f"- {kw['word']}（{kw['type']}，搜索量{kw['count']}）" for kw in hot_keywords)
+            kw_section = f"""
+### 高流量热搜词参考（以下是从平台真实搜索数据中提取的高流量词，请优先在标题中合理使用）
+{kw_lines}
+
+注意：
+- 优先使用搜索量高的词，但不要生硬堆砌
+- 根据商品实际属性选择合适的关键词组合
+- 不需要全部使用，挑选最相关的3-5个融入标题
+"""
+
         if platform == "pinduoduo":
             return f"""请为以下商品生成{count}个高质量的{pname}商品标题。
 
 商品信息：{product_info}
-
+{kw_section}
 ## 拼多多标题写作规则（必须严格遵守）
 
 ### 字数规则
@@ -141,6 +155,7 @@ class LLMClient:
 
         return f"""请为以下商品生成{count}个优化的{pname}商品标题。
 商品信息：{product_info}
+{kw_section}
 请按JSON格式输出，每个标题包含 title, keywords, strategy 三个字段。
 标题长度25-35字，核心搜索词放前半部分，包含属性词和修饰词。
 只输出JSON。"""

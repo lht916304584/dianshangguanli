@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>电商AI优化工具箱 — AI标题生成 · 商品图生成 · 详情页策划</title>
+<meta name="description" content="专为电商卖家打造的AI工具集：AI标题生成与评分、商品主图/详情图生成、详情页文案策划、竞品分析。支持拼多多、淘宝、抖音、小红书四大平台。">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0f;--surface:#13131a;--surface2:#1a1a24;--border:#2a2a3a;--text:#e8e8f0;--text2:#8888a0;--accent:#ff6b35;--accent2:#ff8f5e;--accent-glow:rgba(255,107,53,0.15);--green:#22c55e;--green-glow:rgba(34,197,94,0.15);--blue:#3b82f6;--purple:#a855f7;--radius:12px}
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+body::before{content:'';position:fixed;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle at 30% 20%,rgba(255,107,53,0.03) 0%,transparent 50%),radial-gradient(circle at 70% 80%,rgba(168,85,247,0.03) 0%,transparent 50%);animation:bgFloat 20s ease-in-out infinite;z-index:0}
+@keyframes bgFloat{0%,100%{transform:translate(0,0)}50%{transform:translate(-2%,2%)}}
+a{color:var(--accent);text-decoration:none}
+.container{width:100%;max-width:1200px;margin:0 auto;padding:0 24px;position:relative;z-index:1}
+
+/* Nav */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:64px;padding:0 24px;background:rgba(10,10,15,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-brand{font-size:1.1rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:24px;align-items:center}
+.nav-links a{color:var(--text2);font-size:0.85rem;transition:color 0.3s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{padding:8px 20px;background:linear-gradient(135deg,var(--accent),#ff4500);color:white;border-radius:8px;font-size:0.85rem;font-weight:600;transition:all 0.3s}
+.nav-cta:hover{transform:translateY(-2px);box-shadow:0 4px 20px rgba(255,107,53,0.3)}
+
+/* Hero */
+.hero{padding:140px 0 100px;text-align:center}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:6px 16px;background:var(--surface);border:1px solid var(--border);border-radius:20px;font-size:0.8rem;color:var(--text2);margin-bottom:24px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+.hero h1{font-size:3rem;font-weight:900;line-height:1.2;margin-bottom:20px;max-width:800px;margin-left:auto;margin-right:auto}
+.hero h1 .gradient{background:linear-gradient(135deg,var(--accent),var(--accent2),var(--purple));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.1rem;color:var(--text2);line-height:1.7;max-width:560px;margin:0 auto 32px;font-weight:300}
+.hero-cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 32px;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:all 0.3s;font-family:inherit}
+.btn-primary{background:linear-gradient(135deg,var(--accent),#ff4500);color:white;box-shadow:0 4px 20px rgba(255,107,53,0.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(255,107,53,0.4)}
+.btn-secondary{padding:14px 32px;background:var(--surface);color:var(--text);border:1px solid var(--border);font-size:1rem;font-weight:600}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.hero-stats{display:flex;justify-content:center;gap:48px;margin-top:60px;flex-wrap:wrap}
+.hero-stat{text-align:center}
+.hero-stat .num{font-size:2rem;font-weight:900;color:var(--accent)}
+.hero-stat .label{font-size:0.85rem;color:var(--text2);margin-top:4px}
+
+/* Section */
+.section{padding:80px 0}
+.section-title{text-align:center;font-size:1.8rem;font-weight:700;margin-bottom:12px}
+.section-subtitle{text-align:center;font-size:1rem;color:var(--text2);margin-bottom:48px;font-weight:300}
+
+/* Feature Cards */
+.feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;transition:all 0.3s}
+.feature-card:hover{border-color:var(--accent);transform:translateY(-4px);box-shadow:0 12px 40px rgba(255,107,53,0.08)}
+.feature-icon{font-size:2rem;margin-bottom:16px}
+.feature-card h3{font-size:1.05rem;font-weight:700;margin-bottom:8px}
+.feature-card p{font-size:0.85rem;color:var(--text2);line-height:1.6}
+.feature-tag{display:inline-block;padding:3px 10px;background:var(--bg);border:1px solid var(--border);border-radius:6px;font-size:0.75rem;color:var(--text2);margin-top:12px}
+
+/* Steps */
+.steps{display:flex;gap:24px;justify-content:center;flex-wrap:wrap}
+.step{flex:1;min-width:220px;max-width:300px;text-align:center;padding:32px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius)}
+.step-num{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--accent),#ff4500);color:white;display:inline-flex;align-items:center;justify-content:center;font-weight:700;margin-bottom:16px}
+.step h3{font-size:1rem;font-weight:700;margin-bottom:8px}
+.step p{font-size:0.85rem;color:var(--text2);line-height:1.6}
+
+/* Platforms */
+.platform-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap}
+.platform-item{display:flex;align-items:center;gap:10px;padding:14px 24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);font-size:0.95rem;font-weight:600;transition:all 0.3s}
+.platform-item:hover{border-color:var(--accent)}
+.platform-item .icon{font-size:1.2rem}
+
+/* CTA Section */
+.cta-section{text-align:center;padding:100px 0;background:linear-gradient(180deg,transparent,var(--surface),transparent)}
+.cta-section h2{font-size:2rem;font-weight:700;margin-bottom:16px}
+.cta-section p{font-size:1rem;color:var(--text2);margin-bottom:32px;max-width:480px;margin-left:auto;margin-right:auto}
+
+/* Footer */
+.landing-footer{text-align:center;padding:40px 24px;border-top:1px solid var(--border);color:var(--text2);font-size:0.8rem}
+.landing-footer a{color:var(--text2);text-decoration:none}
+.landing-footer a:hover{color:var(--accent)}
+
+@media(max-width:900px){
+.hero h1{font-size:2.2rem}
+.feature-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:600px){
+.hero{padding:120px 0 60px}
+.hero h1{font-size:1.8rem}
+.hero-stats{gap:24px}
+.feature-grid{grid-template-columns:1fr}
+.nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+<div class="nav-brand">🔥 电商AI优化工具箱</div>
+<div class="nav-links">
+<a href="#features">功能</a>
+<a href="#steps">上手</a>
+<a href="/tool.html" class="nav-cta">立即使用</a>
+</div>
+</nav>
+
+<section class="hero">
+<div class="container">
+<div class="hero-badge"><span class="dot"></span> 已支持 4 大电商平台</div>
+<h1>让AI帮你写出<br><span class="gradient">高转化电商标题</span></h1>
+<p>AI标题生成与评分、商品图一键生成、详情页文案策划。所有AI功能使用你自己的API Key，数据安全有保障。</p>
+<div class="hero-cta">
+<a href="/tool.html" class="btn btn-primary">🚀 免费开始使用</a>
+<a href="#features" class="btn btn-secondary">了解功能</a>
+</div>
+<div class="hero-stats">
+<div class="hero-stat"><div class="num">4</div><div class="label">支持平台</div></div>
+<div class="hero-stat"><div class="num">∞</div><div class="label">AI生成次数</div></div>
+<div class="hero-stat"><div class="num">0</div><div class="label">元标题评分</div></div>
+</div>
+</div>
+</section>
+
+<section class="section" id="features">
+<div class="container">
+<h2 class="section-title">一站式AI电商工具箱</h2>
+<p class="section-subtitle">从标题到图片，从策划到分析，全流程AI辅助</p>
+<div class="feature-grid">
+<div class="feature-card">
+<div class="feature-icon">📊</div>
+<h3>标题智能评分</h3>
+<p>从关键词覆盖率、可读性、卖点表达、合规性等维度，为你的标题打出专业分数，并给出具体优化建议。</p>
+<span class="feature-tag">永久免费</span>
+</div>
+<div class="feature-card">
+<div class="feature-icon">✨</div>
+<h3>AI标题生成</h3>
+<p>输入商品信息，AI自动生成多个高分标题。系统实时检索平台热搜词库，将高流量词注入生成过程。</p>
+<span class="feature-tag">每日免费3次</span>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🖼️</div>
+<h3>AI商品图生成</h3>
+<p>配置你的生图模型，一键生成商品主图和详情图。支持产品图保真替换背景、参考图风格迁移。</p>
+<span class="feature-tag">用户自管API</span>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🎨</div>
+<h3>详情页策划</h3>
+<p>AI自动提炼卖点、策划6屏详情页结构、生成每屏的AI生图提示词。一键批量生成详情页全部图片。</p>
+<span class="feature-tag">端到端生成</span>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🔍</div>
+<h3>竞品标题分析</h3>
+<p>粘贴竞品标题，AI自动进行关键词提取、结构拆解、卖点对比，并给出反制策略建议。</p>
+<span class="feature-tag">深度分析</span>
+</div>
+<div class="feature-card">
+<div class="feature-icon">🔥</div>
+<h3>热搜词库</h3>
+<p>实时查看拼多多、淘宝、抖音、小红书四大平台的热搜关键词，按品类、类型分类，辅助标题选词。</p>
+<span class="feature-tag">免费查询</span>
+</div>
+<div class="feature-card">
+<div class="feature-icon">📥</div>
+<h3>批量操作</h3>
+<p>支持CSV批量导入标题进行评分和优化，一次最多处理50条。结果可导出CSV，方便团队协作。</p>
+<span class="feature-tag">效率工具</span>
+</div>
+<div class="feature-card">
+<div class="feature-icon">⭐</div>
+<h3>收藏与历史</h3>
+<p>收藏满意的标题，随时查看使用记录。所有数据与账号绑定，换设备登录即可同步。</p>
+<span class="feature-tag">账号同步</span>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section" id="steps">
+<div class="container">
+<h2 class="section-title">3步上手</h2>
+<p class="section-subtitle">无需复杂配置，几分钟即可开始使用</p>
+<div class="steps">
+<div class="step">
+<div class="step-num">1</div>
+<h3>配置API Key</h3>
+<p>进入「我的 → 设置」，添加你的AI文案API Key（如DeepSeek）和生图模型配置。数据完全由你掌控。</p>
+</div>
+<div class="step">
+<div class="step-num">2</div>
+<h3>选择平台</h3>
+<p>根据你的商品所在平台（拼多多/淘宝/抖音/小红书），切换对应平台，AI会自动适配平台规则。</p>
+</div>
+<div class="step">
+<div class="step-num">3</div>
+<h3>输入商品信息</h3>
+<p>输入商品描述，点击生成。AI会结合平台热搜词库，为你生成多个高流量、高转化的标题候选。</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<h2 class="section-title">支持全部主流电商平台</h2>
+<p class="section-subtitle">针对不同平台的搜索算法和用户习惯，AI自动调整生成策略</p>
+<div class="platform-row">
+<div class="platform-item"><span class="icon">🟠</span> 拼多多</div>
+<div class="platform-item"><span class="icon">🔵</span> 淘宝/天猫</div>
+<div class="platform-item"><span class="icon">⚫</span> 抖音电商</div>
+<div class="platform-item"><span class="icon">🔴</span> 小红书</div>
+</div>
+</div>
+</section>
+
+<section class="cta-section">
+<div class="container">
+<h2>准备好让AI帮你卖货了吗？</h2>
+<p>标题评分永久免费，AI生成每日3次免费额度。配置自己的API Key，即可享受无限次生成。</p>
+<a href="/tool.html" class="btn btn-primary" style="padding:16px 40px;font-size:1.1rem">🚀 立即免费使用</a>
+</div>
+</section>
+
+<footer class="landing-footer">
+<div>AI标题优化神器 v3.0 · 支持拼多多/淘宝/抖音/小红书</div>
+<div style="margin-top:6px"><a href="https://beian.miit.gov.cn/" target="_blank">粤ICP备2026038535号</a></div>
+</footer>
+
+</body>
+</html>

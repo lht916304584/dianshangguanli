@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import admin, detail, health, image, llm_config, platform, title, user
+from app.api.v1.endpoints import admin, config, detail, health, image, llm_config, platform, title, user
 
 api_router = APIRouter()
 
@@ -20,3 +20,5 @@ api_router.include_router(llm_config.router, prefix="/llm", tags=["LLM配置"])
 api_router.include_router(platform.router, tags=["平台"])
 # 健康检查
 api_router.include_router(health.router, tags=["health"])
+# 公开配置
+api_router.include_router(config.router, prefix="/config", tags=["配置"])

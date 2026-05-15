@@ -3,7 +3,6 @@
 import json
 
 from app.ai.llm_client import llm_client
-from app.ai.image_generator import image_generator
 
 PLATFORM_CONTEXT = {
     "pinduoduo": "拼多多用户价格敏感，强调性价比和实惠，文案要接地气",
@@ -20,11 +19,8 @@ class DetailPlanner:
         page_structure = await self._generate_page_structure(selling_points, platform, product_info, llm=llm)
         image_prompts = await self._generate_image_prompts(page_structure, product_info, llm=llm)
 
-        # 预留图片生成（当前仅提示词）
+        # 图片生成由前端按需调用 /image/generate
         images = []
-        for prompt in image_prompts:
-            result = await image_generator.generate(prompt)
-            images.append(result)
 
         return {
             "success": True,
