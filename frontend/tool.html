@@ -320,9 +320,10 @@ textarea,input[type="text"],input[type="password"],input[type="tel"],select{padd
 <div class="input-group"><label>API Key</label><input type="password" id="img-api-key" placeholder="sk-..."></div>
 <div class="input-group"><label>Base URL</label><input type="text" id="img-base-url" placeholder="https://api.openai.com/v1" value="https://api.openai.com/v1"></div>
 <div class="row">
-<div class="input-group"><label>模型</label><select id="img-model"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
+<div class="input-group"><label>模型</label><select id="img-model" onchange="toggleCustomModel()" style="min-width:0"><option value="dall-e-3">dall-e-3</option><option value="dall-e-2">dall-e-2</option><option value="">其他（自定义）</option></select></div>
 <div class="input-group"><label>图片尺寸</label><select id="img-size"><option value="1024x1024">1024x1024</option><option value="1024x1792">1024x1792（竖图）</option><option value="1792x1024">1792x1024（横图）</option></select></div>
 </div>
+<div class="input-group hidden" id="img-model-custom-wrap"><label>自定义模型名称</label><input type="text" id="img-model-custom" placeholder="例如：flux-schnell / stable-diffusion-xl"></div>
 <div style="display:flex;gap:10px">
 <button class="btn btn-primary" onclick="saveImageConfig()" style="flex:2">💾 保存配置</button>
 <button class="btn" onclick="testImageConnection()" id="btn-img-test" style="flex:1;background:var(--surface2);color:var(--text);border:1px solid var(--border);font-size:0.9rem">🧪 测试连通</button>
@@ -1064,6 +1065,24 @@ function goToSettings() {
   switchSubTab('settings');
 }
 
+function toggleCustomModel() {
+  const sel = document.getElementById('img-model');
+  const wrap = document.getElementById('img-model-custom-wrap');
+  if (sel.value === '') {
+    wrap.classList.remove('hidden');
+  } else {
+    wrap.classList.add('hidden');
+  }
+}
+
+function getImageModel() {
+  const sel = document.getElementById('img-model');
+  if (sel.value === '') {
+    return document.getElementById('img-model-custom').value.trim();
+  }
+  return sel.value;
+}
+
 async function loadImageConfig() {
   if (!authToken) return;
   try {
@@ -1072,8 +1091,20 @@ async function loadImageConfig() {
     if (d.success && d.config) {
       const cfg = d.config;
       if (cfg.base_url) document.getElementById('img-base-url').value = cfg.base_url;
-      if (cfg.model) document.getElementById('img-model').value = cfg.model;
       if (cfg.size) document.getElementById('img-size').value = cfg.size;
+      // 模型处理：如果不在预设列表中，选"其他"并填充自定义
+      const presetModels = ['dall-e-3', 'dall-e-2'];
+      if (cfg.model && presetModels.includes(cfg.model)) {
+        document.getElementById('img-model').value = cfg.model;
+        document.getElementById('img-model-custom-wrap').classList.add('hidden');
+      } else if (cfg.model) {
+        document.getElementById('img-model').value = '';
+        document.getElementById('img-model-custom').value = cfg.model;
+        document.getElementById('img-model-custom-wrap').classList.remove('hidden');
+      } else {
+        document.getElementById('img-model').value = 'dall-e-3';
+        document.getElementById('img-model-custom-wrap').classList.add('hidden');
+      }
     }
   } catch(e) {}
 }
@@ -1082,11 +1113,15 @@ async function saveImageConfig() {
   if (!authToken) { showAuth(); return; }
   const apiKey = document.getElementById('img-api-key').value.trim();
   const baseUrl = document.getElementById('img-base-url').value.trim();
-  const model = document.getElementById('img-model').value;
+  const model = getImageModel();
   const size = document.getElementById('img-size').value;
 
   if (!apiKey) {
     showToast('请输入 API Key');
+    return;
+  }
+  if (!model) {
+    showToast('请输入模型名称');
     return;
   }
 
@@ -1113,6 +1148,25 @@ async function testImageConnection() {
   btn.disabled = true;
   btn.textContent = '测试中...';
   resultEl.style.display = 'none';
+
+  // 先保存当前配置（临时），确保测试用的是最新填写的值
+  const model = getImageModel();
+  const baseUrl = document.getElementById('img-base-url').value.trim();
+  const apiKey = document.getElementById('img-api-key').value.trim();
+  const size = document.getElementById('img-size').value;
+  if (!apiKey || !model) {
+    showToast('请先填写 API Key 和模型名称');
+    btn.disabled = false;
+    btn.textContent = '🧪 测试连通';
+    return;
+  }
+  try {
+    await fetch(`${API}/image/config`, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
+      body: JSON.stringify({api_key: apiKey, base_url: baseUrl, model: model, size: size})
+    });
+  } catch(e) {}
 
   try {
     const r = await fetch(`${API}/image/test`, {

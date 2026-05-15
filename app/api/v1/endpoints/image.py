@@ -158,24 +158,19 @@ async def test_image_api(authorization: str = Header(default="")):
     base_url = config_dict.get("base_url", "https://api.openai.com/v1").rstrip("/")
     model = config_dict.get("model", "dall-e-3")
 
-    test_url = f"{base_url}/models"
     headers = {
         "Authorization": f"Bearer {raw_key}",
     }
 
     try:
         async with httpx.AsyncClient(timeout=15.0) as client:
-            resp = await client.get(test_url, headers=headers)
-            raw_text = resp.text
+            # 1. 先尝试 /v1/models（OpenAI 标准端点）
+            resp = await client.get(f"{base_url}/models", headers=headers)
             if resp.status_code == 200:
-                # 尝试解析，确认返回的是 JSON
                 try:
                     data = resp.json()
                     models = data.get("data", [])
-                    # 检查目标模型是否在列表中
-                    model_found = any(
-                        m.get("id") == model for m in models
-                    )
+                    model_found = any(m.get("id") == model for m in models)
                     return {
                         "success": True,
                         "status": "connected",
@@ -189,20 +184,72 @@ async def test_image_api(authorization: str = Header(default="")):
                     return {
                         "success": False,
                         "status": "error",
-                        "message": f"API 返回非 JSON 数据: {raw_text[:200]}",
+                        "message": f"API 返回非 JSON 数据: {resp.text[:200]}",
                     }
-            else:
+
+            # 2. /models 不存在（很多国内中转商未实现），fallback 测试生图端点
+            # 发一个 prompt 为空的请求，预期返回 400/422 参数错误，
+            # 以此验证 /images/generations 端点是否存在且不消耗额度
+            if resp.status_code == 404:
+                resp2 = await client.post(
+                    f"{base_url}/images/generations",
+                    headers={**headers, "Content-Type": "application/json"},
+                    json={"model": model, "prompt": "", "n": 1, "size": "1024x1024"},
+                )
+                if resp2.status_code == 404:
+                    return {
+                        "success": False,
+                        "status": "error",
+                        "message": "API 端点不存在（/models 和 /images/generations 均返回 404），请检查 Base URL 是否正确",
+                    }
+
+                # 400/422 表示端点存在但参数被拒，说明连通正常
+                if resp2.status_code in (400, 422):
+                    return {
+                        "success": True,
+                        "status": "connected",
+                        "model_found": None,
+                        "model": model,
+                        "message": "API 端点连通正常（models 列表不可用，但生图端点可用）",
+                    }
+
+                # 401 表示 key 有问题但端点存在
+                if resp2.status_code == 401:
+                    try:
+                        err = resp2.json().get("error", {})
+                        msg = err.get("message", "API Key 无效")
+                    except Exception:
+                        msg = resp2.text[:200]
+                    return {
+                        "success": False,
+                        "status": "error",
+                        "message": f"API Key 无效: {msg}",
+                    }
+
+                # 其他状态码
                 try:
-                    data = resp.json()
-                    err = data.get("error", {})
-                    msg = err.get("message", f"HTTP {resp.status_code}")
+                    err = resp2.json().get("error", {})
+                    msg = err.get("message", f"HTTP {resp2.status_code}")
                 except Exception:
-                    msg = f"HTTP {resp.status_code}: {raw_text[:200]}"
+                    msg = resp2.text[:200]
                 return {
                     "success": False,
                     "status": "error",
                     "message": msg,
                 }
+
+            # /models 返回了非 200 非 404 的状态
+            try:
+                err = resp.json().get("error", {})
+                msg = err.get("message", f"HTTP {resp.status_code}")
+            except Exception:
+                msg = resp.text[:200]
+            return {
+                "success": False,
+                "status": "error",
+                "message": msg,
+            }
+
     except httpx.TimeoutException:
         return {
             "success": False,
