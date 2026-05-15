@@ -1202,15 +1202,20 @@ async function doImageGenerate() {
   const resultEl = document.getElementById('image-result');
 
   btn.disabled = true;
-  showLoading(true, 'AI正在生成图片...');
+  showLoading(true, 'AI正在生成图片，可能需要30~90秒，请耐心等待...');
   resultEl.classList.add('hidden');
+
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), 180000); // 3分钟超时
 
   try {
     const r = await fetch(`${API}/image/generate`, {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer ' + authToken},
-      body: JSON.stringify({prompt, image_type: imageType, count})
+      body: JSON.stringify({prompt, image_type: imageType, count}),
+      signal: ctrl.signal
     });
+    clearTimeout(timer);
     const d = await r.json();
 
     if (r.status === 401) { showAuth(); return; }
@@ -1227,8 +1232,14 @@ async function doImageGenerate() {
     } else {
       showToast(d.error || d.detail || '生成失败');
     }
-  } catch(e) { showToast('生成失败，请检查网络或API配置'); }
-  finally { btn.disabled = false; showLoading(false); }
+  } catch(e) {
+    if (e.name === 'AbortError') {
+      showToast('生成超时，请稍后到「历史记录」查看结果');
+    } else {
+      showToast('生成失败，请检查网络或API配置');
+    }
+  }
+  finally { btn.disabled = false; showLoading(false); clearTimeout(timer); }
 }
 
 function showImageLightbox(url) {

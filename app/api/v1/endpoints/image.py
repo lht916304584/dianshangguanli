@@ -128,13 +128,15 @@ async def generate_image(
         result_json=",".join(result["urls"]),
     )
 
-    return {
+    response = {
         "success": True,
         "urls": result["urls"],
         "prompt": result["prompt"],
         "image_type": req.image_type,
         "count": len(result["urls"]),
     }
+    print(f"[ImageAPI] Response: {response}")
+    return response
 
 
 @router.get("/test")
